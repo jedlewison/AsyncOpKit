@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'AsyncOpKit', :exclusive => true do
+  pod "AsyncOpKit", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "AsyncOpKit", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
