@@ -77,10 +77,6 @@ class AsyncOpKitTests: QuickSpec {
                 
                 context("when an operation finishes normally") {
                     
-                    beforeEach {
-                        subject?.finish()
-                    }
-                    
                     it("should not be cancelled") {
                         expect(subject?.cancelled).toEventuallyNot(beTrue())
                     }
@@ -96,6 +92,7 @@ class AsyncOpKitTests: QuickSpec {
                     context("when an operation is started after being finished") {
                         
                         beforeEach {
+                            subject?.finish()
                             subject?.start()
                         }
                         
