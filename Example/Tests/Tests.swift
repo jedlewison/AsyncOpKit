@@ -27,6 +27,28 @@ class AsyncOpKitTests: QuickSpec {
             afterEach {
                 resultsObject = nil
                 resultsHandlerCompleted = nil
+                subject?.completionHandler = nil
+                subject = nil
+            }
+            
+            context("before it starts") {
+                
+                it("should be ready to start") {
+                    expect(subject?.ready).to(beTrue())
+                }
+                
+                it("should not be executing") {
+                    expect(subject?.executing).to(beFalse())
+                }
+
+                it("should not be cancelled") {
+                    expect(subject?.cancelled).to(beFalse())
+                }
+                
+                it("should not be finished") {
+                    expect(subject?.finished).to(beFalse())
+                }
+                
             }
             
             context("when it starts normally") {
@@ -73,6 +95,10 @@ class AsyncOpKitTests: QuickSpec {
                     it("should return itself in its results handler resultsObject") {
                         expect(resultsObject?.operation).toEventually(equal(subject))
                     }
+                    
+                    it("should return a results object that does not indicate it is canceled") {
+                        expect(resultsObject?.cancelled).toEventually(beFalse())
+                    }
                 }
                 
                 context("when an operation finishes normally") {
@@ -85,7 +111,7 @@ class AsyncOpKitTests: QuickSpec {
                         expect(subject?.finished).toEventually(beTrue())
                     }
                     
-                    it("should start executing and stop executing") {
+                    it("should not be executing") {
                         expect(subject?.executing).toEventually(beFalse())
                     }
                     
@@ -108,7 +134,7 @@ class AsyncOpKitTests: QuickSpec {
 
                 }
                 
-                context("When an operation is cancelled after being started but before completion") {
+                context("When an executing operation is cancelled after being started") {
                     
                     beforeEach {
                         subject?.cancel()
@@ -118,9 +144,17 @@ class AsyncOpKitTests: QuickSpec {
                         expect(subject?.cancelled).to(beTrue())
                     }
                     
-                    it("should not still be executing if handleCancellation synchronously finishes the op") {
-                        expect(subject?.executing).to(beFalse())
-                        expect(subject?.finished).to(beTrue())
+                    it("should eventually stop executing and finish") {
+                        expect(subject?.executing).toEventually(beFalse())
+                        expect(subject?.finished).toEventually(beTrue())
+                    }
+                    
+                    it("should invoke the results closure when finished") {
+                        expect(resultsHandlerCompleted).toEventually(beTrue())
+                    }
+                    
+                    it("the results closure results object should mark it as cancelled") {
+                        expect(resultsObject?.cancelled).toEventually(beTrue())
                     }
                 }
 
@@ -141,7 +175,7 @@ class AsyncOpKitTests: QuickSpec {
                     expect(subject?.finished).to(beTrue())
                 }
                 
-                it("should not start executing") {
+                it("should never start executing") {
                     expect(subject?.executing).to(beFalse())
                 }
                 
@@ -149,15 +183,13 @@ class AsyncOpKitTests: QuickSpec {
                     expect(subject?.executing).toEventuallyNot(beTrue())
                 }
                 
+                it ("the result handler's completion block should still fire") {
+                    expect(resultsHandlerCompleted).toEventually(beTrue())
+                }
+                
                 it("the resultsHandler's resultsObject should mark it as cancelled") {
                     expect(resultsObject?.cancelled).toEventually(beTrue())
                 }
-            }
-            
-            context("the completion block should fire with a results object in all scenarios") {
-                
-                var resultsObject : JDAsyncOperationResults!
-                
             }
             
         }
