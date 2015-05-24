@@ -1,12 +1,14 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'AsyncOpKit', :exclusive => true do
-  pod "AsyncOpKit", :path => "../"
+    use_frameworks!
+    pod "AsyncOpKit", :path => "../"
 end
 
 target 'Tests', :exclusive => true do
-  pod "AsyncOpKit", :path => "../"
+    use_frameworks!
+    pod "AsyncOpKit", :path => "../"
 
-  pod 'Specta'
-  pod 'Expecta'
+    pod 'Quick'
+    pod 'Nimble'
 end
