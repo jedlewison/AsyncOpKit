@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/<GITHUB_USERNAME>/AsyncOpKit"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
-  s.author           = { "Jed Lewison" => "jed@magicappfactory.com" }
+  s.author           = { "Jed Lewison" => "jed@.....magic....app....factory.com" }
   s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/AsyncOpKit.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
