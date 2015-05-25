@@ -1,10 +1,14 @@
-@objc public protocol JDAsyncOperationResults : NSObjectProtocol {
+@objc public protocol JDAsyncOperationObjectProtocol : NSObjectProtocol {
     
     /// A reference to the finished operation.
-    var operation : JDAsyncOperation {get}
+//    var cancelled : Bool {get}
     
-    ///
-    var cancelled : Bool {get}
+}
+
+@objc public protocol AsyncClosuresOperationObjectProtocol : NSObjectProtocol {
+    
+    /// A reference to the finished operation.
+    //    var cancelled : Bool {get}
     
 }
 

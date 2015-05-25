@@ -1,15 +1,7 @@
-//
-//  AsyncClosuresOperation.swift
-//  Pods
-//
-//  Created by Jed Lewison on 5/25/15.
-//
-//
-
-import Foundation
-
 public class AsyncClosuresOperation : JDAsyncOperation {
     
+    public typealias AsyncClosuresOperationResultsHandler = (finishedOp: AsyncClosuresOperationObjectProtocol) -> Void
+        
     public typealias AsyncClosureIdentifier = Int
     public typealias AsyncClosure = (op: AsyncClosuresOperation, closureIdentifier: AsyncClosureIdentifier) -> Void
     

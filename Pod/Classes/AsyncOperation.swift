@@ -1,6 +1,17 @@
-public class JDAsyncOperation: NSOperation {
+public class JDAsyncOperation: NSOperation, JDAsyncOperationObjectProtocol {
     
-    public var resultsHandler : ((finishedOp: JDAsyncOperationResults) -> Void)?
+    public typealias JDAsyncOperationResultsHandler = (finishedOp: JDAsyncOperationObjectProtocol) -> Void
+    public var resultsHandler : JDAsyncOperationResultsHandler? {
+        get {
+            return _resultsHandler
+        }
+        
+        set {
+            _resultsHandler = newValue
+        }
+    }
+    
+    private var _resultsHandler : JDAsyncOperationResultsHandler? = nil
     
     public func handleCancellation() {
         // intended to be subclassed.
@@ -67,27 +78,16 @@ public class JDAsyncOperation: NSOperation {
         get { return _finished }
     }
     
-    func getResults() -> DefaultAsyncOperationResults {
-        return DefaultAsyncOperationResults(op: self);
-    }
-    
-    public final func finish(operationResults : JDAsyncOperationResults? = nil) {
+    public final func finish() {
         
         if finished { return }
         
         if let resultsHandler = resultsHandler {
+            
             self.resultsHandler = nil
             
-            let finishedResults : JDAsyncOperationResults
-            
-            if let operationResults = operationResults {
-                finishedResults = operationResults
-            } else {
-                finishedResults = DefaultAsyncOperationResults(op: self)
-            }
-            
             completionOpQ.addOperationWithBlock {
-                resultsHandler(finishedOp: finishedResults)
+                resultsHandler(finishedOp: self)
             }
         }
         
@@ -104,19 +104,5 @@ public class JDAsyncOperation: NSOperation {
     
     private var _executing = false
     private var _finished = false
-    
-    class DefaultAsyncOperationResults : NSObject, JDAsyncOperationResults {
-        
-        init(op: JDAsyncOperation) {
-            error = nil;
-            operation = op
-        }
-        let error : NSError?
-        let operation : JDAsyncOperation
-        var cancelled : Bool {
-            get { return operation.cancelled }
-        }
-        
-    }
         
 }

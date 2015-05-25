@@ -16,25 +16,25 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
         describe("Handle Async Closures") {
             
             var subject : AsyncClosuresOperation? = nil
-            var resultsObject : JDAsyncOperationResults? = nil
+            var finishedOperation : JDAsyncOperationObjectProtocol? = nil
             var resultsHandlerCompleted : Bool? = nil
             var numberOfAsyncClosuresFinished : Int?
             
             beforeEach {
                 numberOfAsyncClosuresFinished = 0
-                resultsObject = nil
+                finishedOperation = nil
                 resultsHandlerCompleted = false
                 
                 subject = self.getOperationInstance() as? AsyncClosuresOperation
                 subject?.resultsHandler = {
                     result in
-                    resultsObject = result
+                    finishedOperation = result
                     resultsHandlerCompleted = true
                 }
             }
             
             afterEach {
-                resultsObject = nil
+                finishedOperation = nil
                 resultsHandlerCompleted = nil
                 subject?.resultsHandler = nil
                 subject = nil

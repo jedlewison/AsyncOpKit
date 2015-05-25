@@ -13,23 +13,23 @@ class AsyncOpKitTests: QuickSpec {
         describe("The behavior of an AsyncOperation") {
             
             var subject : JDAsyncOperation? = nil
-            var resultsObject : JDAsyncOperationResults? = nil
+            var finishedOperation : JDAsyncOperation? = nil
             var resultsHandlerCompleted : Bool? = nil
             
             beforeEach {
-                resultsObject = nil
+                finishedOperation = nil
                 resultsHandlerCompleted = false
                 
                 subject = self.getOperationInstance()
                 subject?.resultsHandler = {
-                    result in
-                    resultsObject = result
+                    finishedOp in
+                    finishedOperation = finishedOp as? JDAsyncOperation
                     resultsHandlerCompleted = true
                 }
             }
             
             afterEach {
-                resultsObject = nil
+                finishedOperation = nil
                 resultsHandlerCompleted = nil
                 subject?.resultsHandler = nil
                 subject = nil
@@ -93,12 +93,12 @@ class AsyncOpKitTests: QuickSpec {
                         expect(subject?.resultsHandler).toEventually(beNil())
                     }
                     
-                    it("should return itself in its results handler resultsObject") {
-                        expect(resultsObject?.operation).toEventually(equal(subject))
+                    fit("should return itself in its results handler resultsObject") {
+                        expect(finishedOperation).toEventually(equal(subject))
                     }
                     
                     it("should return a results object that does not indicate it is canceled") {
-                        expect(resultsObject?.cancelled).toEventually(beFalse())
+                        expect(finishedOperation?.cancelled).toEventually(beFalse())
                     }
                 }
                 
@@ -155,7 +155,7 @@ class AsyncOpKitTests: QuickSpec {
                     }
                     
                     it("the results closure results object should mark it as cancelled") {
-                        expect(resultsObject?.cancelled).toEventually(beTrue())
+                        expect(finishedOperation?.cancelled).toEventually(beTrue())
                     }
                 }
 
@@ -189,7 +189,7 @@ class AsyncOpKitTests: QuickSpec {
                 }
                 
                 it("the resultsHandler's resultsObject should mark it as cancelled") {
-                    expect(resultsObject?.cancelled).toEventually(beTrue())
+                    expect(finishedOperation?.cancelled).toEventually(beTrue())
                 }
             }
             
