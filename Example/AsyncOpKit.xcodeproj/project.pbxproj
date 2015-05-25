@@ -22,6 +22,7 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
+		85B885B71B126DBB00381362 /* ClosureTestsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B885B61B126DBB00381362 /* ClosureTestsFile.swift */; };
 		85E7C7091B1184170050A197 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E7C7081B1184170050A197 /* Tests.swift */; };
 		D18D1BA3820046F8A2365896 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FCDF772A114E41D48810F4 /* Pods_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		612B33797039BCF34632A9C2 /* Pods-AsyncOpKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKit/Pods-AsyncOpKit.debug.xcconfig"; sourceTree = "<group>"; };
 		73136D7BF2FB85C47A46F4F6 /* Pods_AsyncOpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AsyncOpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85B885B61B126DBB00381362 /* ClosureTestsFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureTestsFile.swift; sourceTree = "<group>"; };
 		85E7C7071B1184160050A197 /* Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		85E7C7081B1184170050A197 /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		8C35F5687120E19C09D1D0D8 /* Pods-AsyncOpKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKit/Pods-AsyncOpKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				85E7C7081B1184170050A197 /* Tests.swift */,
 				85E7C7071B1184160050A197 /* Tests-Bridging-Header.h */,
+				85B885B61B126DBB00381362 /* ClosureTestsFile.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85E7C7091B1184170050A197 /* Tests.swift in Sources */,
+				85B885B71B126DBB00381362 /* ClosureTestsFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

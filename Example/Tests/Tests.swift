@@ -5,6 +5,10 @@ import AsyncOpKit
 
 class AsyncOpKitTests: QuickSpec {
     
+    internal func getOperationInstance() -> JDAsyncOperation {
+        return JDAsyncOperation()
+    }
+    
     override func spec() {
         describe("The behavior of an AsyncOperation") {
             
@@ -16,7 +20,7 @@ class AsyncOpKitTests: QuickSpec {
                 resultsObject = nil
                 resultsHandlerCompleted = false
                 
-                subject = JDAsyncOperation()
+                subject = self.getOperationInstance()
                 subject?.completionHandler = {
                     result in
                     resultsObject = result

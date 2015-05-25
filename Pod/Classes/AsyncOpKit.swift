@@ -11,8 +11,38 @@ finishExecutionBlock
 
 */
 
-public class JDAsyncBlockOperation : JDAsyncOperation {
+public class JDAsyncClosureOperation : JDAsyncOperation {
     
+    public typealias JDAsyncClosureIdentifier = Int
+    public typealias JDAsyncClosure = (op: JDAsyncClosureOperation, closureIdentifier: JDAsyncClosureIdentifier) -> Void
+    
+    private var closures = Dictionary<JDAsyncClosureIdentifier, JDAsyncClosure>()
+    private var currentClosureIdentifier = 0
+    private var numberOfClosures = 0
+    
+    public func addAsyncClosure(asyncClosure : JDAsyncClosure) {
+        let key = closures.count
+        closures.updateValue(asyncClosure, forKey: key)
+    }
+    
+    public func markClosureWithIdentifierFinished(closureIdentifier : JDAsyncClosureIdentifier) {
+        performClosureWithIdentifier(closureIdentifier + 1)
+    }
+    
+    override public func main() {
+        performClosureWithIdentifier(0)
+    }
+    
+    private func performClosureWithIdentifier(closureIdentifier : JDAsyncClosureIdentifier) {
+        
+        if let closure = closures[closureIdentifier] {
+            closures.removeValueForKey(closureIdentifier)
+            closure(op: self, closureIdentifier: closureIdentifier)
+        } else {
+            self.finish()
+        }
+        
+    }
     
 }
 
@@ -35,7 +65,7 @@ public class JDAsyncOperation: NSOperation {
         // invoked at most once, after cancel is invoked on an operation that has begun execution
         // must call finish after handling cancellation
         // do not call super
-        self.finish()
+        finish()
     }
 
     public var result : NSString? // use this property to store the results of your operation
@@ -67,7 +97,7 @@ public class JDAsyncOperation: NSOperation {
 
         willChangeValueForKey("isExecuting")
 
-        dispatch_async(self.qualityOfService.globalDispatchQueue(), {
+        dispatch_async(qualityOfService.globalDispatchQueue(), {
             if (!self.finished && !self.cancelled) {
                 self.main()
             } else {
@@ -136,8 +166,8 @@ public class JDAsyncOperation: NSOperation {
     class DefaultAsyncOperationResults : NSObject, JDAsyncOperationResults {
 
         init(op: JDAsyncOperation) {
-            self.error = nil;
-            self.operation = op
+            error = nil;
+            operation = op
         }
         let error : NSError?
         let operation : JDAsyncOperation
