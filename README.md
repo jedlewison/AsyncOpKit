@@ -1,3 +1,7 @@
+# Coming soon
+
+Ignore these stubs! AsyncOpKit is still WIP -- it will be released soon as a pod, but until then, assume that it won't work and that if it does, it will soon break. :)
+
 # AsyncOpKit
 
 [![CI Status](http://img.shields.io/travis/Jed Lewison/AsyncOpKit.svg?style=flat)](https://travis-ci.org/Jed Lewison/AsyncOpKit)
@@ -22,7 +26,7 @@ pod "AsyncOpKit"
 
 ## Author
 
-Jed Lewison, jed@magicappfactory.com
+Jed Lewison, jed@*
 
 ## License
 
