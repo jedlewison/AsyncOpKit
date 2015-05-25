@@ -1,17 +1,7 @@
 public class JDAsyncOperation: NSOperation, JDAsyncOperationObjectProtocol {
     
     public typealias JDAsyncOperationResultsHandler = (finishedOp: JDAsyncOperationObjectProtocol) -> Void
-    public var resultsHandler : JDAsyncOperationResultsHandler? {
-        get {
-            return _resultsHandler
-        }
-        
-        set {
-            _resultsHandler = newValue
-        }
-    }
-    
-    private var _resultsHandler : JDAsyncOperationResultsHandler? = nil
+    public var resultsHandler : JDAsyncOperationResultsHandler?
     
     public func handleCancellation() {
         // intended to be subclassed.

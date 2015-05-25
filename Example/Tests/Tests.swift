@@ -12,7 +12,7 @@ class AsyncOpKitTests: QuickSpec {
     override func spec() {
         describe("The behavior of an AsyncOperation") {
             
-            var subject : JDAsyncOperation? = nil
+            var subject : JDAsyncOperation! = nil
             var finishedOperation : JDAsyncOperation? = nil
             var resultsHandlerCompleted : Bool? = nil
             
@@ -21,7 +21,7 @@ class AsyncOpKitTests: QuickSpec {
                 resultsHandlerCompleted = false
                 
                 subject = self.getOperationInstance()
-                subject?.resultsHandler = {
+                subject.resultsHandler = {
                     finishedOp in
                     finishedOperation = finishedOp as? JDAsyncOperation
                     resultsHandlerCompleted = true
@@ -38,19 +38,19 @@ class AsyncOpKitTests: QuickSpec {
             context("before it starts") {
                 
                 it("should be ready to start") {
-                    expect(subject?.ready).to(beTrue())
+                    expect(subject.ready).to(beTrue())
                 }
                 
                 it("should not be executing") {
-                    expect(subject?.executing).to(beFalse())
+                    expect(subject.executing).to(beFalse())
                 }
 
                 it("should not be cancelled") {
-                    expect(subject?.cancelled).to(beFalse())
+                    expect(subject.cancelled).to(beFalse())
                 }
                 
                 it("should not be finished") {
-                    expect(subject?.finished).to(beFalse())
+                    expect(subject.finished).to(beFalse())
                 }
                 
             }
@@ -58,18 +58,26 @@ class AsyncOpKitTests: QuickSpec {
             context("when it starts normally") {
                 
                 beforeEach {
-                    subject?.start()
+                    subject.start()
+                }
+                
+                afterEach {
+                    subject = nil
                 }
                 
                 describe("immediately after starting") {
                     it("should be executing") {
-                        expect(subject?.executing).to(beTrue())
+                        expect(subject.executing).to(beTrue())
                     }
-                    
+
                     it("should not be finished") {
-                        expect(subject?.finished).to(beFalse())
+                        expect(subject.finished).to(beFalse())
                     }
-                    
+
+                    it("should not be cancelled") {
+                        expect(subject.cancelled).to(beFalse())
+                    }
+
                     it("should not execute its results handler") {
                         expect(resultsHandlerCompleted).to(beFalse())
                     }
@@ -78,11 +86,11 @@ class AsyncOpKitTests: QuickSpec {
                 
                 describe("asynchronously after starting") {
                     it("should stop executing") {
-                        expect(subject?.executing).toEventually(beFalse())
+                        expect(subject.executing).toEventually(beFalse())
                     }
                     
                     it("should finish") {
-                        expect(subject?.finished).toEventually(beTrue())
+                        expect(subject.finished).toEventually(beTrue())
                     }
                     
                     it("should execute its results handler") {
@@ -90,10 +98,10 @@ class AsyncOpKitTests: QuickSpec {
                     }
                     
                     it("should nil out the results handler") {
-                        expect(subject?.resultsHandler).toEventually(beNil())
+                        expect(subject.resultsHandler).toEventually(beNil())
                     }
                     
-                    fit("should return itself in its results handler resultsObject") {
+                    it("should return itself in its results handler resultsObject") {
                         expect(finishedOperation).toEventually(equal(subject))
                     }
                     
@@ -105,30 +113,30 @@ class AsyncOpKitTests: QuickSpec {
                 context("when an operation finishes normally") {
                     
                     it("should not be cancelled") {
-                        expect(subject?.cancelled).toEventuallyNot(beTrue())
+                        expect(subject.cancelled).toEventuallyNot(beTrue())
                     }
                     
                     it("should eventually be finished") {
-                        expect(subject?.finished).toEventually(beTrue())
+                        expect(subject.finished).toEventually(beTrue())
                     }
                     
                     it("should not be executing") {
-                        expect(subject?.executing).toEventually(beFalse())
+                        expect(subject.executing).toEventually(beFalse())
                     }
                     
                     context("when an operation is started after being finished") {
                         
                         beforeEach {
-                            subject?.finish()
-                            subject?.start()
+                            subject.finish()
+                            subject.start()
                         }
                         
                         it("should still be finished") {
-                            expect(subject?.finished).to(beTrue())
+                            expect(subject.finished).to(beTrue())
                         }
                         
                         it("should not be executing") {
-                            expect(subject?.executing).to(beFalse())
+                            expect(subject.executing).to(beFalse())
                         }
                         
                     }
@@ -138,16 +146,16 @@ class AsyncOpKitTests: QuickSpec {
                 context("When an executing operation is cancelled after being started") {
                     
                     beforeEach {
-                        subject?.cancel()
+                        subject.cancel()
                     }
                     
                     it("should immediatelhy be marked as cancelled") {
-                        expect(subject?.cancelled).to(beTrue())
+                        expect(subject.cancelled).to(beTrue())
                     }
                     
                     it("should eventually stop executing and finish") {
-                        expect(subject?.executing).toEventually(beFalse())
-                        expect(subject?.finished).toEventually(beTrue())
+                        expect(subject.executing).toEventually(beFalse())
+                        expect(subject.finished).toEventually(beTrue())
                     }
                     
                     it("should invoke the results closure when finished") {
@@ -164,24 +172,24 @@ class AsyncOpKitTests: QuickSpec {
             context("when it is canceled before starting") {
                 
                 beforeEach {
-                    subject?.cancel()
-                    subject?.start()
+                    subject.cancel()
+                    subject.start()
                 }
                 
                 it("should immediately cancel") {
-                    expect(subject?.cancelled).to(beTrue())
+                    expect(subject.cancelled).to(beTrue())
                 }
                 
                 it("should be finished") {
-                    expect(subject?.finished).to(beTrue())
+                    expect(subject.finished).to(beTrue())
                 }
                 
                 it("should never start executing") {
-                    expect(subject?.executing).to(beFalse())
+                    expect(subject.executing).to(beFalse())
                 }
                 
                 it("should never be executing") {
-                    expect(subject?.executing).toEventuallyNot(beTrue())
+                    expect(subject.executing).toEventuallyNot(beTrue())
                 }
                 
                 it ("the result handler's completion block should still fire") {

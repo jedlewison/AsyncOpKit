@@ -6,7 +6,14 @@ import AsyncOpKit
 class AsyncClosureOpKitTests: AsyncOpKitTests {
     
     override internal func getOperationInstance() -> JDAsyncOperation {
-        return AsyncClosuresOperation()
+        let closuresOp = AsyncClosuresOperation()
+        closuresOp.addAsyncClosure {
+            op, closureIdentifier in
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                op.markClosureWithIdentifierFinished(closureIdentifier)
+            }
+        }
+        return closuresOp
     }
     
     override func spec() {
@@ -25,7 +32,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 finishedOperation = nil
                 resultsHandlerCompleted = false
                 
-                subject = self.getOperationInstance() as? AsyncClosuresOperation
+                subject = AsyncClosuresOperation()
                 subject?.resultsHandler = {
                     result in
                     finishedOperation = result
@@ -93,7 +100,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                                 numberOfAsyncClosuresFinished?++
                                 op.markClosureWithIdentifierFinished(closureIdentifier)
-
+                                
                             }
                         }
                     }
@@ -113,26 +120,26 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
             context("when a closure adds 9 new closures") {
                 
                 beforeEach {
-                        subject?.addAsyncClosure {
-                            op, closureIdentifier in
-                            
-                            for _ in 0...9 {
-                                op.addAsyncClosure {
-                                    op, closureIdentifier in
-                                    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-                                        numberOfAsyncClosuresFinished?++
-                                        op.markClosureWithIdentifierFinished(closureIdentifier)
-                                        
-                                    }
-
+                    subject?.addAsyncClosure {
+                        op, closureIdentifier in
+                        
+                        for _ in 0...9 {
+                            op.addAsyncClosure {
+                                op, closureIdentifier in
+                                dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                                    numberOfAsyncClosuresFinished?++
+                                    op.markClosureWithIdentifierFinished(closureIdentifier)
+                                    
                                 }
-                            }
-
-                            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-                                numberOfAsyncClosuresFinished?++
-                                op.markClosureWithIdentifierFinished(closureIdentifier)
                                 
                             }
+                        }
+                        
+                        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                            numberOfAsyncClosuresFinished?++
+                            op.markClosureWithIdentifierFinished(closureIdentifier)
+                            
+                        }
                     }
                     
                     subject?.start()
@@ -200,5 +207,5 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
         }
         
     }
-
+    
 }
