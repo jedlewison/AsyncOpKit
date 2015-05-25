@@ -11,7 +11,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
     
     override func spec() {
         // make sure we pass all the current specs
-        //super.spec()
+        super.spec()
         
         describe("Handle Async Closures") {
             
@@ -107,6 +107,93 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 
                 it("should eventually mark itself as finished") {
                     expect(subject?.finished).toEventually(beTrue())
+                }
+            }
+            
+            context("when a closure adds 9 new closures") {
+                
+                beforeEach {
+                        subject?.addAsyncClosure {
+                            op, closureIdentifier in
+                            
+                            for _ in 0...9 {
+                                op.addAsyncClosure {
+                                    op, closureIdentifier in
+                                    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                                        numberOfAsyncClosuresFinished?++
+                                        op.markClosureWithIdentifierFinished(closureIdentifier)
+                                        
+                                    }
+
+                                }
+                            }
+
+                            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                                numberOfAsyncClosuresFinished?++
+                                op.markClosureWithIdentifierFinished(closureIdentifier)
+                                
+                            }
+                    }
+                    
+                    subject?.start()
+                }
+                
+                it("should execute ten total closures") {
+                    expect(numberOfAsyncClosuresFinished).toEventually(equal(10))
+                }
+                
+                it("should eventually mark itself as finished") {
+                    expect(subject?.finished).toEventually(beTrue())
+                }
+            }
+            
+            context("when the operation is cancelled after executing five closures but there are ten closures that finish asynchronously") {
+                
+                var numberOfCancellations = 0
+                
+                beforeEach {
+                    for _ in 0...9 {
+                        subject?.addAsyncClosure {
+                            op, closureIdentifier in
+                            if op.cancelled {
+                                numberOfCancellations++
+                                op.markClosureWithIdentifierFinished(closureIdentifier)
+                                return
+                            }
+                            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                                numberOfAsyncClosuresFinished?++
+                                if (numberOfAsyncClosuresFinished == 5) {
+                                    op.cancel()
+                                }
+                                op.markClosureWithIdentifierFinished(closureIdentifier)
+                                
+                            }
+                        }
+                    }
+                    
+                    subject?.start()
+                }
+                
+                afterEach {
+                    numberOfCancellations = 0
+                    subject?.finish()
+                    subject = nil
+                }
+                
+                it("should execute five uncancelled closures") {
+                    expect(numberOfAsyncClosuresFinished).toEventually(equal(5))
+                }
+                
+                it("should eventually mark itself as finished") {
+                    expect(subject?.finished).toEventually(beTrue())
+                }
+                
+                it("should eventually mark itself as canceled") {
+                    expect(subject?.cancelled).toEventually(beTrue())
+                }
+                
+                it("should tell 5 of the closures that it was cancelled") {
+                    expect(numberOfCancellations).toEventually(equal(5))
                 }
             }
             

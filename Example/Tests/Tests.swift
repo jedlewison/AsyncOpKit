@@ -74,9 +74,6 @@ class AsyncOpKitTests: QuickSpec {
                         expect(resultsHandlerCompleted).to(beFalse())
                     }
                     
-                    it("should still have a results handler") {
-                        expect(subject?.completionHandler).toNot(beNil())
-                    }
                 }
                 
                 describe("asynchronously after starting") {
