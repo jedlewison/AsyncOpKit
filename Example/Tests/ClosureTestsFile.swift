@@ -5,7 +5,7 @@ import AsyncOpKit
 
 class AsyncClosureOpKitTests: AsyncOpKitTests {
     
-    override internal func getOperationInstance() -> JDAsyncOperation {
+    override internal func createTestInstance() -> JDAsyncOperation {
         let closuresOp = AsyncClosuresOperation()
         closuresOp.addAsyncClosure {
             op, closureIdentifier in
@@ -22,7 +22,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
         
         describe("Handle Async Closures") {
             
-            var subject : AsyncClosuresOperation? = nil
+            var subject : AsyncClosuresOperation! = nil
             var finishedOperation : JDAsyncOperationObjectProtocol? = nil
             var resultsHandlerCompleted : Bool? = nil
             var numberOfAsyncClosuresFinished : Int?
@@ -33,7 +33,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 resultsHandlerCompleted = false
                 
                 subject = AsyncClosuresOperation()
-                subject?.resultsHandler = {
+                subject.resultsHandler = {
                     result in
                     finishedOperation = result
                     resultsHandlerCompleted = true
@@ -51,12 +51,12 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
             context("when there is one closure that finishes synchronously") {
                 
                 beforeEach {
-                    subject?.addAsyncClosure {
+                    subject.addAsyncClosure {
                         op, closureIdentifier in
                         numberOfAsyncClosuresFinished?++
                         op.markClosureWithIdentifierFinished(closureIdentifier)
                     }
-                    subject?.start()
+                    subject.start()
                 }
                 
                 it("should execute one closure") {
@@ -64,7 +64,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 }
                 
                 it("should eventually mark itself as finished") {
-                    expect(subject?.finished).toEventually(beTrue())
+                    expect(subject.finished).toEventually(beTrue())
                 }
             }
             
@@ -72,14 +72,14 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 
                 beforeEach {
                     for _ in 0...9 {
-                        subject?.addAsyncClosure {
+                        subject.addAsyncClosure {
                             op, closureIdentifier in
                             numberOfAsyncClosuresFinished?++
                             op.markClosureWithIdentifierFinished(closureIdentifier)
                         }
                     }
                     
-                    subject?.start()
+                    subject.start()
                 }
                 
                 it("should execute ten closures") {
@@ -87,7 +87,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 }
                 
                 it("should eventually mark itself as finished") {
-                    expect(subject?.finished).toEventually(beTrue())
+                    expect(subject.finished).toEventually(beTrue())
                 }
             }
             
@@ -95,7 +95,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 
                 beforeEach {
                     for _ in 0...9 {
-                        subject?.addAsyncClosure {
+                        subject.addAsyncClosure {
                             op, closureIdentifier in
                             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                                 numberOfAsyncClosuresFinished?++
@@ -105,7 +105,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                         }
                     }
                     
-                    subject?.start()
+                    subject.start()
                 }
                 
                 it("should execute ten closures") {
@@ -113,14 +113,14 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 }
                 
                 it("should eventually mark itself as finished") {
-                    expect(subject?.finished).toEventually(beTrue())
+                    expect(subject.finished).toEventually(beTrue())
                 }
             }
             
             context("when a closure adds 9 new closures") {
                 
                 beforeEach {
-                    subject?.addAsyncClosure {
+                    subject.addAsyncClosure {
                         op, closureIdentifier in
                         
                         for _ in 0...9 {
@@ -142,7 +142,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                         }
                     }
                     
-                    subject?.start()
+                    subject.start()
                 }
                 
                 it("should execute ten total closures") {
@@ -150,7 +150,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 }
                 
                 it("should eventually mark itself as finished") {
-                    expect(subject?.finished).toEventually(beTrue())
+                    expect(subject.finished).toEventually(beTrue())
                 }
             }
             
@@ -160,7 +160,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 
                 beforeEach {
                     for _ in 0...9 {
-                        subject?.addAsyncClosure {
+                        subject.addAsyncClosure {
                             op, closureIdentifier in
                             if op.cancelled {
                                 numberOfCancellations++
@@ -178,7 +178,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                         }
                     }
                     
-                    subject?.start()
+                    subject.start()
                 }
                 
                 afterEach {
@@ -192,11 +192,11 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 }
                 
                 it("should eventually mark itself as finished") {
-                    expect(subject?.finished).toEventually(beTrue())
+                    expect(subject.finished).toEventually(beTrue())
                 }
                 
                 it("should eventually mark itself as canceled") {
-                    expect(subject?.cancelled).toEventually(beTrue())
+                    expect(subject.cancelled).toEventually(beTrue())
                 }
                 
                 it("should tell 5 of the closures that it was cancelled") {
