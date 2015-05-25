@@ -10,10 +10,10 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   AsyncOpKit:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  AsyncOpKit: 943dff82ee586d1cd2c2374e5a502fd0a89822cc
+  AsyncOpKit: 797ddcc55ae080adbf2697906fdbe164610beb69
   Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
   Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
 

@@ -6,7 +6,7 @@ import AsyncOpKit
 class AsyncClosureOpKitTests: AsyncOpKitTests {
     
     override internal func getOperationInstance() -> JDAsyncOperation {
-        return JDAsyncClosureOperation()
+        return AsyncClosuresOperation()
     }
     
     override func spec() {
@@ -15,7 +15,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
         
         describe("Handle Async Closures") {
             
-            var subject : JDAsyncClosureOperation? = nil
+            var subject : AsyncClosuresOperation? = nil
             var resultsObject : JDAsyncOperationResults? = nil
             var resultsHandlerCompleted : Bool? = nil
             var numberOfAsyncClosuresFinished : Int?
@@ -25,8 +25,8 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 resultsObject = nil
                 resultsHandlerCompleted = false
                 
-                subject = self.getOperationInstance() as? JDAsyncClosureOperation
-                subject?.completionHandler = {
+                subject = self.getOperationInstance() as? AsyncClosuresOperation
+                subject?.resultsHandler = {
                     result in
                     resultsObject = result
                     resultsHandlerCompleted = true
@@ -36,7 +36,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
             afterEach {
                 resultsObject = nil
                 resultsHandlerCompleted = nil
-                subject?.completionHandler = nil
+                subject?.resultsHandler = nil
                 subject = nil
                 numberOfAsyncClosuresFinished = nil
             }

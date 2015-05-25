@@ -21,7 +21,7 @@ class AsyncOpKitTests: QuickSpec {
                 resultsHandlerCompleted = false
                 
                 subject = self.getOperationInstance()
-                subject?.completionHandler = {
+                subject?.resultsHandler = {
                     result in
                     resultsObject = result
                     resultsHandlerCompleted = true
@@ -31,7 +31,7 @@ class AsyncOpKitTests: QuickSpec {
             afterEach {
                 resultsObject = nil
                 resultsHandlerCompleted = nil
-                subject?.completionHandler = nil
+                subject?.resultsHandler = nil
                 subject = nil
             }
             
@@ -90,7 +90,7 @@ class AsyncOpKitTests: QuickSpec {
                     }
                     
                     it("should nil out the results handler") {
-                        expect(subject?.completionHandler).toEventually(beNil())
+                        expect(subject?.resultsHandler).toEventually(beNil())
                     }
                     
                     it("should return itself in its results handler resultsObject") {
