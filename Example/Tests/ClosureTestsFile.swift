@@ -5,7 +5,7 @@ import AsyncOpKit
 
 class AsyncClosureOpKitTests: AsyncOpKitTests {
     
-    override internal func createTestInstance() -> JDAsyncOperation {
+    override internal func createTestInstance() -> AsyncOperation {
         let closuresOp = AsyncClosuresOperation()
         closuresOp.addAsyncClosure {
             op, closureIdentifier in
@@ -17,15 +17,18 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
     }
     
     override func spec() {
-        // make sure we pass all the current specs
+        
+        // make the closures object can pass all the current tests
         super.spec()
         
         describe("Handle Async Closures") {
             
             var subject : AsyncClosuresOperation! = nil
-            var finishedOperation : JDAsyncOperationObjectProtocol? = nil
+            var finishedOperation : AsyncOperationObjectProtocol? = nil
             var resultsHandlerCompleted : Bool? = nil
             var numberOfAsyncClosuresFinished : Int?
+            var resultValue = "Should change"
+
             
             beforeEach {
                 numberOfAsyncClosuresFinished = 0
@@ -37,10 +40,14 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                     result in
                     finishedOperation = result
                     resultsHandlerCompleted = true
+                    if let opValue = finishedOperation?.value as? String {
+                        resultValue = opValue
+                    }
                 }
             }
             
             afterEach {
+                resultValue = "Should change"
                 finishedOperation = nil
                 resultsHandlerCompleted = nil
                 subject?.resultsHandler = nil
@@ -50,12 +57,24 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
             
             context("when there is one closure that finishes synchronously") {
                 
+                var expectedValue = "AsyncClosuresOperation result value"
+                
                 beforeEach {
                     subject.addAsyncClosure {
                         op, closureIdentifier in
                         numberOfAsyncClosuresFinished?++
+                        op.value = expectedValue
                         op.markClosureWithIdentifierFinished(closureIdentifier)
+
                     }
+                    
+                    subject.resultsHandler = {
+                        finishedOp in
+                        if let value = finishedOp.value as? String {
+                           resultValue = value
+                        }
+                    }
+
                     subject.start()
                 }
                 
@@ -65,6 +84,10 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 
                 it("should eventually mark itself as finished") {
                     expect(subject.finished).toEventually(beTrue())
+                }
+                
+                it("should have the same value that was assigned in the closure") {
+                    expect(resultValue).toEventually(equal(expectedValue))
                 }
             }
             

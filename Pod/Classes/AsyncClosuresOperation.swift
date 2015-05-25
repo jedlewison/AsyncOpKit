@@ -1,7 +1,5 @@
-public class AsyncClosuresOperation : JDAsyncOperation {
+public class AsyncClosuresOperation : AsyncOperation {
     
-    public typealias AsyncClosuresOperationResultsHandler = (finishedOp: AsyncClosuresOperationObjectProtocol) -> Void
-        
     public typealias AsyncClosureIdentifier = Int
     public typealias AsyncClosure = (op: AsyncClosuresOperation, closureIdentifier: AsyncClosureIdentifier) -> Void
     

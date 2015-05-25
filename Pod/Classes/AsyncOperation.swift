@@ -1,7 +1,7 @@
-public class JDAsyncOperation: NSOperation, JDAsyncOperationObjectProtocol {
+public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     
-    public typealias JDAsyncOperationResultsHandler = (finishedOp: JDAsyncOperationObjectProtocol) -> Void
-    public var resultsHandler : JDAsyncOperationResultsHandler?
+    public typealias AsyncOperationResultsHandler = (finishedOp: AsyncOperationObjectProtocol) -> Void
+    public var resultsHandler : AsyncOperationResultsHandler?
     
     public func handleCancellation() {
         // intended to be subclassed.
@@ -11,9 +11,8 @@ public class JDAsyncOperation: NSOperation, JDAsyncOperationObjectProtocol {
         finish()
     }
     
-    public var result : NSString? // use this property to store the results of your operation
+    public var value : AnyObject? // use this property to store the results of your operation
     public var error : NSError? // use this property to store any error about your operation
-    
 
     override public final func cancel() {
         if cancelled { return }
