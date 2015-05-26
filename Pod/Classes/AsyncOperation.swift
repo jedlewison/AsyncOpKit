@@ -1,3 +1,5 @@
+/// AsyncOperation takes care of the boilerplate you need for writing asynchronous NSOperations and adds a couple of useful features: An optional results handler that includes the operation, and properties to store results of the operation. 
+
 public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     
     /// The resultsHandler is fired once when the operation finishes on the queue specified by `resultsHandlerQueue`. It passes in the finished operation which will indicate whethere the operation was cancelled, had an error, or has a value.
