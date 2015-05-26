@@ -23,14 +23,20 @@ public class AsyncClosuresOperation : AsyncOperation {
         performClosureWithIdentifier(0)
     }
     
+    override public func handleCancellation() {
+        // empty implementation
+    }
+    
     private func performClosureWithIdentifier(closureIdentifier: AsyncClosureIdentifier) {
         
         dispatch_async(closureQueue) {
-            if let closure = self.closures[closureIdentifier] {
-                self.closures.removeValueForKey(closureIdentifier)
-                closure(op: self, closureIdentifier: closureIdentifier)
-            } else {
-                self.finish()
+            if (!self.finished) {
+                if let closure = self.closures[closureIdentifier] {
+                    self.closures.removeValueForKey(closureIdentifier)
+                    closure(op: self, closureIdentifier: closureIdentifier)
+                } else {
+                    self.finish()
+                }
             }
         }
         

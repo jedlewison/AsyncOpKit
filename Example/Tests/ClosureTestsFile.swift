@@ -140,7 +140,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 }
             }
             
-            context("when a closure adds 9 new closures") {
+            context("when a closure adds 10 new closures") {
                 
                 beforeEach {
                     subject.addAsyncClosure {
@@ -177,7 +177,7 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 }
             }
             
-            context("when the operation is cancelled after executing five closures but there are ten closures that finish asynchronously") {
+            context("when the operation is cancelled after executing five closures but the closures simply opt-out by marking the closure finished") {
                 
                 var numberOfCancellations = 0
                 
@@ -227,6 +227,56 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
                 }
             }
             
+            context("when the operation is cancelled after executing five closures and the async block finishes after cancellation") {
+                
+                var numberOfCancellations = 0
+                
+                beforeEach {
+                    for _ in 0...9 {
+                        subject.addAsyncClosure {
+                            op, closureIdentifier in
+                            if op.cancelled {
+                                numberOfCancellations++
+                                op.finish()
+                                return
+                            }
+                            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                                numberOfAsyncClosuresFinished?++
+                                if (numberOfAsyncClosuresFinished == 5) {
+                                    op.cancel()
+                                }
+                                op.markClosureWithIdentifierFinished(closureIdentifier)
+                                
+                            }
+                        }
+                    }
+                    
+                    subject.start()
+                }
+                
+                afterEach {
+                    numberOfCancellations = 0
+                    subject?.finish()
+                    subject = nil
+                }
+                
+                it("should execute five uncancelled closures") {
+                    expect(numberOfAsyncClosuresFinished).toEventually(equal(5))
+                }
+                
+                it("should eventually mark itself as finished") {
+                    expect(subject.finished).toEventually(beTrue())
+                }
+                
+                it("should eventually mark itself as canceled") {
+                    expect(subject.cancelled).toEventually(beTrue())
+                }
+                
+                it("should tell 1 of the closures that it was cancelled and not execute the remaining 4") {
+                    expect(numberOfCancellations).toEventually(equal(1))
+                }
+            }
+
         }
         
     }

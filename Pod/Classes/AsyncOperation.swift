@@ -1,7 +1,15 @@
 public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     
-    public typealias AsyncOperationResultsHandler = (finishedOp: AsyncOperationObjectProtocol) -> Void
-    public var resultsHandler: AsyncOperationResultsHandler?
+    public var resultsHandler: ((finishedOp: AsyncOperationObjectProtocol) -> Void)?
+    public var resultsHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+    
+    override public func main() {
+        // subclass this and kick off potentially asynchronous work
+        // call finished = true when done
+        // do not call super as super does nothing but finish the task
+        // println("Error: \(self) Must subclass main to do anything useful")
+        finish()
+    }
     
     public func handleCancellation() {
         // intended to be subclassed.
@@ -51,14 +59,6 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         didChangeValueForKey("isExecuting")
     }
     
-    override public func main() {
-        // subclass this and kick off potentially asynchronous work
-        // call finished = true when done
-        // do not call super as super does nothing but finish the task
-        // println("Error: \(self) Must subclass main to do anything useful")
-        finish()
-    }
-    
     override public final var executing: Bool {
         get { return _executing }
     }
@@ -75,7 +75,7 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
             
             self.resultsHandler = nil
             
-            completionOpQ.addOperationWithBlock {
+            resultsHandlerQueue.addOperationWithBlock {
                 resultsHandler(finishedOp: self)
             }
         }
@@ -88,8 +88,6 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         didChangeValueForKey("isFinished")
         
     }
-    
-    public var completionOpQ: NSOperationQueue = NSOperationQueue.mainQueue()
     
     private var _executing = false
     private var _finished = false
