@@ -1,7 +1,7 @@
 public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     
     public typealias AsyncOperationResultsHandler = (finishedOp: AsyncOperationObjectProtocol) -> Void
-    public var resultsHandler : AsyncOperationResultsHandler?
+    public var resultsHandler: AsyncOperationResultsHandler?
     
     public func handleCancellation() {
         // intended to be subclassed.
@@ -11,8 +11,8 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         finish()
     }
     
-    public var value : AnyObject? // use this property to store the results of your operation
-    public var error : NSError? // use this property to store any error about your operation
+    public var value: AnyObject? // use this property to store the results of your operation
+    public var error: NSError? // use this property to store any error about your operation
 
     override public final func cancel() {
         if cancelled { return }
@@ -23,7 +23,7 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         }
     }
     
-    override public final var asynchronous : Bool {
+    override public final var asynchronous: Bool {
         return true
     }
     
@@ -59,11 +59,11 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         finish()
     }
     
-    override public final var executing : Bool {
+    override public final var executing: Bool {
         get { return _executing }
     }
     
-    override public final var finished : Bool {
+    override public final var finished: Bool {
         get { return _finished }
     }
     
@@ -89,7 +89,7 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         
     }
     
-    public var completionOpQ : NSOperationQueue = NSOperationQueue.mainQueue()
+    public var completionOpQ: NSOperationQueue = NSOperationQueue.mainQueue()
     
     private var _executing = false
     private var _finished = false

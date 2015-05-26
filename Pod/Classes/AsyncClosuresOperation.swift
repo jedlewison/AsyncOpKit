@@ -8,14 +8,14 @@ public class AsyncClosuresOperation : AsyncOperation {
     private var numberOfClosures = 0
     public var closureQueue = dispatch_get_main_queue() // must be a serial queue!
     
-    public func addAsyncClosure(asyncClosure : AsyncClosure) {
+    public func addAsyncClosure(asyncClosure: AsyncClosure) {
         dispatch_async(closureQueue) {
             let key = self.closures.count
             self.closures.updateValue(asyncClosure, forKey: key)
         }
     }
     
-    public func markClosureWithIdentifierFinished(closureIdentifier : AsyncClosureIdentifier) {
+    public func markClosureWithIdentifierFinished(closureIdentifier: AsyncClosureIdentifier) {
         performClosureWithIdentifier(closureIdentifier + 1)
     }
     
@@ -23,7 +23,7 @@ public class AsyncClosuresOperation : AsyncOperation {
         performClosureWithIdentifier(0)
     }
     
-    private func performClosureWithIdentifier(closureIdentifier : AsyncClosureIdentifier) {
+    private func performClosureWithIdentifier(closureIdentifier: AsyncClosureIdentifier) {
         
         dispatch_async(closureQueue) {
             if let closure = self.closures[closureIdentifier] {

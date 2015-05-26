@@ -23,10 +23,10 @@ class AsyncClosureOpKitTests: AsyncOpKitTests {
         
         describe("Handle Async Closures") {
             
-            var subject : AsyncClosuresOperation! = nil
-            var finishedOperation : AsyncOperationObjectProtocol? = nil
-            var resultsHandlerCompleted : Bool? = nil
-            var numberOfAsyncClosuresFinished : Int?
+            var subject: AsyncClosuresOperation! = nil
+            var finishedOperation: AsyncOperationObjectProtocol? = nil
+            var resultsHandlerCompleted: Bool? = nil
+            var numberOfAsyncClosuresFinished: Int?
             var resultValue = "Should change"
 
             

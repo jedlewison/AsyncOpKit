@@ -1,8 +1,9 @@
 @objc public protocol AsyncOperationObjectProtocol : NSObjectProtocol {
     
-    var value : AnyObject? {get} // use this property to store the results of your operation
-    var error : NSError? {get} // use this property to store any error about your operation
-    var cancelled : Bool { @objc(isCancelled) get }
+    var value: AnyObject? {get} // use this property to store the results of your operation
+    var error: NSError? {get} // use this property to store any error about your operation
+    var cancelled: Bool { @objc(isCancelled) get }
+    var dependencies: [AnyObject] { get }
     
 }
 
