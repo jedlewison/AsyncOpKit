@@ -1,19 +1,24 @@
 public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     
+    /// The resultsHandler is fired once when the operation finishes on the queue specified by `resultsHandlerQueue`. It passes in the finished operation which will indicate whethere the operation was cancelled, had an error, or has a value.
     public var resultsHandler: ((finishedOp: AsyncOperationObjectProtocol) -> Void)?
+    
+    /// The operation queue on which the results handler will fire. Default is mainQueue.
     public var resultsHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     
+    /// Override main to start potentially asynchronous work. When the operation is complete, you must call finish(). Do not call super.
+    /// This method will not be called it the operation was cancelled before it was started.
     override public func main() {
-        // subclass this and kick off potentially asynchronous work
-        // call finished = true when done
-        // do not call super as super does nothing but finish the task
-        // println("Error: \(self) Must subclass main to do anything useful")
         finish()
     }
     
-    public var value: AnyObject? // use this property to store the results of your operation
-    public var error: NSError? // use this property to store any error about your operation
+    // use this property to store the results of your operation. You can also declare new properties in subclasses
+    public var value: AnyObject?
     
+    // use this property to store any error about your operation
+    public var error: NSError?
+    
+    // MARK: Async Operation boilerplate. For more information, read the Concurrency Programming Guide for iOS or OS X.
     override public final var asynchronous: Bool {
         return true
     }
@@ -30,7 +35,7 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         
         willChangeValueForKey("isExecuting")
         
-        dispatch_async(qualityOfService.globalDispatchQueue(), {
+        dispatch_async(qualityOfService.getGlobalDispatchQueue(), {
             if (!self.finished && !self.cancelled) {
                 self.main()
             } else {

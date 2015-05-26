@@ -10,10 +10,20 @@
 extension NSQualityOfService {
     
     /// returns a global GCD queue for the corresponding QOS
-    func globalDispatchQueue() -> dispatch_queue_t {
+    func getGlobalDispatchQueue() -> dispatch_queue_t {
         return dispatch_get_global_queue(dispatchQOS(), 0)
     }
     
+    func createSerialDispatchQueue(label: UnsafePointer<Int8>) -> dispatch_queue_t {
+        let attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, dispatchQOS(), 0)
+        return dispatch_queue_create(label, attr)
+    }
+
+    func createConcurrentDispatchQueue(label: UnsafePointer<Int8>) -> dispatch_queue_t {
+        let attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_CONCURRENT, dispatchQOS(), 0)
+        return dispatch_queue_create(label, attr)
+    }
+
     /// returns GCD's corresponding QOS class
     func dispatchQOS() -> qos_class_t {
         switch (self) {
@@ -29,4 +39,5 @@ extension NSQualityOfService {
             return QOS_CLASS_UTILITY
         }
     }
+    
 }
