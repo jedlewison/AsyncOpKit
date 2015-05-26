@@ -11,25 +11,8 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         finish()
     }
     
-    public func handleCancellation() {
-        // intended to be subclassed.
-        // invoked at most once, after cancel is invoked on an operation that has begun execution
-        // must call finish after handling cancellation
-        // do not call super
-        finish()
-    }
-    
     public var value: AnyObject? // use this property to store the results of your operation
     public var error: NSError? // use this property to store any error about your operation
-
-    override public final func cancel() {
-        if cancelled { return }
-        
-        super.cancel()
-        if executing {
-            handleCancellation()
-        }
-    }
     
     override public final var asynchronous: Bool {
         return true
