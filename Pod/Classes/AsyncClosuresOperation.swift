@@ -51,6 +51,10 @@ public class AsyncClosuresOperation : AsyncOperation {
         addAsyncClosure(asyncClosure)
     }
     
+    class public func asyncClosuresOperationWithClosure(asyncClosure: AsyncClosure) -> AsyncClosuresOperation {
+        return AsyncClosuresOperation(asyncClosure: asyncClosure)
+    }
+    
     /// The the kind of queue that should be used to manage adding and starting the operation's AsyncClosures.
     /// Note: The AsyncClosure itself can invoke other background threads
     

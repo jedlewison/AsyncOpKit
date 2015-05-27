@@ -3,23 +3,43 @@ import Quick
 import Nimble
 import AsyncOpKit
 
-class AsyncClosureOpKitTests: AsyncOpKitTests {
-    
+class AsyncClosureOpKitConvenienceInitTests: AsyncOpKitTests {
+
     override internal func createTestInstance() -> AsyncOperation {
+        
+        // make the init closures object can pass all the current tests
+
         let closuresOp = AsyncClosuresOperation {
             op, closureIdentifier in
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                 op.markClosureWithIdentifierFinished(closureIdentifier)
             }
         }
-
+        
         return closuresOp
     }
+}
+
+class AsyncClosureOpKitClassFactoryTests: AsyncOpKitTests {
+    
+    override internal func createTestInstance() -> AsyncOperation {
+        
+        // make the factory created closures object can pass all the current tests
+
+        let closuresOp = AsyncClosuresOperation.asyncClosuresOperationWithClosure {
+            op, closureIdentifier in
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                op.markClosureWithIdentifierFinished(closureIdentifier)
+            }
+        }
+        
+        return closuresOp
+    }
+}
+
+class AsyncClosureOpKitTests: QuickSpec {
     
     override func spec() {
-        
-        // make the closures object can pass all the current tests
-        super.spec()
         
         describe("Handle Async Closures") {
             
