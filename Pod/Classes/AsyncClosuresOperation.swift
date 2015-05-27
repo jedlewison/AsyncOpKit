@@ -4,42 +4,37 @@
 
 public class AsyncClosuresOperation : AsyncOperation {
     
-    /// Used to identify AsyncClosures
-    public typealias AsyncClosureIdentifier = Int
-    
     /**
     The signature of an AsyncClosure.
     
     :param: op The AsyncClosuresOperation responsible for performing the closures
-    :param: closureIdentifier An identifier representing the closure
+    :param: finishAsyncClosure: AsyncClosureFinishingFunction A function that will mark the asyncClosure as finished on the owning operation. This must be called in order to notify the owning operation that the closure has finished, even when operation has been cancelled. Invocations after the first are ignored.
     
     You must use the parameters to tell the operation when the closure has finished, for example:
     
       let closuresOp = AsyncClosuresOperation()
         closuresOp.addAsyncClosure {
-          op, closureIdentifier in
+          op, finishAsyncClosure in
           dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-            // do some stuff and then finish
-            op.markClosureWithIdentifierFinished(closureIdentifier)
+            // do some async stuff and then finish
+            finishAsyncClosure()
         }
        }
     
     You can also use the parameters to check it the operation has been cancelled:
     
     */
-    public typealias AsyncClosure = (op: AsyncClosuresOperation, closureIdentifier: AsyncClosureIdentifier) -> Void
     
-    /// Call this method to inform the operation that an AsyncClosure has been finished and that it should execute the next closure or finish the operation.
-    /// WARNING: You must call this method on every closure for the operation to finish.
-    
-    public final func markClosureWithIdentifierFinished(closureIdentifier: AsyncClosureIdentifier) {
-        performClosureWithIdentifier(closureIdentifier + 1)
-    }
+    public typealias AsyncClosureFinishingFunction = () -> Void
+    public typealias AsyncClosure = (op: AsyncClosuresOperation, finishAsyncClosure: AsyncClosureFinishingFunction) -> Void
     
     /// Add an AsyncClosure to an AsyncClosuresOperation.
     /// See AsyncClosure documentation for usage.
     
     public final func addAsyncClosure(asyncClosure: AsyncClosure) {
+        if executing || finished || cancelled {
+            return
+        }
         let key = self.closures.count
         self.closures.updateValue(asyncClosure, forKey: key)
     }
@@ -81,16 +76,22 @@ public class AsyncClosuresOperation : AsyncOperation {
             case .Main:
                 return dispatch_get_main_queue()
             case .Background:
-                return qos.createSerialDispatchQueue("AsyncClosuresOperationQOS")
+                return qos.createSerialDispatchQueue("AsyncClosuresOperationSerialQueue")
             }
         }
     }
     
     // MARK: Private methods/properties
     
-    private var _closuresQueueKind = AsyncClosuresQueueKind.Main
+    private typealias AsyncClosureIdentifier = Int
     
-    private var closuresQueue = dispatch_get_main_queue()
+    private func markClosureWithIdentifierFinished(closureIdentifier: AsyncClosureIdentifier) {
+        performClosureWithIdentifier(closureIdentifier + 1)
+    }
+    
+    private var _closuresQueueKind = AsyncClosuresQueueKind.Background
+    
+    private var closuresQueue = AsyncClosuresQueueKind.Background.serialQueueForQOS(.Default)
     
     private var closures = Dictionary<AsyncClosureIdentifier, AsyncClosure>()
     private var currentClosureIdentifier = 0
@@ -106,8 +107,11 @@ public class AsyncClosuresOperation : AsyncOperation {
             if (!self.finished) {
                 if let closure = self.closures[closureIdentifier] {
                     self.closures.removeValueForKey(closureIdentifier)
-                    closure(op: self, closureIdentifier: closureIdentifier)
-                } else {
+                    var asyncClosureFinishingFunction = {
+                        self.markClosureWithIdentifierFinished(closureIdentifier)
+                    }
+                    closure(op: self, finishAsyncClosure: asyncClosureFinishingFunction)
+                } else if (self.closures.count == 0){
                     self.finish()
                 }
             }

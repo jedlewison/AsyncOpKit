@@ -10,9 +10,9 @@ class AsyncClosureOpKitConvenienceInitTests: AsyncOpKitTests {
         // make the init closures object can pass all the current tests
 
         let closuresOp = AsyncClosuresOperation {
-            op, closureIdentifier in
+            op, finishAsyncClosure in
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-                op.markClosureWithIdentifierFinished(closureIdentifier)
+                finishAsyncClosure()
             }
         }
         
@@ -27,9 +27,9 @@ class AsyncClosureOpKitClassFactoryTests: AsyncOpKitTests {
         // make the factory created closures object can pass all the current tests
 
         let closuresOp = AsyncClosuresOperation.asyncClosuresOperationWithClosure {
-            op, closureIdentifier in
+            op, finishAsyncClosure in
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-                op.markClosureWithIdentifierFinished(closureIdentifier)
+                finishAsyncClosure()
             }
         }
         
@@ -81,10 +81,10 @@ class AsyncClosureOpKitTests: QuickSpec {
                 
                 beforeEach {
                     subject.addAsyncClosure {
-                        op, closureIdentifier in
+                        op, finishAsyncClosure in
                         numberOfAsyncClosuresFinished?++
                         op.value = expectedValue
-                        op.markClosureWithIdentifierFinished(closureIdentifier)
+                        finishAsyncClosure()
 
                     }
                     
@@ -116,9 +116,9 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, closureIdentifier in
+                            op, finishAsyncClosure in
                             numberOfAsyncClosuresFinished?++
-                            op.markClosureWithIdentifierFinished(closureIdentifier)
+                            finishAsyncClosure()
                         }
                     }
                     
@@ -139,11 +139,10 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, closureIdentifier in
+                            op, finishAsyncClosure in
                             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                                 numberOfAsyncClosuresFinished?++
-                                op.markClosureWithIdentifierFinished(closureIdentifier)
-                                
+                                finishAsyncClosure()
                             }
                         }
                     }
@@ -160,35 +159,28 @@ class AsyncClosureOpKitTests: QuickSpec {
                 }
             }
             
-            context("when a closure adds 10 new closures") {
+            context("when there are ten closures that finish asynchronously with multiple finishAsyncClosure commands") {
                 
                 beforeEach {
-                    subject.addAsyncClosure {
-                        op, closureIdentifier in
-                        
-                        for _ in 0...9 {
-                            op.addAsyncClosure {
-                                op, closureIdentifier in
-                                dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-                                    numberOfAsyncClosuresFinished?++
-                                    op.markClosureWithIdentifierFinished(closureIdentifier)
-                                    
-                                }
-                                
+                    for _ in 0...9 {
+                        subject.addAsyncClosure {
+                            op, finishAsyncClosure in
+                            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+                                numberOfAsyncClosuresFinished?++
+                                finishAsyncClosure()
+                                finishAsyncClosure()
+
+                                finishAsyncClosure()
+                                finishAsyncClosure()
+
                             }
-                        }
-                        
-                        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-                            numberOfAsyncClosuresFinished?++
-                            op.markClosureWithIdentifierFinished(closureIdentifier)
-                            
                         }
                     }
                     
                     subject.start()
                 }
                 
-                it("should execute ten total closures") {
+                it("should execute ten closures") {
                     expect(numberOfAsyncClosuresFinished).toEventually(equal(10))
                 }
                 
@@ -196,6 +188,7 @@ class AsyncClosureOpKitTests: QuickSpec {
                     expect(subject.finished).toEventually(beTrue())
                 }
             }
+
             
             context("when the operation is cancelled after executing five closures but the closures simply opt-out by marking the closure finished") {
                 
@@ -204,10 +197,10 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, closureIdentifier in
+                            op, finishAsyncClosure in
                             if op.cancelled {
                                 numberOfCancellations++
-                                op.markClosureWithIdentifierFinished(closureIdentifier)
+                                finishAsyncClosure()
                                 return
                             }
                             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
@@ -215,7 +208,7 @@ class AsyncClosureOpKitTests: QuickSpec {
                                 if (numberOfAsyncClosuresFinished == 5) {
                                     op.cancel()
                                 }
-                                op.markClosureWithIdentifierFinished(closureIdentifier)
+                                finishAsyncClosure()
                                 
                             }
                         }
@@ -254,7 +247,7 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, closureIdentifier in
+                            op, finishAsyncClosure in
                             if op.cancelled {
                                 numberOfCancellations++
                                 op.finish()
@@ -265,8 +258,7 @@ class AsyncClosureOpKitTests: QuickSpec {
                                 if (numberOfAsyncClosuresFinished == 5) {
                                     op.cancel()
                                 }
-                                op.markClosureWithIdentifierFinished(closureIdentifier)
-                                
+                                finishAsyncClosure()
                             }
                         }
                     }

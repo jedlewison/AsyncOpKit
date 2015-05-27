@@ -153,8 +153,8 @@ class AsyncOpKitTests: QuickSpec {
                         subject.cancel()
                     }
                     
-                    it("should immediatelhy be marked as cancelled") {
-                        expect(subject.cancelled).to(beTrue())
+                    it("should eventually be marked as cancelled") {
+                        expect(subject.cancelled).toEventually(beTrue())
                     }
                     
                     it("should eventually stop executing and finish") {
