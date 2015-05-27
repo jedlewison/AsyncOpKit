@@ -6,13 +6,13 @@ import AsyncOpKit
 class AsyncClosureOpKitTests: AsyncOpKitTests {
     
     override internal func createTestInstance() -> AsyncOperation {
-        let closuresOp = AsyncClosuresOperation()
-        closuresOp.addAsyncClosure {
+        let closuresOp = AsyncClosuresOperation {
             op, closureIdentifier in
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                 op.markClosureWithIdentifierFinished(closureIdentifier)
             }
         }
+
         return closuresOp
     }
     

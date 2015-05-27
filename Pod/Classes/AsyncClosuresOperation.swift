@@ -44,6 +44,13 @@ public class AsyncClosuresOperation : AsyncOperation {
         self.closures.updateValue(asyncClosure, forKey: key)
     }
     
+    /// Create a new AsyncClosuresOperation with an AsyncClosure
+    
+    public convenience init(asyncClosure: AsyncClosure) {
+        self.init()
+        addAsyncClosure(asyncClosure)
+    }
+    
     /// The the kind of queue that should be used to manage adding and starting the operation's AsyncClosures.
     /// Note: The AsyncClosure itself can invoke other background threads
     
