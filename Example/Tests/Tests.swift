@@ -30,24 +30,24 @@ class AsyncOpKitTests: QuickSpec {
             
             var subject: AsyncOperation! = nil
             var finishedOperation: AsyncOperation? = nil
-            var resultsHandlerCompleted: Bool? = nil
+            var completionHandlerCompleted: Bool? = nil
             
             beforeEach {
                 finishedOperation = nil
-                resultsHandlerCompleted = false
+                completionHandlerCompleted = false
                 
                 subject = self.createTestInstance()
-                subject.resultsHandler = {
+                subject.completionHandler = {
                     finishedOp in
                     finishedOperation = finishedOp as? AsyncOperation
-                    resultsHandlerCompleted = true
+                    completionHandlerCompleted = true
                 }
             }
             
             afterEach {
                 finishedOperation = nil
-                resultsHandlerCompleted = nil
-                subject?.resultsHandler = nil
+                completionHandlerCompleted = nil
+                subject?.completionHandler = nil
                 subject = nil
             }
             
@@ -95,7 +95,7 @@ class AsyncOpKitTests: QuickSpec {
                     }
 
                     it("should not execute its results handler") {
-                        expect(resultsHandlerCompleted).to(beFalse())
+                        expect(completionHandlerCompleted).to(beFalse())
                     }
                     
                 }
@@ -110,11 +110,11 @@ class AsyncOpKitTests: QuickSpec {
                     }
                     
                     it("should execute its results handler") {
-                        expect(resultsHandlerCompleted).toEventually(beTrue())
+                        expect(completionHandlerCompleted).toEventually(beTrue())
                     }
                     
                     it("should nil out the results handler") {
-                        expect(subject.resultsHandler).toEventually(beNil())
+                        expect(subject.completionHandler).toEventually(beNil())
                     }
                     
                     it("should return itself in its results handler resultsObject") {
@@ -175,7 +175,7 @@ class AsyncOpKitTests: QuickSpec {
                     }
                     
                     it("should invoke the results closure when finished") {
-                        expect(resultsHandlerCompleted).toEventually(beTrue())
+                        expect(completionHandlerCompleted).toEventually(beTrue())
                     }
                     
                     it("the results closure results object should mark it as cancelled") {
@@ -209,10 +209,10 @@ class AsyncOpKitTests: QuickSpec {
                 }
                 
                 it ("the result handler's completion block should still fire") {
-                    expect(resultsHandlerCompleted).toEventually(beTrue())
+                    expect(completionHandlerCompleted).toEventually(beTrue())
                 }
                 
-                it("the resultsHandler's resultsObject should mark it as cancelled") {
+                it("the completionHandler's resultsObject should mark it as cancelled") {
                     expect(finishedOperation?.cancelled).toEventually(beTrue())
                 }
             }

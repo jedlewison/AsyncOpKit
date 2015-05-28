@@ -1,19 +1,10 @@
-// The protocol to which finished operations passed into AsyncOperations resultsHandlers conform.
-
+/// The protocol to which finished operations passed into AsyncOperations completionHandlers conform.
 @objc public protocol AsyncOperationObjectProtocol : NSObjectProtocol {
-    
     var value: AnyObject? {get} // use this property to store the results of your operation
     var error: NSError? {get} // use this property to store any error about your operation
     var cancelled: Bool { @objc(isCancelled) get }
     var dependencies: [AnyObject] { get }
     
-}
-
-@objc public protocol AsyncClosureObjectProtocol : NSObjectProtocol {
-    var value: AnyObject? {get set}
-    var operationCancelled: Bool { get }
-    func finishClosure() -> Void
-    func cancelOperation() -> Void
 }
 
 extension NSQualityOfService {

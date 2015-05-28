@@ -1,34 +1,54 @@
-/// Use an AsyncClosuresOperation to serially run an arbitrary number of potentially asynchronous closures.
-/// Although AsyncClosures can run asynchronously from the perspective of the queue or thread managing the operation, the operation object runs them serially, FIFO.
-/// For concurrent AsyncClosures, create multiple AsyncClosuresOperation objects
 
+/// Pass an AsyncClosure to a AsyncClosuresOperation to perform a potentially asynchronous work inside a closure, marking it as finished when done.
+///
+/// :param: closureController Use the closureController to mark the closure finished, to cancel the parent closures operation, or to check operation status.
 public typealias AsyncClosure = (closureController: AsyncClosureObjectProtocol) -> Void
 
-public enum AsyncClosuresQueueKind {
-    case Main
-    case Background
+/// AsyncClosureObjectProtocol defines the interface for the object passed into AsyncClosures by AsyncClosuresOperations
+@objc public protocol AsyncClosureObjectProtocol : NSObjectProtocol {
+    /// Set a value on the AsyncClosuresOperation to pass among closures
+    var value: AnyObject? {get set}
     
-    public func serialOperationQueueForKind() -> NSOperationQueue {
-        switch self {
-        case .Main:
-            return NSOperationQueue.mainQueue()
-        case .Background:
-            let serialOperationQueueForKind = NSOperationQueue()
-            serialOperationQueueForKind.maxConcurrentOperationCount = 1
-            return serialOperationQueueForKind
-        }
-    }
+    /// Check if the operation is cancelled
+    var isOperationCancelled: Bool { get }
+    
+    /// Mark the closure finished
+    func finishClosure() -> Void
+    
+    /// Cancel the operation
+    func cancelOperation() -> Void
 }
+
+/// The kind of serial operation queue the AsyncClosuresOperation should manage.
+public enum AsyncClosuresQueueKind {
+    /// Use a mainQueue operation queue
+    case Main
+    /// Create a background queue
+    case Background
+}
+
+/// AsyncClosuresOperation manages a queue of AsyncClosure closures.
 
 public class AsyncClosuresOperation : AsyncOperation {
     
-    /// Create a new AsyncClosuresOperation with an AsyncClosure
-    
+    ///:queueKind: Whether the closures should execute on the mainQueue or a background queue.
+    ///:returns: A new AsyncClosuresOperation
     public init(queueKind: AsyncClosuresQueueKind) {
         closureOpQ = queueKind.serialOperationQueueForKind()
         super.init()
     }
-
+    
+    /// Create a new AsyncClosuresOperation with a closure
+    ///
+    /// 1. Because the queue is performed serially, closures must be marked finished. (See addAsyncClosure).
+    /// 2. Once started, an AsyncClosuresOperation will not finish until all its closures have been marked as finished, even if it has been cancelled. It is the programmer's responsibility to check for cancellation.
+    /// 3. If an AsyncClosuresOperation is cancelled before it is started, its AsyncClosures will not be called.
+    /// 4. For executing closures concurrently, use a concurrent operation queue with multiple AsyncClosuresOperations. You can add dependencies.
+    ///
+    /// :queueKind: Whether the closures should execute on the mainQueue or a background queue.
+    /// :asyncClosure: The AsyncClosure.
+    /// :see: addAsyncClosure.
+    
     public convenience init(queueKind: AsyncClosuresQueueKind, asyncClosure: AsyncClosure) {
         self.init(queueKind: queueKind)
         addAsyncClosure(asyncClosure)
@@ -38,33 +58,24 @@ public class AsyncClosuresOperation : AsyncOperation {
         return AsyncClosuresOperation(queueKind: queueKind, asyncClosure: asyncClosure)
     }
     
-    /// The kind of queue used for managing adding and kicking of async closures.
-    
-
-
-    /**
-    The signature of an AsyncClosure.
-    
-    :param: op The AsyncClosuresOperation responsible for performing the closures
-    :param: finishAsyncClosure: AsyncClosureFinishingFunction A function that will mark the asyncClosure as finished on the owning operation. This must be called in order to notify the owning operation that the closure has finished, even when operation has been cancelled. Invocations after the first are ignored.
-    
-    You must use the parameters to tell the operation when the closure has finished, for example:
-    
-    let closuresOp = AsyncClosuresOperation()
-    closuresOp.addAsyncClosure {
-    op, finishAsyncClosure in
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-    // do some async stuff and then finish
-    finishAsyncClosure()
-    }
-    }
-    
-    You can also use the parameters to check it the operation has been cancelled:
-    
-    */
-    
-    /// Add an AsyncClosure to an AsyncClosuresOperation.
-    /// See AsyncClosure documentation for usage.
+    /// Adds a new AsyncClosure to the AsyncClosuresOperation. Has no effect if the operation has begun executing or has already finished or been cancelled.
+    /// Usage:
+    ///   closuresOp.addAsyncClosure {
+    ///     closureController in
+    ///     if closureController.isOperationCancelled {
+    ///     closureController.finishClosure()
+    ///     return
+    ///     }
+    ///     dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+    ///     // do some async stuff and then finish
+    ///     closureController.finishClosure()
+    ///     }
+    ///   }
+    ///
+    /// :param: asyncClosure The AsyncClosure to add. For the operation to proceed to
+    /// the next closure or to finish, you must use asyncClosure's closureController
+    /// parameter mark it as finished.
+    /// :see: AsyncClosureObjectProtocol
     
     public final func addAsyncClosure(asyncClosure: AsyncClosure) {
         if executing || finished || cancelled {
@@ -86,16 +97,13 @@ public class AsyncClosuresOperation : AsyncOperation {
                     self.finish()
                 }
             }
-
         }
-        
-        
     }
+    
+    // MARK: Private methods/properties
     
     private let closureOpQ: NSOperationQueue
     private var closures = [AsyncClosureOperation]()
-    
-    // MARK: Private methods/properties
     
     override public func main() {
         if closures.count > 0 {
@@ -126,7 +134,7 @@ public class AsyncClosuresOperation : AsyncOperation {
             }
         }
         
-        var operationCancelled: Bool {
+        var isOperationCancelled: Bool {
             return self.masterOperation.cancelled
         }
         
@@ -147,8 +155,18 @@ public class AsyncClosuresOperation : AsyncOperation {
                 masterOperation.value = newValue
             }
         }
-        
     }
+}
 
-    
+extension AsyncClosuresQueueKind {
+    public func serialOperationQueueForKind() -> NSOperationQueue {
+        switch self {
+        case .Main:
+            return NSOperationQueue.mainQueue()
+        case .Background:
+            let serialOperationQueueForKind = NSOperationQueue()
+            serialOperationQueueForKind.maxConcurrentOperationCount = 1
+            return serialOperationQueueForKind
+        }
+    }
 }

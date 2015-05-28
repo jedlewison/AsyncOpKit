@@ -75,7 +75,7 @@ class AsyncClosureOpKitTests: QuickSpec {
                     subject.cancel()
                     subject.finish()
                     subject.completionBlock = nil
-                    subject.resultsHandler = nil
+                    subject.completionHandler = nil
                     
                 }
                 subject = nil
@@ -96,7 +96,7 @@ class AsyncClosureOpKitTests: QuickSpec {
                         
                     }
                     
-                    subject.resultsHandler = {
+                    subject.completionHandler = {
                         finishedOp in
                         if let value = finishedOp.value as? String {
                             testAssistant.resultValue = value
@@ -203,7 +203,7 @@ class AsyncClosureOpKitTests: QuickSpec {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
                             closureController in
-                            if closureController.operationCancelled {
+                            if closureController.isOperationCancelled {
                                 testAssistant.numberOfCancellations++
                                 closureController.finishClosure()
                                 return
@@ -245,7 +245,7 @@ class AsyncClosureOpKitTests: QuickSpec {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
                             closureController in
-                            if closureController.operationCancelled {
+                            if closureController.isOperationCancelled {
                                 testAssistant.numberOfCancellations++
                                 closureController.finishClosure()
                                 return

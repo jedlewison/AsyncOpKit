@@ -2,11 +2,12 @@
 
 public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     
-    /// The resultsHandler is fired once when the operation finishes on the queue specified by `resultsHandlerQueue`. It passes in the finished operation which will indicate whethere the operation was cancelled, had an error, or has a value.
-    public var resultsHandler: ((finishedOp: AsyncOperationObjectProtocol) -> Void)?
+    /// The completionHandler is fired once when the operation finishes on the queue specified by `completionHandlerQueue`. It passes in the finished operation which will indicate whethere the operation was cancelled, had an error, or has a value.
+    /// ;finishedOp: The finished operation. Conforms to AsyncOperationObjectProtocol.
+    public var completionHandler: ((finishedOp: AsyncOperationObjectProtocol) -> Void)?
     
     /// The operation queue on which the results handler will fire. Default is mainQueue.
-    public var resultsHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+    public var completionHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue()
     
     /// Override main to start potentially asynchronous work. When the operation is complete, you must call finish(). Do not call super.
     /// This method will not be called it the operation was cancelled before it was started.
@@ -57,10 +58,10 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         _executing = false
         _finished = true
         
-        if let resultsHandler = resultsHandler {
-            self.resultsHandler = nil
-            resultsHandlerQueue.addOperationWithBlock {
-                resultsHandler(finishedOp: self)
+        if let completionHandler = completionHandler {
+            self.completionHandler = nil
+            completionHandlerQueue.addOperationWithBlock {
+                completionHandler(finishedOp: self)
             }
         }
         
