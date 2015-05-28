@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "AsyncOpKit"
-  s.version          = "0.0.1"
+  s.version          = "0.0.2"
   s.summary          = "AsyncOpKit provides Swift subclasses of NSOperation to help manage asynchronous operations"
   s.description      = <<-DESC
                        AsyncOpKit helps manage asynchronous operations.
