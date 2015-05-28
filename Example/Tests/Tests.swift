@@ -5,11 +5,27 @@ import AsyncOpKit
 
 class AsyncOpKitTests: QuickSpec {
     
+    // Create a simple subclass of the base class that does something asynchronously
+    internal class TestAsyncOperation : AsyncOperation {
+        let dispatchQ = dispatch_queue_create("", DISPATCH_QUEUE_CONCURRENT)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Double(NSEC_PER_SEC)))
+
+        override final func main() {
+            dispatch_after(delayTime, dispatchQ) {
+                self.finish()
+            }
+        }
+    }
+    
     internal func createTestInstance() -> AsyncOperation {
-        return AsyncOperation()
+        return TestAsyncOperation()
     }
     
     override func spec() {
+        performTest()
+    }
+    
+    func performTest() {
         describe("The behavior of an AsyncOperation") {
             
             var subject: AsyncOperation! = nil
@@ -67,14 +83,10 @@ class AsyncOpKitTests: QuickSpec {
                 
                 describe("immediately after starting") {
                     it("should be executing") {
-                        // TODO: Figure out why this test registers false positives
-                        // Might be an error with Quick/Nimble/XCTest ... or AOK
                         expect(subject.executing).to(beTrue())
                     }
 
                     it("should not be finished") {
-                        // TODO: Figure out why this test registers false positives
-                        // Might be an error with Quick/Nimble/XCTest ... or AOK
                         expect(subject.finished).to(beFalse())
                     }
 

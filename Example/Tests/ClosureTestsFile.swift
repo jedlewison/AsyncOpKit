@@ -9,10 +9,11 @@ class AsyncClosureOpKitConvenienceInitTests: AsyncOpKitTests {
         
         // make sure the init closures object can pass all the current tests
         let dispatchQ = dispatch_queue_create("", DISPATCH_QUEUE_CONCURRENT)
-        
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Double(NSEC_PER_SEC)))
+
         let closuresOp = AsyncClosuresOperation(queueKind: .Background) {
             closureController in
-            dispatch_async(dispatchQ) {
+            dispatch_after(delayTime, dispatchQ) {
                 closureController.finishClosure()
             }
         }
@@ -27,10 +28,11 @@ class AsyncClosureOpKitClassFactoryTests: AsyncOpKitTests {
         
         // make sure the factory created closures object can pass all the current tests
         let dispatchQ = dispatch_queue_create("", DISPATCH_QUEUE_CONCURRENT)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Double(NSEC_PER_SEC)))
         
         let closuresOp = AsyncClosuresOperation.asyncClosuresOperation(.Main) {
             closureController in
-            dispatch_async(dispatchQ) {
+            dispatch_after(delayTime, dispatchQ) {
                 closureController.finishClosure()
             }
         }
@@ -49,10 +51,8 @@ class AsyncClosureOpKitTests: QuickSpec {
     }
     
     override func spec() {
-        for i in 0...69 {
-            specWithQueueKind(.Background)
-            specWithQueueKind(.Main)
-        }
+        specWithQueueKind(.Background)
+        specWithQueueKind(.Main)
     }
     
     func specWithQueueKind(queueKind: AsyncClosuresQueueKind) {

@@ -11,9 +11,7 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     /// Override main to start potentially asynchronous work. When the operation is complete, you must call finish(). Do not call super.
     /// This method will not be called it the operation was cancelled before it was started.
     override public func main() {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.finish()
-        }
+        self.finish()
     }
     
     // use this property to store the results of your operation. You can also declare new properties in subclasses
@@ -28,12 +26,8 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     }
     
     override public final func start() {
-        if cancelled {
+        if cancelled || finished {
             finish()
-            return
-        }
-        
-        if finished {
             return
         }
         
@@ -41,13 +35,7 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         _executing = true
         didChangeValueForKey("isExecuting")
         
-        
-        if (!self.finished && !self.cancelled) {
-            self.main()
-        } else {
-            self.finish()
-        }
-        
+        main()
     }
     
     override public final var executing: Bool {
@@ -59,18 +47,18 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     }
     
     public final func finish() {
-        
-        if finished { return }
+        if finished {
+            return
+        }
         
         willChangeValueForKey("isFinished")
         willChangeValueForKey("isExecuting")
+        
         _executing = false
         _finished = true
         
         if let resultsHandler = resultsHandler {
-            
             self.resultsHandler = nil
-            
             resultsHandlerQueue.addOperationWithBlock {
                 resultsHandler(finishedOp: self)
             }
@@ -78,7 +66,6 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         
         didChangeValueForKey("isExecuting")
         didChangeValueForKey("isFinished")
-        
     }
     
     private var _executing = false
