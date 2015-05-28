@@ -9,10 +9,10 @@ class AsyncClosureOpKitConvenienceInitTests: AsyncOpKitTests {
         
         // make the init closures object can pass all the current tests
 
-        let closuresOp = AsyncClosuresOperation {
-            op, finishAsyncClosure in
+        let closuresOp = AsyncClosuresOperation(queueKind: .Main) {
+            closureController in
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-                finishAsyncClosure()
+                closureController.finishClosure()
             }
         }
         
@@ -20,22 +20,22 @@ class AsyncClosureOpKitConvenienceInitTests: AsyncOpKitTests {
     }
 }
 
-class AsyncClosureOpKitClassFactoryTests: AsyncOpKitTests {
-    
-    override internal func createTestInstance() -> AsyncOperation {
-        
-        // make the factory created closures object can pass all the current tests
-
-        let closuresOp = AsyncClosuresOperation.asyncClosuresOperationWithClosure {
-            op, finishAsyncClosure in
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
-                finishAsyncClosure()
-            }
-        }
-        
-        return closuresOp
-    }
-}
+//class AsyncClosureOpKitClassFactoryTests: AsyncOpKitTests {
+//    
+//    override internal func createTestInstance() -> AsyncOperation {
+//        
+//        // make the factory created closures object can pass all the current tests
+//
+//        let closuresOp = AsyncClosuresOperation.asyncClosuresOperationWithClosure(.Main) {
+//            closureController in
+//            dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+//                closureController.finishClosure()
+//            }
+//        }
+//        
+//        return closuresOp
+//    }
+//}
 
 class AsyncClosureOpKitTests: QuickSpec {
     
@@ -49,13 +49,12 @@ class AsyncClosureOpKitTests: QuickSpec {
             var numberOfAsyncClosuresFinished: Int?
             var resultValue = "Should change"
 
-            
             beforeEach {
                 numberOfAsyncClosuresFinished = 0
                 finishedOperation = nil
                 resultsHandlerCompleted = false
                 
-                subject = AsyncClosuresOperation()
+                subject = AsyncClosuresOperation(queueKind: .Main)
                 subject.resultsHandler = {
                     result in
                     finishedOperation = result
@@ -81,10 +80,10 @@ class AsyncClosureOpKitTests: QuickSpec {
                 
                 beforeEach {
                     subject.addAsyncClosure {
-                        op, finishAsyncClosure in
+                        closureController in
                         numberOfAsyncClosuresFinished?++
-                        op.value = expectedValue
-                        finishAsyncClosure()
+                        closureController.value = expectedValue
+                        closureController.finishClosure()
 
                     }
                     
@@ -116,9 +115,9 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, finishAsyncClosure in
+                            closureController in
                             numberOfAsyncClosuresFinished?++
-                            finishAsyncClosure()
+                            closureController.finishClosure()
                         }
                     }
                     
@@ -139,10 +138,10 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, finishAsyncClosure in
+                            closureController in
                             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                                 numberOfAsyncClosuresFinished?++
-                                finishAsyncClosure()
+                                closureController.finishClosure()
                             }
                         }
                     }
@@ -164,14 +163,13 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, finishAsyncClosure in
+                            closureController in
                             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                                 numberOfAsyncClosuresFinished?++
-                                finishAsyncClosure()
-                                finishAsyncClosure()
-
-                                finishAsyncClosure()
-                                finishAsyncClosure()
+                                closureController.finishClosure()
+                                closureController.finishClosure()
+                                closureController.finishClosure()
+                                closureController.finishClosure()
 
                             }
                         }
@@ -197,18 +195,18 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, finishAsyncClosure in
-                            if op.cancelled {
+                            closureController in
+                            if closureController.operationCancelled {
                                 numberOfCancellations++
-                                finishAsyncClosure()
+                                closureController.finishClosure()
                                 return
                             }
                             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                                 numberOfAsyncClosuresFinished?++
                                 if (numberOfAsyncClosuresFinished == 5) {
-                                    op.cancel()
+                                    closureController.cancelOperation()
                                 }
-                                finishAsyncClosure()
+                                closureController.finishClosure()
                                 
                             }
                         }
@@ -247,18 +245,18 @@ class AsyncClosureOpKitTests: QuickSpec {
                 beforeEach {
                     for _ in 0...9 {
                         subject.addAsyncClosure {
-                            op, finishAsyncClosure in
-                            if op.cancelled {
+                            closureController in
+                            if closureController.operationCancelled {
                                 numberOfCancellations++
-                                op.finish()
+                                closureController.finishClosure()
                                 return
                             }
                             dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
                                 numberOfAsyncClosuresFinished?++
                                 if (numberOfAsyncClosuresFinished == 5) {
-                                    op.cancel()
+                                    closureController.cancelOperation()
                                 }
-                                finishAsyncClosure()
+                                closureController.finishClosure()
                             }
                         }
                     }
@@ -284,8 +282,9 @@ class AsyncClosureOpKitTests: QuickSpec {
                     expect(subject.cancelled).toEventually(beTrue())
                 }
                 
-                it("should tell 1 of the closures that it was cancelled and not execute the remaining 4") {
-                    expect(numberOfCancellations).toEventually(equal(1))
+                it("should tell 5 of the closures that it was cancelled and not execute the remaining 5") {
+                    expect(numberOfCancellations).toEventually(equal(5))
+                    expect(numberOfAsyncClosuresFinished).toEventually(equal(5))
                 }
             }
 

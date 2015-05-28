@@ -9,6 +9,13 @@
     
 }
 
+@objc public protocol AsyncClosureObjectProtocol : NSObjectProtocol {
+    var value: AnyObject? {get set}
+    var operationCancelled: Bool { get }
+    func finishClosure() -> Void
+    func cancelOperation() -> Void
+}
+
 extension NSQualityOfService {
     
     /// returns a global GCD queue for the corresponding QOS
