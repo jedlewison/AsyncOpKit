@@ -1,4 +1,4 @@
-/// AsyncOperation takes care of the boilerplate you need for writing asynchronous NSOperations and adds a couple of useful features: An optional results handler that includes the operation, and properties to store results of the operation. 
+/// AsyncOperation takes care of the boilerplate you need for writing asynchronous NSOperations and adds a couple of useful features: An optional results handler that includes the operation, and properties to store results of the operation.
 
 public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     
@@ -11,7 +11,9 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     /// Override main to start potentially asynchronous work. When the operation is complete, you must call finish(). Do not call super.
     /// This method will not be called it the operation was cancelled before it was started.
     override public func main() {
-        finish()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.finish()
+        }
     }
     
     // use this property to store the results of your operation. You can also declare new properties in subclasses
@@ -36,17 +38,16 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         }
         
         willChangeValueForKey("isExecuting")
-        
-        dispatch_async(qualityOfService.getGlobalDispatchQueue(), {
-            if (!self.finished && !self.cancelled) {
-                self.main()
-            } else {
-                self.finish()
-            }
-        })
-        
         _executing = true
         didChangeValueForKey("isExecuting")
+        
+        
+        if (!self.finished && !self.cancelled) {
+            self.main()
+        } else {
+            self.finish()
+        }
+        
     }
     
     override public final var executing: Bool {
@@ -61,6 +62,11 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
         
         if finished { return }
         
+        willChangeValueForKey("isFinished")
+        willChangeValueForKey("isExecuting")
+        _executing = false
+        _finished = true
+        
         if let resultsHandler = resultsHandler {
             
             self.resultsHandler = nil
@@ -70,10 +76,6 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
             }
         }
         
-        willChangeValueForKey("isFinished")
-        willChangeValueForKey("isExecuting")
-        _executing = false
-        _finished = true
         didChangeValueForKey("isExecuting")
         didChangeValueForKey("isFinished")
         
@@ -81,5 +83,5 @@ public class AsyncOperation: NSOperation, AsyncOperationObjectProtocol {
     
     private var _executing = false
     private var _finished = false
-        
+    
 }

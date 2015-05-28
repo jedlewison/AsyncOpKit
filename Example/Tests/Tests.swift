@@ -66,13 +66,13 @@ class AsyncOpKitTests: QuickSpec {
                 }
                 
                 describe("immediately after starting") {
-                    xit("should be executing") {
+                    it("should be executing") {
                         // TODO: Figure out why this test registers false positives
                         // Might be an error with Quick/Nimble/XCTest ... or AOK
                         expect(subject.executing).to(beTrue())
                     }
 
-                    xit("should not be finished") {
+                    it("should not be finished") {
                         // TODO: Figure out why this test registers false positives
                         // Might be an error with Quick/Nimble/XCTest ... or AOK
                         expect(subject.finished).to(beFalse())
