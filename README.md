@@ -7,8 +7,6 @@ AsyncOpKit helps manage asynchronous operations. It provides:
 
 AsyncOperation also provides a helpful result handler that fires on a queue of your choosing (default mainQueue) and lets you provide result value and error.
 
-## Usage
-
 ## Requirements
 
 iOS 8.0 or later.
