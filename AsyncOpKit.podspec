@@ -1,38 +1,30 @@
-#
-# Be sure to run `pod lib lint AsyncOpKit.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# Any lines starting with a # are optional, but encouraged
-#
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = "AsyncOpKit"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of AsyncOpKit."
+  s.version          = "0.0.1"
+  s.summary          = "AsyncOpKit provides Swift subclasses of NSOperation to help manage asynchronous operations"
   s.description      = <<-DESC
-                       An optional longer description of AsyncOpKit
+                       AsyncOpKit helps manage asynchronous operations.
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       * AsyncOperation is a Swift NSOperation subclass that handles
+                       the boilerplate necessary for asynchronous NSOperations. Just
+                       override main() and don't forget to finish your operation.
+                       * AsyncOperation also provides a helpful result handler that
+                       fires on a queue of your choosing (default mainQueue) and lets
+                       you provide result value and error.
+                       * AsyncClosuresOperation is an AsyncOperation subclass that
+                       lets you manage asynchronous work inside of closures. It's similar
+                       to NSBlockOperation, but but closures/blocks do not finish until
+                           you mark them as complete.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/AsyncOpKit"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/jedlewison/AsyncOpKit"
   s.license          = 'MIT'
   s.author           = { "Jed Lewison" => "jed@.....magic....app....factory.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/AsyncOpKit.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.platform     = :ios, '7.0'
+  s.source           = { :git => "https://github.com/jedlewison/AsyncOpKit.git", :tag => s.version.to_s }
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
     'AsyncOpKit' => ['Pod/Assets/*.png']
   }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
