@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "AsyncOpKit"
-  s.version          = "0.0.2"
+  s.version          = "0.0.3"
   s.summary          = "AsyncOpKit provides Swift subclasses of NSOperation to help manage asynchronous operations"
   s.description      = <<-DESC
                        AsyncOpKit helps manage asynchronous operations.
@@ -22,9 +22,5 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/jedlewison/AsyncOpKit.git", :tag => s.version.to_s }
   s.platform     = :ios, '8.0'
   s.requires_arc = true
-
-  s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'AsyncOpKit' => ['Pod/Assets/*.png']
-  }
+  s.source_files = '*.swift'
 end
