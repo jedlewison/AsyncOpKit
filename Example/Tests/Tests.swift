@@ -39,7 +39,7 @@ class AsyncOpKitTests: QuickSpec {
                 subject = self.createTestInstance()
                 subject.completionHandler = {
                     finishedOp in
-                    finishedOperation = finishedOp as? AsyncOperation
+                    finishedOperation = finishedOp
                     completionHandlerCompleted = true
                 }
             }
