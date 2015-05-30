@@ -33,9 +33,20 @@ public class AsyncClosuresOperation : AsyncOperation {
     
     ///:queueKind: Whether the closures should execute on the mainQueue or a background queue.
     ///:returns: A new AsyncClosuresOperation
-    @objc public init(queueKind: AsyncClosuresQueueKind) {
-        closureOpQ = queueKind.serialOperationQueueForKind()
+    @objc override public convenience init() {
+        self.init(queueKind: .Main, qualityOfService: .Default)
+    }
+    
+    @objc public convenience init(queueKind: AsyncClosuresQueueKind) {
+        self.init(queueKind: queueKind, qualityOfService: .Default)
+    }
+
+    @objc public init(queueKind: AsyncClosuresQueueKind, qualityOfService: NSQualityOfService) {
+        closureQueueKind = queueKind
+        closureDispatchQueue = closureQueueKind.serialDispatchQueue(qualityOfService)
+        
         super.init()
+        self.qualityOfService = qualityOfService
     }
     
     /// Create a new AsyncClosuresOperation with a closure
@@ -50,7 +61,7 @@ public class AsyncClosuresOperation : AsyncOperation {
     /// :see: addAsyncClosure.
     
     @objc public convenience init(queueKind: AsyncClosuresQueueKind, asyncClosure: AsyncClosure) {
-        self.init(queueKind: queueKind)
+        self.init(queueKind: queueKind, qualityOfService: .Default)
         addAsyncClosure(asyncClosure)
     }
     
@@ -101,18 +112,32 @@ public class AsyncClosuresOperation : AsyncOperation {
     }
     
     // MARK: Private methods/properties
-    
-    private let closureOpQ: NSOperationQueue
+    private let closureQueueKind: AsyncClosuresQueueKind
+    private let closureDispatchQueue: dispatch_queue_t
+
     private var closures = [AsyncClosureOperation]()
     
     override public func main() {
-        if closures.count > 0 {
-            closureOpQ.addOperations(closures, waitUntilFinished: false)
+        
+        self.performNextClosureOperationOrFinish()
+    }
+    
+    private final func performNextClosureOperationOrFinish() {
+        
+        if let nextClosureOp = closures.first {
+            closures.removeAtIndex(0)
+            nextClosureOp.completionBlock = {
+                self.performNextClosureOperationOrFinish()
+            }
+            dispatch_async(closureDispatchQueue) {
+                nextClosureOp.start()                
+            }
         } else {
             self.finish()
         }
+
     }
-    
+
     internal class AsyncClosureOperation : AsyncOperation, AsyncClosureObjectProtocol {
         
         init(asyncClosure: AsyncClosure, masterOperation: AsyncClosuresOperation) {
@@ -158,6 +183,9 @@ public class AsyncClosuresOperation : AsyncOperation {
     }
 }
 
+
+
+
 extension AsyncClosuresQueueKind {
     public func serialOperationQueueForKind() -> NSOperationQueue {
         switch self {
@@ -167,6 +195,14 @@ extension AsyncClosuresQueueKind {
             let serialOperationQueueForKind = NSOperationQueue()
             serialOperationQueueForKind.maxConcurrentOperationCount = 1
             return serialOperationQueueForKind
+        }
+    }
+    public func serialDispatchQueue(qos: NSQualityOfService) -> dispatch_queue_t {
+        switch self {
+        case .Main:
+            return dispatch_get_main_queue()
+        case .Background:
+            return qos.createSerialDispatchQueue("asyncClosuresOperation")
         }
     }
 }

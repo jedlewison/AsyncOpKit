@@ -8,7 +8,7 @@ class AsyncOpKitTests: QuickSpec {
     // Create a simple subclass of the base class that does something asynchronously
     internal class TestAsyncOperation : AsyncOperation {
         let dispatchQ = dispatch_queue_create("", DISPATCH_QUEUE_CONCURRENT)
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Double(NSEC_PER_SEC)))
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.0005 * Double(NSEC_PER_SEC)))
 
         override final func main() {
             dispatch_after(delayTime, dispatchQ) {
