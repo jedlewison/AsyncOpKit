@@ -20,7 +20,7 @@ public typealias AsyncClosure = (closureController: AsyncClosureObjectProtocol) 
 }
 
 /// The kind of serial operation queue the AsyncClosuresOperation should manage.
-public enum AsyncClosuresQueueKind {
+@objc public enum AsyncClosuresQueueKind: Int {
     /// Use a mainQueue operation queue
     case Main
     /// Create a background queue
@@ -33,7 +33,7 @@ public class AsyncClosuresOperation : AsyncOperation {
     
     ///:queueKind: Whether the closures should execute on the mainQueue or a background queue.
     ///:returns: A new AsyncClosuresOperation
-    public init(queueKind: AsyncClosuresQueueKind) {
+    @objc public init(queueKind: AsyncClosuresQueueKind) {
         closureOpQ = queueKind.serialOperationQueueForKind()
         super.init()
     }
@@ -49,12 +49,12 @@ public class AsyncClosuresOperation : AsyncOperation {
     /// :asyncClosure: The AsyncClosure.
     /// :see: addAsyncClosure.
     
-    public convenience init(queueKind: AsyncClosuresQueueKind, asyncClosure: AsyncClosure) {
+    @objc public convenience init(queueKind: AsyncClosuresQueueKind, asyncClosure: AsyncClosure) {
         self.init(queueKind: queueKind)
         addAsyncClosure(asyncClosure)
     }
     
-    class public func asyncClosuresOperation(queueKind: AsyncClosuresQueueKind, asyncClosure: AsyncClosure) -> AsyncClosuresOperation {
+    @objc class public func asyncClosuresOperation(queueKind: AsyncClosuresQueueKind, asyncClosure: AsyncClosure) -> AsyncClosuresOperation {
         return AsyncClosuresOperation(queueKind: queueKind, asyncClosure: asyncClosure)
     }
     
