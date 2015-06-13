@@ -18,7 +18,7 @@ class AsyncOpKitTests: QuickSpec {
     }
     
     internal func createTestInstance() -> AsyncOperation {
-        return TestAsyncOperation()
+       return TestAsyncOperation()
     }
     
     override func spec() {

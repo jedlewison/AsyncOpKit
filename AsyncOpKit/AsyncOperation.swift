@@ -4,22 +4,22 @@ public class AsyncOperation: NSOperation {
     
     /// The completionHandler is fired once when the operation finishes on the queue specified by `completionHandlerQueue`. It passes in the finished operation which will indicate whethere the operation was cancelled, had an error, or has a value.
     /// :finishedOp: The finished operation. Downcast if needed inside the compleetion handler.
-    public var completionHandler: ((finishedOp: AsyncOperation) -> Void)?
+    public final var completionHandler: ((finishedOp: AsyncOperation) -> Void)?
     
     /// The operation queue on which the results handler will fire. Default is mainQueue.
-    public var completionHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue()
+    public final var completionHandlerQueue: dispatch_queue_t = dispatch_get_main_queue()
     
     /// Override main to start potentially asynchronous work. When the operation is complete, you must call finish(). Do not call super.
     /// This method will not be called it the operation was cancelled before it was started.
     override public func main() {
-        self.finish()
+        finish()
     }
     
     // use this property to store the results of your operation. You can also declare new properties in subclasses
     public var value: AnyObject?
     
     // use this property to store any error about your operation
-    public var error: NSError?
+    public final var error: NSError?
     
     // MARK: Async Operation boilerplate. For more information, read the Concurrency Programming Guide for iOS or OS X.
     override public final var asynchronous: Bool {
@@ -46,8 +46,14 @@ public class AsyncOperation: NSOperation {
     override public final var finished: Bool {
         get { return _finished }
     }
-    
+
     public final func finish() {
+        dispatch_sync(lockQ) {
+            self.finishWithLock()
+        }
+    }
+    
+    private func finishWithLock() {
         if finished {
             return
         }
@@ -60,15 +66,14 @@ public class AsyncOperation: NSOperation {
         
         if let completionHandler = completionHandler {
             self.completionHandler = nil
-            completionHandlerQueue.addOperationWithBlock {
-                completionHandler(finishedOp: self)
-            }
+            dispatch_async(completionHandlerQueue) { completionHandler(finishedOp: self) }
         }
         
         didChangeValueForKey("isExecuting")
         didChangeValueForKey("isFinished")
     }
-    
+
+    private let lockQ = NSQualityOfService.UserInteractive.createSerialDispatchQueue("asyncOperation.lockQ")
     private var _executing = false
     private var _finished = false
     
