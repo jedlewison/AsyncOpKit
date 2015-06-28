@@ -139,23 +139,6 @@ class AsyncOpKitTests: QuickSpec {
                     it("should not be executing") {
                         expect(subject.executing).toEventually(beFalse())
                     }
-                    
-                    context("when an operation is started after being finished") {
-                        
-                        beforeEach {
-                            subject.finish()
-                            subject.start()
-                        }
-                        
-                        it("should still be finished") {
-                            expect(subject.finished).to(beTrue())
-                        }
-                        
-                        it("should not be executing") {
-                            expect(subject.executing).to(beFalse())
-                        }
-                        
-                    }
 
                 }
                 

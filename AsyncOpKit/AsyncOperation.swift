@@ -1,6 +1,35 @@
+enum AsyncOperationState: String {
+    case Ready = "isReady"
+    case Executing = "isExecuting"
+    case Finished = "isFinished"
+}
+
+
 /// AsyncOperation takes care of the boilerplate you need for writing asynchronous NSOperations and adds a couple of useful features: An optional results handler that includes the operation, and properties to store results of the operation.
 
 public class AsyncOperation: NSOperation {
+    
+    var state = AsyncOperationState.Ready {
+        willSet {
+            if newValue != state {
+                willChangeValueForKey(newValue.rawValue)
+                willChangeValueForKey(state.rawValue)
+            }
+        }
+        
+        didSet {
+            if oldValue != state {
+                didChangeValueForKey(oldValue.rawValue)
+                didChangeValueForKey(state.rawValue)
+                if finished {
+                    if let completionHandler = completionHandler {
+                        self.completionHandler = nil
+                        dispatch_async(completionHandlerQueue) { completionHandler(finishedOp: self) }
+                    }
+                }
+            }
+        }
+    }
     
     /// The completionHandler is fired once when the operation finishes on the queue specified by `completionHandlerQueue`. It passes in the finished operation which will indicate whethere the operation was cancelled, had an error, or has a value.
     /// :finishedOp: The finished operation. Downcast if needed inside the compleetion handler.
@@ -27,54 +56,32 @@ public class AsyncOperation: NSOperation {
     }
     
     override public final func start() {
-        if cancelled || finished {
+
+        assert(state != .Finished, "State was unexpectedly finished")
+        assert(state == .Ready, "State was unexpectedly not ready")
+
+        if !cancelled {
+            state = .Executing
+            main()
+        } else {
             finish()
-            return
         }
-        
-        willChangeValueForKey("isExecuting")
-        _executing = true
-        didChangeValueForKey("isExecuting")
-        
-        main()
     }
     
     override public final var executing: Bool {
-        get { return _executing }
+        get { return state == .Executing }
     }
     
     override public final var finished: Bool {
-        get { return _finished }
+        get { return state == .Finished }
     }
-
+    
     public final func finish() {
         dispatch_sync(lockQ) {
-            self.finishWithLock()
+            self.state = .Finished
         }
     }
     
-    private func finishWithLock() {
-        if finished {
-            return
-        }
-        
-        willChangeValueForKey("isFinished")
-        willChangeValueForKey("isExecuting")
-        
-        _executing = false
-        _finished = true
-        
-        if let completionHandler = completionHandler {
-            self.completionHandler = nil
-            dispatch_async(completionHandlerQueue) { completionHandler(finishedOp: self) }
-        }
-        
-        didChangeValueForKey("isExecuting")
-        didChangeValueForKey("isFinished")
-    }
-
     private let lockQ = NSQualityOfService.UserInteractive.createSerialDispatchQueue("asyncOperation.lockQ")
-    private var _executing = false
-    private var _finished = false
     
 }
