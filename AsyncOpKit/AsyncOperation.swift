@@ -12,8 +12,9 @@ public class AsyncOperation: NSOperation {
     var state = AsyncOperationState.Ready {
         willSet {
             if newValue != state {
+                let oldValue = state
                 willChangeValueForKey(newValue.rawValue)
-                willChangeValueForKey(state.rawValue)
+                willChangeValueForKey(oldValue.rawValue)
             }
         }
         

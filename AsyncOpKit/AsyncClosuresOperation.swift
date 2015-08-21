@@ -1,7 +1,7 @@
 
 /// Pass an AsyncClosure to a AsyncClosuresOperation to perform a potentially asynchronous work inside a closure, marking it as finished when done.
 ///
-/// :param: closureController Use the closureController to mark the closure finished, to cancel the parent closures operation, or to check operation status.
+/// - parameter closureController: Use the closureController to mark the closure finished, to cancel the parent closures operation, or to check operation status.
 public typealias AsyncClosure = (closureController: AsyncClosureObjectProtocol) -> Void
 
 /// AsyncClosureObjectProtocol defines the interface for the object passed into AsyncClosures by AsyncClosuresOperations
@@ -32,7 +32,7 @@ public typealias AsyncClosure = (closureController: AsyncClosureObjectProtocol) 
 public class AsyncClosuresOperation : AsyncOperation {
     
     ///:queueKind: Whether the closures should execute on the mainQueue or a background queue.
-    ///:returns: A new AsyncClosuresOperation
+    ///- returns: A new AsyncClosuresOperation
     @objc override public convenience init() {
         self.init(queueKind: .Main, qualityOfService: .Default)
     }
@@ -83,7 +83,7 @@ public class AsyncClosuresOperation : AsyncOperation {
     ///     }
     ///   }
     ///
-    /// :param: asyncClosure The AsyncClosure to add. For the operation to proceed to
+    /// - parameter asyncClosure: The AsyncClosure to add. For the operation to proceed to
     /// the next closure or to finish, you must use asyncClosure's closureController
     /// parameter mark it as finished.
     /// :see: AsyncClosureObjectProtocol
