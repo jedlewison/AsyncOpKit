@@ -58,11 +58,11 @@ public class AsyncOperation: NSOperation {
     
     override public final func start() {
 
-        if state != .Finished {
+        if state == .Finished {
             debugPrintln("State was unexpectedly finished")
         }
 
-        if state == .Ready {
+        if state != .Ready {
             debugPrintln("State was unexpectedly not ready")
         }
 
