@@ -57,8 +57,13 @@ public class AsyncOperation: NSOperation {
     
     override public final func start() {
 
-        assert(state != .Finished, "State was unexpectedly finished")
-        assert(state == .Ready, "State was unexpectedly not ready")
+        if state != .Finished {
+            debugPrintln("State was unexpectedly finished")
+        }
+
+        if state == .Ready {
+            debugPrintln("State was unexpectedly not ready")
+        }
 
         if !cancelled {
             state = .Executing
