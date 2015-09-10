@@ -1,10 +1,11 @@
-target 'AsyncOpKit' do
+source 'https://github.com/CocoaPods/Specs.git'
 
-end
+platform :ios, '8.0'
+
 
 target 'AsyncOpKitTests' do
 	use_frameworks!
         pod 'Quick', :git => 'https://github.com/Quick/Quick.git', :branch => 'swift-2.0'
         pod 'Nimble', :git => 'https://github.com/Quick/Nimble.git', :branch => 'swift-2.0'
-end
 
+end

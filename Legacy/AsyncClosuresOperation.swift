@@ -1,3 +1,6 @@
+/// AsyncOperation is provided for compatability with objective c
+
+import Foundation
 
 /// Pass an AsyncClosure to a AsyncClosuresOperation to perform a potentially asynchronous work inside a closure, marking it as finished when done.
 ///

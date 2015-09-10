@@ -1,3 +1,7 @@
+/// AsyncOperation is provided for compatability with objective c
+
+import Foundation
+
 extension NSQualityOfService {
     
     /// returns a global GCD queue for the corresponding QOS
