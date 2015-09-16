@@ -1,7 +1,7 @@
 import Foundation
 import Quick
 import Nimble
-import AsyncOpKit
+@testable import AsyncOpKit
 
 class AsyncClosureOpKitConvenienceInitTests: AsyncOpKitTests {
     

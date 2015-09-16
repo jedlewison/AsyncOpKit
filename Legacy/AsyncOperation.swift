@@ -1,3 +1,8 @@
+/// AsyncOperation is provided for compatability with objective c
+
+import Foundation
+
+
 enum AsyncOperationState: String {
     case Ready = "isReady"
     case Executing = "isExecuting"
@@ -12,8 +17,9 @@ public class AsyncOperation: NSOperation {
     var state = AsyncOperationState.Ready {
         willSet {
             if newValue != state {
+                let oldValue = state
                 willChangeValueForKey(newValue.rawValue)
-                willChangeValueForKey(state.rawValue)
+                willChangeValueForKey(oldValue.rawValue)
             }
         }
         
@@ -58,11 +64,11 @@ public class AsyncOperation: NSOperation {
     override public final func start() {
 
         if state == .Finished {
-            debugPrintln("State was unexpectedly finished")
+            debugPrint("State was unexpectedly finished")
         }
 
         if state != .Ready {
-            debugPrintln("State was unexpectedly not ready")
+            debugPrint("State was unexpectedly not ready")
         }
 
         if !cancelled {

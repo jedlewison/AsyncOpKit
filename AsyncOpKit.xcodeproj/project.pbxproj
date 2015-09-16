@@ -7,13 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85BE3E511B2CBDAE00558DEC /* AsyncOpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 85BE3E501B2CBDAE00558DEC /* AsyncOpKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFC81BA10B9B0079ADB8 /* AsyncOpTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFC91BA10B9B0079ADB8 /* AsyncClosuresOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB31BA10B9B0079ADB8 /* AsyncClosuresOperation.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFCA1BA10B9B0079ADB8 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB41BA10B9B0079ADB8 /* AsyncOperation.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFCB1BA10B9B0079ADB8 /* AsyncOpKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB51BA10B9B0079ADB8 /* AsyncOpKit.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFDA1BA10BAE0079ADB8 /* ClosureTestsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB91BA10B9B0079ADB8 /* ClosureTestsFile.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFDB1BA10BAE0079ADB8 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBB1BA10B9B0079ADB8 /* Tests.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFDC1BA10BB30079ADB8 /* AsyncOpAutomaticInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBD1BA10B9B0079ADB8 /* AsyncOpAutomaticInputTests.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFDD1BA10BB30079ADB8 /* AsyncOpFinishOverloadsTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBE1BA10B9B0079ADB8 /* AsyncOpFinishOverloadsTesting.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFDE1BA10BB30079ADB8 /* AsyncOpManualInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBF1BA10B9B0079ADB8 /* AsyncOpManualInputTests.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFDF1BA10BB30079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC01BA10B9B0079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFE01BA10BB30079ADB8 /* AsyncOpResultStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC11BA10B9B0079ADB8 /* AsyncOpResultStatusTests.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFE11BA10BB30079ADB8 /* AsyncOpSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC21BA10B9B0079ADB8 /* AsyncOpSubclass.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFE21BA10BB30079ADB8 /* AsyncOpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFE31BA10BB30079ADB8 /* AsyncOpThrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */; settings = {ASSET_TAGS = (); }; };
+		8516EFE41BA10BB30079ADB8 /* AsyncOpWhenFinished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */; settings = {ASSET_TAGS = (); }; };
 		85BE3E571B2CBDAE00558DEC /* AsyncOpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */; };
-		85BE3E981B2CBE3500558DEC /* AsyncClosuresOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE3E951B2CBE3500558DEC /* AsyncClosuresOperation.swift */; };
-		85BE3E991B2CBE3500558DEC /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE3E961B2CBE3500558DEC /* AsyncOperation.swift */; };
-		85BE3E9A1B2CBE3500558DEC /* AsyncOpKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE3E971B2CBE3500558DEC /* AsyncOpKit.swift */; };
-		85BE3EA51B2CBF5400558DEC /* ClosureTestsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE3EA31B2CBF5400558DEC /* ClosureTestsFile.swift */; };
-		85BE3EA61B2CBF5400558DEC /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE3EA41B2CBF5400558DEC /* Tests.swift */; };
 		CFA98C74FBA74624B5E59C41 /* Pods_AsyncOpKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3CE576AF8352D16B71BCEA1 /* Pods_AsyncOpKitTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -44,16 +54,26 @@
 		850DD1D11B2D6CD40039EB71 /* AsyncOpKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AsyncOpKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		850DD1D21B2D6CD40039EB71 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		850DD1D31B2D6CD40039EB71 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOp.swift; sourceTree = "<group>"; };
+		8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpTypes.swift; sourceTree = "<group>"; };
+		8516EFB31BA10B9B0079ADB8 /* AsyncClosuresOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncClosuresOperation.swift; sourceTree = "<group>"; };
+		8516EFB41BA10B9B0079ADB8 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		8516EFB51BA10B9B0079ADB8 /* AsyncOpKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpKit.swift; sourceTree = "<group>"; };
+		8516EFB61BA10B9B0079ADB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../AsyncOpKit/Info.plist; sourceTree = "<group>"; };
+		8516EFB91BA10B9B0079ADB8 /* ClosureTestsFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureTestsFile.swift; sourceTree = "<group>"; };
+		8516EFBB1BA10B9B0079ADB8 /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		8516EFBD1BA10B9B0079ADB8 /* AsyncOpAutomaticInputTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpAutomaticInputTests.swift; sourceTree = "<group>"; };
+		8516EFBE1BA10B9B0079ADB8 /* AsyncOpFinishOverloadsTesting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpFinishOverloadsTesting.swift; sourceTree = "<group>"; };
+		8516EFBF1BA10B9B0079ADB8 /* AsyncOpManualInputTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpManualInputTests.swift; sourceTree = "<group>"; };
+		8516EFC01BA10B9B0079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpPreconditionEvaluatorTests.swift; sourceTree = "<group>"; };
+		8516EFC11BA10B9B0079ADB8 /* AsyncOpResultStatusTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpResultStatusTests.swift; sourceTree = "<group>"; };
+		8516EFC21BA10B9B0079ADB8 /* AsyncOpSubclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpSubclass.swift; sourceTree = "<group>"; };
+		8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpTests.swift; sourceTree = "<group>"; };
+		8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpThrowTests.swift; sourceTree = "<group>"; };
+		8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpWhenFinished.swift; sourceTree = "<group>"; };
+		8516EFE71BA10DFC0079ADB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncOpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		85BE3E4F1B2CBDAE00558DEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		85BE3E501B2CBDAE00558DEC /* AsyncOpKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncOpKit.h; sourceTree = "<group>"; };
 		85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncOpKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		85BE3E5C1B2CBDAE00558DEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		85BE3E951B2CBE3500558DEC /* AsyncClosuresOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncClosuresOperation.swift; sourceTree = "<group>"; };
-		85BE3E961B2CBE3500558DEC /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
-		85BE3E971B2CBE3500558DEC /* AsyncOpKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpKit.swift; sourceTree = "<group>"; };
-		85BE3EA31B2CBF5400558DEC /* ClosureTestsFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureTestsFile.swift; sourceTree = "<group>"; };
-		85BE3EA41B2CBF5400558DEC /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		A57A8E5E0659046AF0EC20BF /* Pods-AsyncOpKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		B3CE576AF8352D16B71BCEA1 /* Pods_AsyncOpKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AsyncOpKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -96,12 +116,60 @@
 			name = Metadata;
 			sourceTree = "<group>";
 		};
+		8516EFB21BA10B9B0079ADB8 /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				8516EFB41BA10B9B0079ADB8 /* AsyncOperation.swift */,
+				8516EFB31BA10B9B0079ADB8 /* AsyncClosuresOperation.swift */,
+				8516EFB51BA10B9B0079ADB8 /* AsyncOpKit.swift */,
+				8516EFB61BA10B9B0079ADB8 /* Info.plist */,
+			);
+			path = Legacy;
+			sourceTree = "<group>";
+		};
+		8516EFB71BA10B9B0079ADB8 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8516EFE71BA10DFC0079ADB8 /* Info.plist */,
+				8516EFB81BA10B9B0079ADB8 /* AsyncOpKitTests */,
+				8516EFBC1BA10B9B0079ADB8 /* AsyncOpTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		8516EFB81BA10B9B0079ADB8 /* AsyncOpKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				8516EFB91BA10B9B0079ADB8 /* ClosureTestsFile.swift */,
+				8516EFBB1BA10B9B0079ADB8 /* Tests.swift */,
+			);
+			path = AsyncOpKitTests;
+			sourceTree = "<group>";
+		};
+		8516EFBC1BA10B9B0079ADB8 /* AsyncOpTests */ = {
+			isa = PBXGroup;
+			children = (
+				8516EFBD1BA10B9B0079ADB8 /* AsyncOpAutomaticInputTests.swift */,
+				8516EFBE1BA10B9B0079ADB8 /* AsyncOpFinishOverloadsTesting.swift */,
+				8516EFBF1BA10B9B0079ADB8 /* AsyncOpManualInputTests.swift */,
+				8516EFC01BA10B9B0079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift */,
+				8516EFC11BA10B9B0079ADB8 /* AsyncOpResultStatusTests.swift */,
+				8516EFC21BA10B9B0079ADB8 /* AsyncOpSubclass.swift */,
+				8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */,
+				8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */,
+				8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */,
+			);
+			path = AsyncOpTests;
+			sourceTree = "<group>";
+		};
 		85BE3E411B2CBDAE00558DEC = {
 			isa = PBXGroup;
 			children = (
 				850DD1D41B2D6CE20039EB71 /* Metadata */,
-				85BE3E4D1B2CBDAE00558DEC /* AsyncOpKit */,
-				85BE3E5A1B2CBDAE00558DEC /* AsyncOpKitTests */,
+				8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */,
+				8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */,
+				8516EFB21BA10B9B0079ADB8 /* Legacy */,
+				8516EFB71BA10B9B0079ADB8 /* Tests */,
 				85BE3E4C1B2CBDAE00558DEC /* Products */,
 				DA858B4DF15CB9D025936E71 /* Pods */,
 				519F65AADD351E852BC1BE2C /* Frameworks */,
@@ -115,44 +183,6 @@
 				85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		85BE3E4D1B2CBDAE00558DEC /* AsyncOpKit */ = {
-			isa = PBXGroup;
-			children = (
-				85BE3E971B2CBE3500558DEC /* AsyncOpKit.swift */,
-				85BE3E961B2CBE3500558DEC /* AsyncOperation.swift */,
-				85BE3E951B2CBE3500558DEC /* AsyncClosuresOperation.swift */,
-				85BE3E501B2CBDAE00558DEC /* AsyncOpKit.h */,
-				85BE3E4E1B2CBDAE00558DEC /* Supporting Files */,
-			);
-			path = AsyncOpKit;
-			sourceTree = "<group>";
-		};
-		85BE3E4E1B2CBDAE00558DEC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				85BE3E4F1B2CBDAE00558DEC /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		85BE3E5A1B2CBDAE00558DEC /* AsyncOpKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				85BE3EA31B2CBF5400558DEC /* ClosureTestsFile.swift */,
-				85BE3EA41B2CBF5400558DEC /* Tests.swift */,
-				85BE3E5B1B2CBDAE00558DEC /* Supporting Files */,
-			);
-			path = AsyncOpKitTests;
-			sourceTree = "<group>";
-		};
-		85BE3E5B1B2CBDAE00558DEC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				85BE3E5C1B2CBDAE00558DEC /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		DA858B4DF15CB9D025936E71 /* Pods */ = {
@@ -171,7 +201,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85BE3E511B2CBDAE00558DEC /* AsyncOpKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,8 +253,9 @@
 		85BE3E421B2CBDAE00558DEC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Magic App Factory";
 				TargetAttributes = {
 					85BE3E4A1B2CBDAE00558DEC = {
@@ -324,9 +354,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85BE3E9A1B2CBE3500558DEC /* AsyncOpKit.swift in Sources */,
-				85BE3E991B2CBE3500558DEC /* AsyncOperation.swift in Sources */,
-				85BE3E981B2CBE3500558DEC /* AsyncClosuresOperation.swift in Sources */,
+				8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */,
+				8516EFCB1BA10B9B0079ADB8 /* AsyncOpKit.swift in Sources */,
+				8516EFC91BA10B9B0079ADB8 /* AsyncClosuresOperation.swift in Sources */,
+				8516EFCA1BA10B9B0079ADB8 /* AsyncOperation.swift in Sources */,
+				8516EFC81BA10B9B0079ADB8 /* AsyncOpTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,8 +366,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85BE3EA61B2CBF5400558DEC /* Tests.swift in Sources */,
-				85BE3EA51B2CBF5400558DEC /* ClosureTestsFile.swift in Sources */,
+				8516EFE31BA10BB30079ADB8 /* AsyncOpThrowTests.swift in Sources */,
+				8516EFE01BA10BB30079ADB8 /* AsyncOpResultStatusTests.swift in Sources */,
+				8516EFDC1BA10BB30079ADB8 /* AsyncOpAutomaticInputTests.swift in Sources */,
+				8516EFDD1BA10BB30079ADB8 /* AsyncOpFinishOverloadsTesting.swift in Sources */,
+				8516EFDA1BA10BAE0079ADB8 /* ClosureTestsFile.swift in Sources */,
+				8516EFDE1BA10BB30079ADB8 /* AsyncOpManualInputTests.swift in Sources */,
+				8516EFE21BA10BB30079ADB8 /* AsyncOpTests.swift in Sources */,
+				8516EFE11BA10BB30079ADB8 /* AsyncOpSubclass.swift in Sources */,
+				8516EFDB1BA10BAE0079ADB8 /* Tests.swift in Sources */,
+				8516EFE41BA10BB30079ADB8 /* AsyncOpWhenFinished.swift in Sources */,
+				8516EFDF1BA10BB30079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +413,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -442,28 +484,35 @@
 		85BE3E621B2CBDAE00558DEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = AsyncOpKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		85BE3E631B2CBDAE00558DEC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = AsyncOpKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -481,8 +530,9 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = AsyncOpKitTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -495,8 +545,9 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = AsyncOpKitTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
