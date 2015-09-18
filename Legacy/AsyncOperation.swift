@@ -71,8 +71,9 @@ public class AsyncOperation: NSOperation {
             debugPrint("State was unexpectedly not ready")
         }
 
+        state = .Executing
+
         if !cancelled {
-            state = .Executing
             main()
         } else {
             finish()
