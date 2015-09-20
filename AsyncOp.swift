@@ -178,7 +178,7 @@ extension AsyncOp {
         self.implementationHandler = implementationHandler
     }
 
-    public func whenFinished(completionHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue(), completionHandler: AsyncOpClosure) {
+    public func whenFinished(whenFinishedQueue completionHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue(), completionHandler: AsyncOpClosure) {
         dispatch_once(&whenFinishedOnceToken) {
             guard self.completionHandler == nil else { return }
             if self.finished {

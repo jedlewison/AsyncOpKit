@@ -1,12 +1,17 @@
 Pod::Spec.new do |s|
     s.name             = "AsyncOpKit"
-    s.version          = "1.0.0"
-    s.summary          = "Generic NSOperation subclass for managing asynchronous code in Swift"
+    s.version          = "1.0.1"
+    s.summary          = "NSOperation for Swift with generic input/output, chaining, error handling, and closures"
     s.description      = <<-DESC
-    AsyncOpKit provides AsyncOp, a generic NSOperation subclass for managing
-    asynchronous operations with NSOperationQueues while taking advantage of
-    the power of Swift's type system. Async Op is not compatible with Obj-C,
-    however a legacy AsyncOperation that is Obj-C compatible is included.'
+    AsyncOpKit brings Swift generics, error handling, and closures to NSOperations with `AsyncOp`, a Swift-only generic NSOperation subclass for composing asynchronous code.
+    `AsyncOp` supports:
+
+    * Generic input and output
+    * Closures for starting and cancelling work, handling results
+    * Closures for evaluating preconditions
+    * Making an AsyncOp dependent on input from another
+
+    You can subclass AsyncOp, but because it provides built-in storage for generic input and output and allows you to customize behavior with closures, in many if not most cases you can just use AsyncOp as-is.
     DESC
     s.author           = "Jed Lewison"
     s.homepage         = "https://github.com/jedlewison/AsyncOpKit"
