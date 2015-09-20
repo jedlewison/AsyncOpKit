@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AE9A9C20-B661-449C-94E7-8DEBC3679D31</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AsyncOpKit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7FB0146701D677C024771EB12323A7A0D4A65B40</key>
+		<string>github.com:jedlewison/AsyncOpKit.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AsyncOpKit.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7FB0146701D677C024771EB12323A7A0D4A65B40</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:jedlewison/AsyncOpKit.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7FB0146701D677C024771EB12323A7A0D4A65B40</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7FB0146701D677C024771EB12323A7A0D4A65B40</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AsyncOpKit</string>
+		</dict>
+	</array>
+</dict>
+</plist>

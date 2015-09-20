@@ -171,16 +171,13 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
 
 }
 
-// MARK: Closures for perform operation work
 extension AsyncOp {
 
-    // MARK: Implementation closure
     public func onStart(implementationHandler: AsyncOpThrowingClosure) {
-        guard self.implementationHandler == nil else { return }
+        guard state == .Initial else { return }
         self.implementationHandler = implementationHandler
     }
 
-    // MARK: Completion
     public func whenFinished(completionHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue(), completionHandler: AsyncOpClosure) {
         dispatch_once(&whenFinishedOnceToken) {
             guard self.completionHandler == nil else { return }
@@ -195,9 +192,8 @@ extension AsyncOp {
         }
     }
 
-    // MARK: Cancellation
     public func onCancel(cancellationHandler: AsyncOpClosure) {
-        guard self.cancellationHandler == nil else { return }
+        guard state == .Initial else { return }
         self.cancellationHandler = cancellationHandler
     }
 
@@ -261,23 +257,23 @@ extension AsyncOp {
 
 }
 
-extension AsyncOp: AsyncOpValueProvider {
+extension AsyncOp: AsyncOpInputProvider {
 
     public func addPreconditionEvaluator(evaluator: AsyncOpPreconditionEvaluator) {
         guard state == .Initial else { debugPrint(WarnSetInput); return }
         preconditionEvaluators.append(evaluator)
     }
 
-    public func setInputProvider<T where T: AsyncOpValueProvider, T.ProvidedValueType == InputType>(inputProvider: T) {
+    public func setInputProvider<T where T: AsyncOpInputProvider, T.ProvidedInputValueType == InputType>(inputProvider: T) {
         guard state == .Initial else { debugPrint(WarnSetInput); return }
         if let inputProvider = inputProvider as? NSOperation {
             addDependency(inputProvider)
         }
-        handlerForAsyncOpInputRequest = inputProvider.provideAsyncOpValue
+        handlerForAsyncOpInputRequest = inputProvider.provideAsyncOpInput
     }
 
-    public typealias ProvidedValueType = OutputType
-    public func provideAsyncOpValue() -> AsyncOpValue<OutputType> {
+    public typealias ProvidedInputValueType = OutputType
+    public func provideAsyncOpInput() -> AsyncOpValue<OutputType> {
         return output
     }
 

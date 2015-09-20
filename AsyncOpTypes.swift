@@ -34,17 +34,17 @@ public enum AsyncOpResultStatus {
     case Failed
 }
 
-public protocol AsyncOpValueProvider {
-    typealias ProvidedValueType
-    func provideAsyncOpValue() -> AsyncOpValue<ProvidedValueType>
+public protocol AsyncOpInputProvider {
+    typealias ProvidedInputValueType
+    func provideAsyncOpInput() -> AsyncOpValue<ProvidedInputValueType>
 }
 
-public enum AsyncOpValue<ValueType>: AsyncOpValueProvider {
+public enum AsyncOpValue<ValueType>: AsyncOpInputProvider {
     case None(AsyncOpValueErrorType)
     case Some(ValueType)
 
-    public typealias ProvidedValueType = ValueType
-    public func provideAsyncOpValue() -> AsyncOpValue<ProvidedValueType> {
+    public typealias ProvidedInputValueType = ValueType
+    public func provideAsyncOpInput() -> AsyncOpValue<ProvidedInputValueType> {
         return self
     }
 }

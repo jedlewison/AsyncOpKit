@@ -11,19 +11,19 @@ import Quick
 import Nimble
 @testable import AsyncOpKit
 
-class AClassInputProvider: AsyncOpValueProvider {
+class AClassInputProvider: AsyncOpInputProvider {
     let asyncOpInput: AsyncOpValue<Int>
     init (asyncOpInput: AsyncOpValue<Int>) {
         self.asyncOpInput = asyncOpInput
     }
 
-    func provideAsyncOpValue() -> AsyncOpValue<Int> {
+    func provideAsyncOpInput() -> AsyncOpValue<Int> {
         return asyncOpInput
     }
 }
 
 
-class AsyncOpAutomaticInputTests : QuickSpec, AsyncOpValueProvider {
+class AsyncOpAutomaticInputTests : QuickSpec, AsyncOpInputProvider {
 
     var randomOutputNumber = random()
 
@@ -208,7 +208,7 @@ class AsyncOpAutomaticInputTests : QuickSpec, AsyncOpValueProvider {
         
     }
 
-    func provideAsyncOpValue() -> AsyncOpValue<Int> {
+    func provideAsyncOpInput() -> AsyncOpValue<Int> {
         return .Some(self.randomOutputNumber)
     }
 
