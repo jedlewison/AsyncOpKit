@@ -1,5 +1,5 @@
 # AsyncOpKit
-
+ 
 AsyncOpKit brings Swift generics, error handling, and closures to NSOperations with `AsyncOp`, a Swift-only generic NSOperation subclass for composing asynchronous code.
 
 `AsyncOp` supports:
@@ -40,7 +40,7 @@ Next, we need specify how the image should be downloaded. We do that in the ``on
 imageDownloadOp.onStart { asyncOp in
 ```
 
-Note that in this example, `asyncOp` is identical to `imageDownloadOp`. That's not so useful here, but it can be useful if you produce operations with a factory method and need a reference to the operation.
+Note that in this example, `asyncOp` is identical to `imageDownloadOp`. That's not so useful here, but it can be useful if you're returning operations from a function.
 
 The first thign we have to do is get our input, which is stored in the input property which is an `AsyncOpValue`, an enum that stores the input value or if there was a problem providing the input, an associated error. `onStart` is a throwing closure, so to get our value we can call a throwing function on `AsyncOpValue` which will succeed if the value exists or throw if not. If it throws, the operation will finish with an error (more on that later).
 
@@ -48,18 +48,18 @@ So here's what things should look like now:
 
 ```swift
 imageDownloadOp.onStart { asyncOp in
-let imageURL = try asyncOp.input.getValue()
+    let imageURL = try asyncOp.input.getValue()
 ```
 
 Next we need to make a network request to get the data stored at the imageURL. For simplicity of this example, let's use a plain old NSURLSession for that:
 
 ```swift
 imageDownloadOp.onStart { asyncOp in
-let imageURL = try asyncOp.input.getValue()
-let dataTask = NSURLSession.sharedSession().dataTaskWithURL(imageURL) { data, response, error in
-// response handling here
-}
-dataTask.resume()
+    let imageURL = try asyncOp.input.getValue()
+    let dataTask = NSURLSession.sharedSession().dataTaskWithURL(imageURL) { data, response, error in
+        // response handling here
+    }
+    dataTask.resume()
 }
 ```
 
@@ -75,15 +75,15 @@ Aside from throwing, how do you finish `AsyncOp`s? Here's a simple implementatio
 
 ```swift
 imageDownloadOp.onStart { asyncOp in
-let imageURL = try asyncOp.input.getValue()
-let dataTask = NSURLSession.sharedSession().dataTaskWithURL(imageURL) { data, _, error in
-if let data = data, image = UIImage(data: data) {
-asyncOp.finish(with: image)
-} else {
-asyncOp.finish(with: error ?? AsyncOpError.Unspecified)
-}
-}
-dataTask.resume()
+    let imageURL = try asyncOp.input.getValue()
+    let dataTask = NSURLSession.sharedSession().dataTaskWithURL(imageURL) { data, _, error in
+        if let data = data, image = UIImage(data: data) {
+            asyncOp.finish(with: image)
+        } else {
+            asyncOp.finish(with: error ?? AsyncOpError.Unspecified)
+        }
+    }
+    dataTask.resume()
 }
 ```
 
@@ -95,8 +95,8 @@ Once our operation finishes, how then do we get the image from the operation? We
 
 ```swift
 imageDownloadOp.whenFinished { asyncOp in
-guard let image = try? asyncOp.output.getValue() else { return }
-imageView.image = image
+    guard let image = try? asyncOp.output.getValue() else { return }
+    imageView.image = image
 }
 ```
 
@@ -104,12 +104,12 @@ Because AsyncOp uses generics and because we specified the output type as a UIIm
 
 ```swift
 imageDownloadOp.whenFinished { asyncOp in
-switch asyncOp.output {
-case .None(let asyncOpValueError):
-errorHandler.handleError(asyncOpValueError)
-case .Some(let image):
-imageView.image = image
-}
+    switch asyncOp.output {
+    case .None(let asyncOpValueError):
+        errorHandler.handleError(asyncOpValueError)
+    case .Some(let image):
+        imageView.image = image
+    }
 }
 ```
 
@@ -157,7 +157,7 @@ imageFilteringOp.setInputProvider(imageDownloadOp)
 
 ```swift
 imageFilteringOp.onStart { asyncOp in
-let image = try asyncOp.input.getValue()
+    let image = try asyncOp.input.getValue()
 ```
 
 Remember, `getValue()` throws, and `onStart` is a throwing closure, so if the download operation errored out and we have no image, the operation will finish immediately at this point. Otherwise, we can continue on with our image filtering, making sure to `finish(with: outputImage)` when we are done.
