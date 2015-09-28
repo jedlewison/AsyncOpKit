@@ -67,7 +67,7 @@ class AsyncOpResultStatusTests : QuickSpec {
             context("Operation has finished because it was cancelled") {
 
                 beforeEach {
-                    subject?.addPreconditionEvaluator { op in return .Cancel }
+                    subject?.addPreconditionEvaluator { return .Cancel }
                     opQ?.addOperations([subject!], waitUntilFinished: true)
                 }
 

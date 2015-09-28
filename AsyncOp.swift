@@ -30,7 +30,7 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
     // Closures
     public typealias AsyncOpClosure = (asyncOp: AsyncOp<InputType, OutputType>) -> Void
     public typealias AsyncOpThrowingClosure = (asyncOp: AsyncOp<InputType, OutputType>) throws -> Void
-    public typealias AsyncOpPreconditionEvaluator = (asyncOp: AsyncOp<InputType, OutputType>) throws -> AsyncOpPreconditionInstruction
+    public typealias AsyncOpPreconditionEvaluator = () throws -> AsyncOpPreconditionInstruction
 
     // MARK: Implementation details
     override public final func start() {
@@ -60,7 +60,7 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
 
             for evaluator in preconditionEvaluators {
                 do {
-                    let evaluatorInstruction = try evaluator(asyncOp: self)
+                    let evaluatorInstruction = try evaluator()
                     switch evaluatorInstruction {
                     case .Cancel where errors.count == 0:
                         preconditionInstruction = .Cancel
@@ -262,6 +262,20 @@ extension AsyncOp: AsyncOpInputProvider {
     public func addPreconditionEvaluator(evaluator: AsyncOpPreconditionEvaluator) {
         guard state == .Initial else { debugPrint(WarnSetInput); return }
         preconditionEvaluators.append(evaluator)
+    }
+
+    func preconditionInstructionByEvaluatingOutput() throws -> AsyncOpPreconditionInstruction {
+        switch output {
+        case .None(let error):
+            switch error {
+            case .Cancelled, .Nil:
+                return .Cancel
+            case .Failed(let error):
+                return .Fail(error)
+            }
+        case .Some:
+            return .Continue
+        }
     }
 
     public func setInputProvider<T where T: AsyncOpInputProvider, T.ProvidedInputValueType == InputType>(inputProvider: T) {

@@ -41,7 +41,7 @@ class AsyncOpPreconditionEvaluatorTests : QuickSpec {
                 context("evaluator that instructs operation to continue") {
 
                     beforeEach {
-                        subject?.addPreconditionEvaluator{ op in
+                        subject?.addPreconditionEvaluator {
                             return .Continue
                         }
                         opQ?.addOperations([subject!], waitUntilFinished: false)
@@ -56,7 +56,7 @@ class AsyncOpPreconditionEvaluatorTests : QuickSpec {
                 context("evaluator that instructs operation to cancel") {
 
                     beforeEach {
-                        subject?.addPreconditionEvaluator { op in
+                        subject?.addPreconditionEvaluator {
                             return .Cancel
                         }
                         opQ?.addOperations([subject!], waitUntilFinished: false)
@@ -75,7 +75,7 @@ class AsyncOpPreconditionEvaluatorTests : QuickSpec {
                 context("evaluator that instructs operation to fail") {
 
                     beforeEach {
-                        subject?.addPreconditionEvaluator { op in
+                        subject?.addPreconditionEvaluator {
                             return .Fail(AsyncOpError.PreconditionFailure)
                         }
                         opQ?.addOperations([subject!], waitUntilFinished: false)
@@ -102,19 +102,19 @@ class AsyncOpPreconditionEvaluatorTests : QuickSpec {
                 context("multiple evaluators that instruct operation to continue") {
 
                     beforeEach {
-                        subject?.addPreconditionEvaluator{ op in
+                        subject?.addPreconditionEvaluator {
                             return .Continue
                         }
-                        subject?.addPreconditionEvaluator{ op in
+                        subject?.addPreconditionEvaluator {
                             return .Continue
                         }
-                        subject?.addPreconditionEvaluator{ op in
+                        subject?.addPreconditionEvaluator {
                             return .Continue
                         }
-                        subject?.addPreconditionEvaluator{ op in
+                        subject?.addPreconditionEvaluator {
                             return .Continue
                         }
-                        subject?.addPreconditionEvaluator{ op in
+                        subject?.addPreconditionEvaluator {
                             return .Continue
                         }
                         opQ?.addOperations([subject!], waitUntilFinished: false)
@@ -130,19 +130,19 @@ class AsyncOpPreconditionEvaluatorTests : QuickSpec {
             context("multiple evaluators that instruct operation to continue, but one instructs canceling") {
 
                 beforeEach {
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Cancel
                     }
                     opQ?.addOperations([subject!], waitUntilFinished: false)
@@ -161,19 +161,19 @@ class AsyncOpPreconditionEvaluatorTests : QuickSpec {
             context("multiple evaluators that instruct operation to continue, but one instructs Failing") {
 
                 beforeEach {
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator { op in
+                    subject?.addPreconditionEvaluator {
                         return .Fail(AsyncOpError.PreconditionFailure)
                     }
                     opQ?.addOperations([subject!], waitUntilFinished: false)
@@ -196,19 +196,19 @@ class AsyncOpPreconditionEvaluatorTests : QuickSpec {
             context("multiple evaluators that instruct operation to continue, but one instructs canceling and one instructs Failing") {
 
                 beforeEach {
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Cancel
                     }
-                    subject?.addPreconditionEvaluator { op in
+                    subject?.addPreconditionEvaluator {
                         return .Fail(AsyncOpError.PreconditionFailure)
                     }
                     opQ?.addOperations([subject!], waitUntilFinished: false)
@@ -231,25 +231,25 @@ class AsyncOpPreconditionEvaluatorTests : QuickSpec {
             context("multiple evaluators that instruct operation to continue, but one instructs canceling and multiple instruct Failing") {
 
                 beforeEach {
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Continue
                     }
-                    subject?.addPreconditionEvaluator{ op in
+                    subject?.addPreconditionEvaluator {
                         return .Cancel
                     }
-                    subject?.addPreconditionEvaluator { op in
+                    subject?.addPreconditionEvaluator {
                         return .Fail(AsyncOpError.PreconditionFailure)
                     }
-                    subject?.addPreconditionEvaluator { op in
+                    subject?.addPreconditionEvaluator {
                         return .Fail(AsyncOpError.PreconditionFailure)
                     }
-                    subject?.addPreconditionEvaluator { op in
+                    subject?.addPreconditionEvaluator {
                         return .Fail(AsyncOpError.PreconditionFailure)
                     }
                     opQ?.addOperations([subject!], waitUntilFinished: false)

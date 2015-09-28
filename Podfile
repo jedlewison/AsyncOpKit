@@ -5,5 +5,5 @@ platform :ios, '8.0'
 target 'AsyncOpKitTests' do
     use_frameworks!
     pod 'Quick'
-    pod 'Nimble', :git => 'https://github.com/Quick/Nimble.git', :branch => 'swift-2.0'
+    pod 'Nimble', '2.0.0-rc.3'
 end
