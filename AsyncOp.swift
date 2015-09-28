@@ -264,7 +264,7 @@ extension AsyncOp: AsyncOpInputProvider {
         preconditionEvaluators.append(evaluator)
     }
 
-    func preconditionInstructionByEvaluatingOutput() throws -> AsyncOpPreconditionInstruction {
+    public func preconditionInstructionByEvaluatingOutput() throws -> AsyncOpPreconditionInstruction {
         switch output {
         case .None(let error):
             switch error {

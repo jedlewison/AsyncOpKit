@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "AsyncOpKit"
-    s.version          = "1.1.0"
+    s.version          = "1.1.1"
     s.summary          = "NSOperation for Swift with generic input/output, chaining, error handling, and closures"
     s.description      = <<-DESC
     AsyncOpKit brings Swift generics, error handling, and closures to NSOperations with `AsyncOp`, a Swift-only generic NSOperation subclass for composing asynchronous code.
