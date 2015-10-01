@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		850B0F751BBCCB9C00553E91 /* AsyncOpGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */; settings = {ASSET_TAGS = (); }; };
+		850B0F781BBCCBD800553E91 /* AsyncOpGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */; settings = {ASSET_TAGS = (); }; };
 		8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */; settings = {ASSET_TAGS = (); }; };
 		8516EFC81BA10B9B0079ADB8 /* AsyncOpTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */; settings = {ASSET_TAGS = (); }; };
 		8516EFC91BA10B9B0079ADB8 /* AsyncClosuresOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB31BA10B9B0079ADB8 /* AsyncClosuresOperation.swift */; settings = {ASSET_TAGS = (); }; };
@@ -51,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		7B075F5944FCCC6739F756F0 /* Pods-AsyncOpKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpGroup.swift; sourceTree = "<group>"; };
+		850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpGroupTests.swift; sourceTree = "<group>"; };
 		850DD1D11B2D6CD40039EB71 /* AsyncOpKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AsyncOpKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		850DD1D21B2D6CD40039EB71 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		850DD1D31B2D6CD40039EB71 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */,
 				8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */,
 				8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */,
+				850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */,
 			);
 			path = AsyncOpTests;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			children = (
 				850DD1D41B2D6CE20039EB71 /* Metadata */,
 				8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */,
+				850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */,
 				8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */,
 				8516EFB21BA10B9B0079ADB8 /* Legacy */,
 				8516EFB71BA10B9B0079ADB8 /* Tests */,
@@ -355,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */,
+				850B0F751BBCCB9C00553E91 /* AsyncOpGroup.swift in Sources */,
 				8516EFCB1BA10B9B0079ADB8 /* AsyncOpKit.swift in Sources */,
 				8516EFC91BA10B9B0079ADB8 /* AsyncClosuresOperation.swift in Sources */,
 				8516EFCA1BA10B9B0079ADB8 /* AsyncOperation.swift in Sources */,
@@ -377,6 +384,7 @@
 				8516EFDB1BA10BAE0079ADB8 /* Tests.swift in Sources */,
 				8516EFE41BA10BB30079ADB8 /* AsyncOpWhenFinished.swift in Sources */,
 				8516EFDF1BA10BB30079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift in Sources */,
+				850B0F781BBCCBD800553E91 /* AsyncOpGroupTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
