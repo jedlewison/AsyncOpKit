@@ -55,6 +55,10 @@ public struct AsyncOpConnector<InputType, OutputType> {
 
 public class AsyncOpGroup {
 
+    public init() {
+
+    }
+
     public func beginWith<InputType, OutputType>(@noescape anAsyncOpProvider: () -> AsyncOp<InputType, OutputType>) -> AsyncOpConnector<InputType, OutputType> {
         let op = anAsyncOpProvider()
         operations.append(op)
@@ -77,7 +81,6 @@ public class AsyncOpGroup {
         operations.append(operation)
         return self
     }
-
 
 }
 

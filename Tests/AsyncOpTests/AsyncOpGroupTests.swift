@@ -24,7 +24,7 @@ class AsyncOpGroupTests : QuickSpec {
         var randomOutputNumber = 0
         var returnedGroup: AsyncOpGroup?
 
-        fdescribe("asyncOpGroup") {
+        describe("asyncOpGroup") {
 
             beforeEach {
                 randomOutputNumber = random()
