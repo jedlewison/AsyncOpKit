@@ -53,6 +53,24 @@ public struct AsyncOpConnector<InputType, OutputType> {
 
 }
 
+extension AsyncOpConnector {
+
+    // When input/output type is the same, allow operation providers to return nil
+
+    func then(@noescape anOperationProvider: () -> AsyncOp<OutputType, InputType>?) -> AsyncOpConnector<InputType, OutputType> {
+        if let anOperation = anOperationProvider() {
+            func newOpProvider() -> AsyncOp<OutputType, InputType> {
+                return anOperation
+            }
+            return then(newOpProvider)
+        } else {
+            return self
+        }
+    }
+
+}
+
+
 public class AsyncOpGroup {
 
     public init() {
