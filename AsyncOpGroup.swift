@@ -57,7 +57,7 @@ extension AsyncOpConnector {
 
     // When input/output type is the same, allow operation providers to return nil
 
-    func then(@noescape anOperationProvider: () -> AsyncOp<OutputType, InputType>?) -> AsyncOpConnector<InputType, OutputType> {
+    public func then(@noescape anOperationProvider: () -> AsyncOp<OutputType, InputType>?) -> AsyncOpConnector<InputType, OutputType> {
         if let anOperation = anOperationProvider() {
             func newOpProvider() -> AsyncOp<OutputType, InputType> {
                 return anOperation
