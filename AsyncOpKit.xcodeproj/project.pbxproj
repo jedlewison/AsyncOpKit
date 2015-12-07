@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85098AB41C16089800B31DAB /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85098AB21C16089800B31DAB /* Nimble.framework */; };
+		85098AB51C16089800B31DAB /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85098AB31C16089800B31DAB /* Quick.framework */; };
+		85098AB61C1608C700B31DAB /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85098AB21C16089800B31DAB /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		85098AB71C1608C700B31DAB /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85098AB31C16089800B31DAB /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		850B0F751BBCCB9C00553E91 /* AsyncOpGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */; };
 		850B0F781BBCCBD800553E91 /* AsyncOpGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */; };
 		8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */; };
@@ -25,8 +29,6 @@
 		8516EFE21BA10BB30079ADB8 /* AsyncOpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */; };
 		8516EFE31BA10BB30079ADB8 /* AsyncOpThrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */; };
 		8516EFE41BA10BB30079ADB8 /* AsyncOpWhenFinished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */; };
-		85BE3E571B2CBDAE00558DEC /* AsyncOpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */; };
-		CFA98C74FBA74624B5E59C41 /* Pods_AsyncOpKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3CE576AF8352D16B71BCEA1 /* Pods_AsyncOpKitTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,13 +48,16 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				85098AB61C1608C700B31DAB /* Nimble.framework in CopyFiles */,
+				85098AB71C1608C700B31DAB /* Quick.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7B075F5944FCCC6739F756F0 /* Pods-AsyncOpKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		85098AB21C16089800B31DAB /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		85098AB31C16089800B31DAB /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpGroup.swift; sourceTree = "<group>"; };
 		850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpGroupTests.swift; sourceTree = "<group>"; };
 		850DD1D11B2D6CD40039EB71 /* AsyncOpKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AsyncOpKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -78,8 +83,6 @@
 		8516EFE71BA10DFC0079ADB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncOpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncOpKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A57A8E5E0659046AF0EC20BF /* Pods-AsyncOpKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		B3CE576AF8352D16B71BCEA1 /* Pods_AsyncOpKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AsyncOpKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,22 +97,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85BE3E571B2CBDAE00558DEC /* AsyncOpKit.framework in Frameworks */,
-				CFA98C74FBA74624B5E59C41 /* Pods_AsyncOpKitTests.framework in Frameworks */,
+				85098AB41C16089800B31DAB /* Nimble.framework in Frameworks */,
+				85098AB51C16089800B31DAB /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		519F65AADD351E852BC1BE2C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B3CE576AF8352D16B71BCEA1 /* Pods_AsyncOpKitTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		850DD1D41B2D6CE20039EB71 /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +165,8 @@
 		85BE3E411B2CBDAE00558DEC = {
 			isa = PBXGroup;
 			children = (
+				85098AB21C16089800B31DAB /* Nimble.framework */,
+				85098AB31C16089800B31DAB /* Quick.framework */,
 				850DD1D41B2D6CE20039EB71 /* Metadata */,
 				8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */,
 				850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */,
@@ -177,8 +174,6 @@
 				8516EFB21BA10B9B0079ADB8 /* Legacy */,
 				8516EFB71BA10B9B0079ADB8 /* Tests */,
 				85BE3E4C1B2CBDAE00558DEC /* Products */,
-				DA858B4DF15CB9D025936E71 /* Pods */,
-				519F65AADD351E852BC1BE2C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,15 +184,6 @@
 				85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		DA858B4DF15CB9D025936E71 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7B075F5944FCCC6739F756F0 /* Pods-AsyncOpKitTests.debug.xcconfig */,
-				A57A8E5E0659046AF0EC20BF /* Pods-AsyncOpKitTests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,13 +221,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85BE3E641B2CBDAE00558DEC /* Build configuration list for PBXNativeTarget "AsyncOpKitTests" */;
 			buildPhases = (
-				D47FB8E7C3A9F2AEC8581C10 /* Check Pods Manifest.lock */,
 				85BE3E521B2CBDAE00558DEC /* Sources */,
 				85BE3E531B2CBDAE00558DEC /* Frameworks */,
 				85BE3E541B2CBDAE00558DEC /* Resources */,
 				85BE3EA81B2CC2EB00558DEC /* CopyFiles */,
-				8453CF6AFB0A3FA2D9696F91 /* Embed Pods Frameworks */,
-				7289E00E7D77D9FC19133684 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -306,54 +289,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		7289E00E7D77D9FC19133684 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8453CF6AFB0A3FA2D9696F91 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D47FB8E7C3A9F2AEC8581C10 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85BE3E461B2CBDAE00558DEC /* Sources */ = {
@@ -528,11 +463,10 @@
 		};
 		85BE3E651B2CBDAE00558DEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B075F5944FCCC6739F756F0 /* Pods-AsyncOpKitTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -547,11 +481,10 @@
 		};
 		85BE3E661B2CBDAE00558DEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A57A8E5E0659046AF0EC20BF /* Pods-AsyncOpKitTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
