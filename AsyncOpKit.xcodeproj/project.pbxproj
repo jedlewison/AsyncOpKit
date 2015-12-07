@@ -7,26 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		850B0F751BBCCB9C00553E91 /* AsyncOpGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */; settings = {ASSET_TAGS = (); }; };
-		850B0F781BBCCBD800553E91 /* AsyncOpGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFC81BA10B9B0079ADB8 /* AsyncOpTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFC91BA10B9B0079ADB8 /* AsyncClosuresOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB31BA10B9B0079ADB8 /* AsyncClosuresOperation.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFCA1BA10B9B0079ADB8 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB41BA10B9B0079ADB8 /* AsyncOperation.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFCB1BA10B9B0079ADB8 /* AsyncOpKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB51BA10B9B0079ADB8 /* AsyncOpKit.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFDA1BA10BAE0079ADB8 /* ClosureTestsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB91BA10B9B0079ADB8 /* ClosureTestsFile.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFDB1BA10BAE0079ADB8 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBB1BA10B9B0079ADB8 /* Tests.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFDC1BA10BB30079ADB8 /* AsyncOpAutomaticInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBD1BA10B9B0079ADB8 /* AsyncOpAutomaticInputTests.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFDD1BA10BB30079ADB8 /* AsyncOpFinishOverloadsTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBE1BA10B9B0079ADB8 /* AsyncOpFinishOverloadsTesting.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFDE1BA10BB30079ADB8 /* AsyncOpManualInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBF1BA10B9B0079ADB8 /* AsyncOpManualInputTests.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFDF1BA10BB30079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC01BA10B9B0079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFE01BA10BB30079ADB8 /* AsyncOpResultStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC11BA10B9B0079ADB8 /* AsyncOpResultStatusTests.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFE11BA10BB30079ADB8 /* AsyncOpSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC21BA10B9B0079ADB8 /* AsyncOpSubclass.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFE21BA10BB30079ADB8 /* AsyncOpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFE31BA10BB30079ADB8 /* AsyncOpThrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */; settings = {ASSET_TAGS = (); }; };
-		8516EFE41BA10BB30079ADB8 /* AsyncOpWhenFinished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */; settings = {ASSET_TAGS = (); }; };
+		850B0F751BBCCB9C00553E91 /* AsyncOpGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */; };
+		850B0F781BBCCBD800553E91 /* AsyncOpGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */; };
+		8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */; };
+		8516EFC81BA10B9B0079ADB8 /* AsyncOpTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */; };
+		8516EFC91BA10B9B0079ADB8 /* AsyncClosuresOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB31BA10B9B0079ADB8 /* AsyncClosuresOperation.swift */; };
+		8516EFCA1BA10B9B0079ADB8 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB41BA10B9B0079ADB8 /* AsyncOperation.swift */; };
+		8516EFCB1BA10B9B0079ADB8 /* AsyncOpKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB51BA10B9B0079ADB8 /* AsyncOpKit.swift */; };
+		8516EFDA1BA10BAE0079ADB8 /* ClosureTestsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB91BA10B9B0079ADB8 /* ClosureTestsFile.swift */; };
+		8516EFDB1BA10BAE0079ADB8 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBB1BA10B9B0079ADB8 /* Tests.swift */; };
+		8516EFDC1BA10BB30079ADB8 /* AsyncOpAutomaticInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBD1BA10B9B0079ADB8 /* AsyncOpAutomaticInputTests.swift */; };
+		8516EFDD1BA10BB30079ADB8 /* AsyncOpFinishOverloadsTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBE1BA10B9B0079ADB8 /* AsyncOpFinishOverloadsTesting.swift */; };
+		8516EFDE1BA10BB30079ADB8 /* AsyncOpManualInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBF1BA10B9B0079ADB8 /* AsyncOpManualInputTests.swift */; };
+		8516EFDF1BA10BB30079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC01BA10B9B0079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift */; };
+		8516EFE01BA10BB30079ADB8 /* AsyncOpResultStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC11BA10B9B0079ADB8 /* AsyncOpResultStatusTests.swift */; };
+		8516EFE11BA10BB30079ADB8 /* AsyncOpSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC21BA10B9B0079ADB8 /* AsyncOpSubclass.swift */; };
+		8516EFE21BA10BB30079ADB8 /* AsyncOpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */; };
+		8516EFE31BA10BB30079ADB8 /* AsyncOpThrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */; };
+		8516EFE41BA10BB30079ADB8 /* AsyncOpWhenFinished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */; };
 		85BE3E571B2CBDAE00558DEC /* AsyncOpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */; };
-		CFA98C74FBA74624B5E59C41 /* Pods_AsyncOpKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3CE576AF8352D16B71BCEA1 /* Pods_AsyncOpKitTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CFA98C74FBA74624B5E59C41 /* Pods_AsyncOpKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3CE576AF8352D16B71BCEA1 /* Pods_AsyncOpKitTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
