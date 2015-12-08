@@ -81,6 +81,7 @@
 		8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpThrowTests.swift; sourceTree = "<group>"; };
 		8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpWhenFinished.swift; sourceTree = "<group>"; };
 		8516EFE71BA10DFC0079ADB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85A678801C165B0400512283 /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncOpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncOpKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -165,6 +166,7 @@
 		85BE3E411B2CBDAE00558DEC = {
 			isa = PBXGroup;
 			children = (
+				85A678801C165B0400512283 /* Cartfile.private */,
 				85098AB21C16089800B31DAB /* Nimble.framework */,
 				85098AB31C16089800B31DAB /* Quick.framework */,
 				850DD1D41B2D6CE20039EB71 /* Metadata */,
