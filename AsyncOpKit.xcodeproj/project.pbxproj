@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85098AB41C16089800B31DAB /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85098AB21C16089800B31DAB /* Nimble.framework */; };
-		85098AB51C16089800B31DAB /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85098AB31C16089800B31DAB /* Quick.framework */; };
-		85098AB61C1608C700B31DAB /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85098AB21C16089800B31DAB /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		85098AB71C1608C700B31DAB /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85098AB31C16089800B31DAB /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		850B0F751BBCCB9C00553E91 /* AsyncOpGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */; };
 		850B0F781BBCCBD800553E91 /* AsyncOpGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */; };
 		8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */; };
@@ -29,6 +25,8 @@
 		8516EFE21BA10BB30079ADB8 /* AsyncOpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */; };
 		8516EFE31BA10BB30079ADB8 /* AsyncOpThrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */; };
 		8516EFE41BA10BB30079ADB8 /* AsyncOpWhenFinished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */; };
+		85992A731C27A7AB00074473 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85992A721C27A7AB00074473 /* Nimble.framework */; };
+		85992A751C27A7B700074473 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85992A741C27A7B700074473 /* Quick.framework */; };
 		85A678A81C16625E00512283 /* AsyncOpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 85A678A71C16625E00512283 /* AsyncOpKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -42,23 +40,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		85BE3EA81B2CC2EB00558DEC /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				85098AB61C1608C700B31DAB /* Nimble.framework in CopyFiles */,
-				85098AB71C1608C700B31DAB /* Quick.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		85098AB21C16089800B31DAB /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
-		85098AB31C16089800B31DAB /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpGroup.swift; sourceTree = "<group>"; };
 		850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpGroupTests.swift; sourceTree = "<group>"; };
 		850DD1D11B2D6CD40039EB71 /* AsyncOpKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AsyncOpKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -82,8 +64,8 @@
 		8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpThrowTests.swift; sourceTree = "<group>"; };
 		8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpWhenFinished.swift; sourceTree = "<group>"; };
 		8516EFE71BA10DFC0079ADB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		85A678801C165B0400512283 /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
-		85A678A11C165F8400512283 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		85992A721C27A7AB00074473 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = "Carthage/Checkouts/Nimble/build/Debug-iphoneos/Nimble.framework"; sourceTree = SOURCE_ROOT; };
+		85992A741C27A7B700074473 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = "Carthage/Checkouts/Quick/build/Debug-iphoneos/Quick.framework"; sourceTree = SOURCE_ROOT; };
 		85A678A71C16625E00512283 /* AsyncOpKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncOpKit.h; sourceTree = "<group>"; };
 		85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncOpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncOpKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,8 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85098AB41C16089800B31DAB /* Nimble.framework in Frameworks */,
-				85098AB51C16089800B31DAB /* Quick.framework in Frameworks */,
+				85992A731C27A7AB00074473 /* Nimble.framework in Frameworks */,
+				85992A751C27A7B700074473 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,8 +94,6 @@
 		850DD1D41B2D6CE20039EB71 /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				85A678A11C165F8400512283 /* Cartfile */,
-				85A678801C165B0400512283 /* Cartfile.private */,
 				850DD1D11B2D6CD40039EB71 /* AsyncOpKit.podspec */,
 				850DD1D21B2D6CD40039EB71 /* LICENSE */,
 				850DD1D31B2D6CD40039EB71 /* README.md */,
@@ -172,8 +152,8 @@
 		85A678A01C165F6E00512283 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				85098AB21C16089800B31DAB /* Nimble.framework */,
-				85098AB31C16089800B31DAB /* Quick.framework */,
+				85992A741C27A7B700074473 /* Quick.framework */,
+				85992A721C27A7AB00074473 /* Nimble.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -240,7 +220,6 @@
 				85BE3E521B2CBDAE00558DEC /* Sources */,
 				85BE3E531B2CBDAE00558DEC /* Frameworks */,
 				85BE3E541B2CBDAE00558DEC /* Resources */,
-				85BE3EA81B2CC2EB00558DEC /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -474,6 +453,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -483,6 +463,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Nimble/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Quick/build/Debug-iphoneos",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -501,6 +483,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Nimble/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Quick/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

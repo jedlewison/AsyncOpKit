@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:AsyncOpKit.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "Checkouts">
+      <FileRef
+         location = "group:InstallingTests.md">
+      </FileRef>
+      <FileRef
+         location = "group:Cartfile">
+      </FileRef>
+      <FileRef
+         location = "group:Cartfile.private">
+      </FileRef>
+      <FileRef
+         location = "group:Cartfile.resolved">
+      </FileRef>
+      <FileRef
+         location = "container:Carthage/Checkouts/Quick/Quick.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "container:Carthage/Checkouts/Nimble/Nimble.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>
