@@ -28,6 +28,26 @@
 		85992A731C27A7AB00074473 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85992A721C27A7AB00074473 /* Nimble.framework */; };
 		85992A751C27A7B700074473 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85992A741C27A7B700074473 /* Quick.framework */; };
 		85A678A81C16625E00512283 /* AsyncOpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 85A678A71C16625E00512283 /* AsyncOpKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85C934AC1C324367009B2E3B /* AsyncOpKit-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C934AB1C324367009B2E3B /* AsyncOpKit-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85C934B31C324367009B2E3B /* AsyncOpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C934A91C324367009B2E3B /* AsyncOpKit.framework */; };
+		85C934C01C3243A6009B2E3B /* AsyncOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */; };
+		85C934C11C3243A6009B2E3B /* AsyncOpGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */; };
+		85C934C21C3243A6009B2E3B /* AsyncOpTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */; };
+		85C934C31C3243A6009B2E3B /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB41BA10B9B0079ADB8 /* AsyncOperation.swift */; };
+		85C934C41C3243A6009B2E3B /* AsyncClosuresOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB31BA10B9B0079ADB8 /* AsyncClosuresOperation.swift */; };
+		85C934C51C3243A6009B2E3B /* AsyncOpKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB51BA10B9B0079ADB8 /* AsyncOpKit.swift */; };
+		85C934C61C3243AF009B2E3B /* ClosureTestsFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB91BA10B9B0079ADB8 /* ClosureTestsFile.swift */; };
+		85C934C71C3243AF009B2E3B /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBB1BA10B9B0079ADB8 /* Tests.swift */; };
+		85C934C81C3243AF009B2E3B /* AsyncOpAutomaticInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBD1BA10B9B0079ADB8 /* AsyncOpAutomaticInputTests.swift */; };
+		85C934C91C3243AF009B2E3B /* AsyncOpFinishOverloadsTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBE1BA10B9B0079ADB8 /* AsyncOpFinishOverloadsTesting.swift */; };
+		85C934CA1C3243AF009B2E3B /* AsyncOpManualInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFBF1BA10B9B0079ADB8 /* AsyncOpManualInputTests.swift */; };
+		85C934CB1C3243AF009B2E3B /* AsyncOpPreconditionEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC01BA10B9B0079ADB8 /* AsyncOpPreconditionEvaluatorTests.swift */; };
+		85C934CC1C3243AF009B2E3B /* AsyncOpResultStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC11BA10B9B0079ADB8 /* AsyncOpResultStatusTests.swift */; };
+		85C934CD1C3243AF009B2E3B /* AsyncOpSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC21BA10B9B0079ADB8 /* AsyncOpSubclass.swift */; };
+		85C934CE1C3243AF009B2E3B /* AsyncOpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */; };
+		85C934CF1C3243AF009B2E3B /* AsyncOpThrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */; };
+		85C934D01C3243AF009B2E3B /* AsyncOpWhenFinished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */; };
+		85C934D11C3243AF009B2E3B /* AsyncOpGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +57,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 85BE3E4A1B2CBDAE00558DEC;
 			remoteInfo = AsyncOpKit;
+		};
+		85C934B41C324367009B2E3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85BE3E421B2CBDAE00558DEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85C934A81C324367009B2E3B;
+			remoteInfo = "AsyncOpKit-OSX";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -69,6 +96,11 @@
 		85A678A71C16625E00512283 /* AsyncOpKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncOpKit.h; sourceTree = "<group>"; };
 		85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncOpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncOpKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C934A91C324367009B2E3B /* AsyncOpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncOpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C934AB1C324367009B2E3B /* AsyncOpKit-OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AsyncOpKit-OSX.h"; sourceTree = "<group>"; };
+		85C934AD1C324367009B2E3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85C934B21C324367009B2E3B /* AsyncOpKit-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AsyncOpKit-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		85C934B91C324367009B2E3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +117,21 @@
 			files = (
 				85992A731C27A7AB00074473 /* Nimble.framework in Frameworks */,
 				85992A751C27A7B700074473 /* Quick.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C934A51C324367009B2E3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C934AF1C324367009B2E3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C934B31C324367009B2E3B /* AsyncOpKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +214,8 @@
 				8516EFB11BA10B9B0079ADB8 /* AsyncOpTypes.swift */,
 				8516EFB21BA10B9B0079ADB8 /* Legacy */,
 				8516EFB71BA10B9B0079ADB8 /* Tests */,
+				85C934AA1C324367009B2E3B /* AsyncOpKit-OSX */,
+				85C934B61C324367009B2E3B /* AsyncOpKit-OSXTests */,
 				85A678A01C165F6E00512283 /* Frameworks */,
 				85BE3E4C1B2CBDAE00558DEC /* Products */,
 			);
@@ -177,8 +226,27 @@
 			children = (
 				85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */,
 				85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */,
+				85C934A91C324367009B2E3B /* AsyncOpKit.framework */,
+				85C934B21C324367009B2E3B /* AsyncOpKit-OSXTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		85C934AA1C324367009B2E3B /* AsyncOpKit-OSX */ = {
+			isa = PBXGroup;
+			children = (
+				85C934AB1C324367009B2E3B /* AsyncOpKit-OSX.h */,
+				85C934AD1C324367009B2E3B /* Info.plist */,
+			);
+			path = "AsyncOpKit-OSX";
+			sourceTree = "<group>";
+		};
+		85C934B61C324367009B2E3B /* AsyncOpKit-OSXTests */ = {
+			isa = PBXGroup;
+			children = (
+				85C934B91C324367009B2E3B /* Info.plist */,
+			);
+			path = "AsyncOpKit-OSXTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +257,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				85A678A81C16625E00512283 /* AsyncOpKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C934A61C324367009B2E3B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C934AC1C324367009B2E3B /* AsyncOpKit-OSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +307,42 @@
 			productReference = 85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		85C934A81C324367009B2E3B /* AsyncOpKit-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85C934BE1C324367009B2E3B /* Build configuration list for PBXNativeTarget "AsyncOpKit-OSX" */;
+			buildPhases = (
+				85C934A41C324367009B2E3B /* Sources */,
+				85C934A51C324367009B2E3B /* Frameworks */,
+				85C934A61C324367009B2E3B /* Headers */,
+				85C934A71C324367009B2E3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AsyncOpKit-OSX";
+			productName = "AsyncOpKit-OSX";
+			productReference = 85C934A91C324367009B2E3B /* AsyncOpKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		85C934B11C324367009B2E3B /* AsyncOpKit-OSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85C934BF1C324367009B2E3B /* Build configuration list for PBXNativeTarget "AsyncOpKit-OSXTests" */;
+			buildPhases = (
+				85C934AE1C324367009B2E3B /* Sources */,
+				85C934AF1C324367009B2E3B /* Frameworks */,
+				85C934B01C324367009B2E3B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85C934B51C324367009B2E3B /* PBXTargetDependency */,
+			);
+			name = "AsyncOpKit-OSXTests";
+			productName = "AsyncOpKit-OSXTests";
+			productReference = 85C934B21C324367009B2E3B /* AsyncOpKit-OSXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -238,7 +350,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Magic App Factory";
 				TargetAttributes = {
@@ -247,6 +359,12 @@
 					};
 					85BE3E551B2CBDAE00558DEC = {
 						CreatedOnToolsVersion = 6.3.2;
+					};
+					85C934A81C324367009B2E3B = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					85C934B11C324367009B2E3B = {
+						CreatedOnToolsVersion = 7.2;
 					};
 				};
 			};
@@ -264,6 +382,8 @@
 			targets = (
 				85BE3E4A1B2CBDAE00558DEC /* AsyncOpKit */,
 				85BE3E551B2CBDAE00558DEC /* AsyncOpKitTests */,
+				85C934A81C324367009B2E3B /* AsyncOpKit-OSX */,
+				85C934B11C324367009B2E3B /* AsyncOpKit-OSXTests */,
 			);
 		};
 /* End PBXProject section */
@@ -277,6 +397,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		85BE3E541B2CBDAE00558DEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C934A71C324367009B2E3B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C934B01C324367009B2E3B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -318,6 +452,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85C934A41C324367009B2E3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C934C51C3243A6009B2E3B /* AsyncOpKit.swift in Sources */,
+				85C934C01C3243A6009B2E3B /* AsyncOp.swift in Sources */,
+				85C934C21C3243A6009B2E3B /* AsyncOpTypes.swift in Sources */,
+				85C934C41C3243A6009B2E3B /* AsyncClosuresOperation.swift in Sources */,
+				85C934C31C3243A6009B2E3B /* AsyncOperation.swift in Sources */,
+				85C934C11C3243A6009B2E3B /* AsyncOpGroup.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85C934AE1C324367009B2E3B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85C934C91C3243AF009B2E3B /* AsyncOpFinishOverloadsTesting.swift in Sources */,
+				85C934D01C3243AF009B2E3B /* AsyncOpWhenFinished.swift in Sources */,
+				85C934C81C3243AF009B2E3B /* AsyncOpAutomaticInputTests.swift in Sources */,
+				85C934CF1C3243AF009B2E3B /* AsyncOpThrowTests.swift in Sources */,
+				85C934C71C3243AF009B2E3B /* Tests.swift in Sources */,
+				85C934CC1C3243AF009B2E3B /* AsyncOpResultStatusTests.swift in Sources */,
+				85C934CB1C3243AF009B2E3B /* AsyncOpPreconditionEvaluatorTests.swift in Sources */,
+				85C934D11C3243AF009B2E3B /* AsyncOpGroupTests.swift in Sources */,
+				85C934CA1C3243AF009B2E3B /* AsyncOpManualInputTests.swift in Sources */,
+				85C934CE1C3243AF009B2E3B /* AsyncOpTests.swift in Sources */,
+				85C934CD1C3243AF009B2E3B /* AsyncOpSubclass.swift in Sources */,
+				85C934C61C3243AF009B2E3B /* ClosureTestsFile.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -325,6 +491,11 @@
 			isa = PBXTargetDependency;
 			target = 85BE3E4A1B2CBDAE00558DEC /* AsyncOpKit */;
 			targetProxy = 85BE3E581B2CBDAE00558DEC /* PBXContainerItemProxy */;
+		};
+		85C934B51C324367009B2E3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85C934A81C324367009B2E3B /* AsyncOpKit-OSX */;
+			targetProxy = 85C934B41C324367009B2E3B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -483,6 +654,78 @@
 			};
 			name = Release;
 		};
+		85C934BA1C324367009B2E3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "AsyncOpKit-OSX/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.AsyncOpKit-OSX";
+				PRODUCT_NAME = AsyncOpKit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		85C934BB1C324367009B2E3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "AsyncOpKit-OSX/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.AsyncOpKit-OSX";
+				PRODUCT_NAME = AsyncOpKit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		85C934BC1C324367009B2E3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = "AsyncOpKit-OSXTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.AsyncOpKit-OSXTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		85C934BD1C324367009B2E3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "AsyncOpKit-OSXTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magicappfactory.AsyncOpKit-OSXTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -509,6 +752,24 @@
 			buildConfigurations = (
 				85BE3E651B2CBDAE00558DEC /* Debug */,
 				85BE3E661B2CBDAE00558DEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85C934BE1C324367009B2E3B /* Build configuration list for PBXNativeTarget "AsyncOpKit-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85C934BA1C324367009B2E3B /* Debug */,
+				85C934BB1C324367009B2E3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85C934BF1C324367009B2E3B /* Build configuration list for PBXNativeTarget "AsyncOpKit-OSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85C934BC1C324367009B2E3B /* Debug */,
+				85C934BD1C324367009B2E3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
