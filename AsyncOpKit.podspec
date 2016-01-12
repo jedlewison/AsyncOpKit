@@ -17,7 +17,8 @@ Pod::Spec.new do |s|
     s.homepage         = "https://github.com/jedlewison/AsyncOpKit"
     s.license          = 'MIT'
     s.source           = { :git => "https://github.com/jedlewison/AsyncOpKit.git", :tag => s.version.to_s }
-    s.platform         = :ios, '8.0'
+    s.ios.deployment_target = '8.0'
+    s.osx.deployment_target = '10.10'
     s.requires_arc     = true
     s.source_files     = "{AsyncOp.swift,AsyncOpTypes.swift,AsyncOpGroup.swift,Legacy/*.swift}"
 end
