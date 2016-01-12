@@ -6,6 +6,7 @@
 
 import Foundation
 
+
 /// AsyncOp is an NSOperation subclass that supports a generic output type and takes care of the boiler plate necessary for asynchronous execution of NSOperations.
 /// You can subclass AsyncOp, but because it's a generic subclass and provides convenient closures for performing work as well has handling cancellation, results, and errors, in many cases you may not need to.
 
@@ -25,7 +26,7 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
         }
     }
 
-    public private(set) final var output: AsyncOpValue<OutputType> = .None(.Nil)
+    public private(set) final var output: AsyncOpValue<OutputType> = .None(.NoValue)
 
     // Closures
     public typealias AsyncOpClosure = (asyncOp: AsyncOp<InputType, OutputType>) -> Void
@@ -167,7 +168,7 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
     private var finishOnceToken: dispatch_once_t = 0
     private var whenFinishedOnceToken: dispatch_once_t = 0
     private var cancelOnceToken: dispatch_once_t = 0
-    private var _input: AsyncOpValue<InputType> = AsyncOpValue.None(.Nil)
+    private var _input: AsyncOpValue<InputType> = AsyncOpValue.None(.NoValue)
 
 }
 
@@ -225,6 +226,7 @@ extension AsyncOp {
     public final func finish(with asyncOpValue: AsyncOpValue<OutputType>) {
         guard executing else { return }
         dispatch_once(&finishOnceToken) {
+
             self.output = asyncOpValue
             self.state = .Finished
             guard let completionHandler = self.completionHandler else { return }
@@ -262,20 +264,6 @@ extension AsyncOp: AsyncOpInputProvider {
     public func addPreconditionEvaluator(evaluator: AsyncOpPreconditionEvaluator) {
         guard state == .Initial else { debugPrint(WarnSetInput); return }
         preconditionEvaluators.append(evaluator)
-    }
-
-    public func preconditionInstructionByEvaluatingOutput() throws -> AsyncOpPreconditionInstruction {
-        switch output {
-        case .None(let error):
-            switch error {
-            case .Cancelled, .Nil:
-                return .Cancel
-            case .Failed(let error):
-                return .Fail(error)
-            }
-        case .Some:
-            return .Continue
-        }
     }
 
     public func setInputProvider<T where T: AsyncOpInputProvider, T.ProvidedInputValueType == InputType>(inputProvider: T) {

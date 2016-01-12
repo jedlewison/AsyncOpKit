@@ -6,6 +6,46 @@
 
 import Foundation
 
+public enum AsyncOpResult<ValueType> {
+
+    case Succeeded(ValueType)
+    case Failed(ErrorType)
+    case Cancelled
+
+    init(asyncOpValue: AsyncOpValue<ValueType>) {
+        switch asyncOpValue {
+        case .Some(let value):
+            self = .Succeeded(value)
+        case .None(let asyncOpError):
+            switch asyncOpError {
+            case .NoValue:
+                self = .Failed(AsyncOpError.NoResultBecauseOperationNotFinished)
+            case .Cancelled:
+                self = .Cancelled
+            case .Failed(let error):
+                self = .Failed(error)
+            }
+        }
+    }
+
+    var succeeded: Bool {
+        switch self {
+        case .Succeeded:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+extension AsyncOp {
+
+    public var result: AsyncOpResult<OutputType> {
+        return AsyncOpResult(asyncOpValue: output)
+    }
+
+}
+
 public protocol AsyncVoidConvertible: NilLiteralConvertible {
     init(asyncVoid: AsyncVoid)
 }
@@ -50,7 +90,7 @@ public enum AsyncOpValue<ValueType>: AsyncOpInputProvider {
 }
 
 public enum AsyncOpValueErrorType: ErrorType {
-    case Nil
+    case NoValue
     case Cancelled
     case Failed(ErrorType)
 }
@@ -60,7 +100,7 @@ extension AsyncOpValue {
     public func getValue() throws -> ValueType {
         switch self {
         case .None:
-            throw AsyncOpValueErrorType.Nil
+            throw AsyncOpValueErrorType.NoValue
         case .Some(let value):
             return value
         }
@@ -114,11 +154,12 @@ extension AsyncOpValueErrorType {
             return nil
         }
     }
-    
+
 }
 
 public enum AsyncOpError: ErrorType {
     case Unspecified
+    case NoResultBecauseOperationNotFinished
     case UnimplementedOperation
     case Multiple([ErrorType])
     case PreconditionFailure
