@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0630"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "NO"
+      parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
@@ -15,24 +15,9 @@
             hideIssues = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "85BE3E4A1B2CBDAE00558DEC"
+               BlueprintIdentifier = "85C934A81C324367009B2E3B"
                BuildableName = "AsyncOpKit.framework"
-               BlueprintName = "AsyncOpKit"
-               ReferencedContainer = "container:AsyncOpKit.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO"
-            hideIssues = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "85BE3E551B2CBDAE00558DEC"
-               BuildableName = "AsyncOpKitTests.xctest"
-               BlueprintName = "AsyncOpKitTests"
+               BlueprintName = "AsyncOpKit-OSX"
                ReferencedContainer = "container:AsyncOpKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -48,9 +33,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "85BE3E551B2CBDAE00558DEC"
-               BuildableName = "AsyncOpKitTests.xctest"
-               BlueprintName = "AsyncOpKitTests"
+               BlueprintIdentifier = "85C934B11C324367009B2E3B"
+               BuildableName = "AsyncOpKit-OSXTests.xctest"
+               BlueprintName = "AsyncOpKit-OSXTests"
                ReferencedContainer = "container:AsyncOpKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -58,9 +43,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "85BE3E4A1B2CBDAE00558DEC"
+            BlueprintIdentifier = "85C934A81C324367009B2E3B"
             BuildableName = "AsyncOpKit.framework"
-            BlueprintName = "AsyncOpKit"
+            BlueprintName = "AsyncOpKit-OSX"
             ReferencedContainer = "container:AsyncOpKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -80,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "85BE3E4A1B2CBDAE00558DEC"
+            BlueprintIdentifier = "85C934A81C324367009B2E3B"
             BuildableName = "AsyncOpKit.framework"
-            BlueprintName = "AsyncOpKit"
+            BlueprintName = "AsyncOpKit-OSX"
             ReferencedContainer = "container:AsyncOpKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -98,9 +83,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "85BE3E4A1B2CBDAE00558DEC"
+            BlueprintIdentifier = "85C934A81C324367009B2E3B"
             BuildableName = "AsyncOpKit.framework"
-            BlueprintName = "AsyncOpKit"
+            BlueprintName = "AsyncOpKit-OSX"
             ReferencedContainer = "container:AsyncOpKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -11,7 +11,7 @@ target "AsyncOpKitTests" do
    project 'AsyncOpKit'
    platform :ios, "9.0"
    pod 'Quick'
-   pod 'Nimble'
+   pod 'Nimble', :git => 'https://github.com/Quick/Nimble.git'
 end
 
 

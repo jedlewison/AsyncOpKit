@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A8BCF3ECC67CD19711A39F3 /* Pods_AsyncOpKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F1E5B2C8B96C533AD5DC85 /* Pods_AsyncOpKitTests.framework */; };
+		7D99E7FEB1B595E75F4F471E /* Pods_AsyncOpKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C5419355895C4278C0FD62 /* Pods_AsyncOpKitTests.framework */; };
 		850B0F751BBCCB9C00553E91 /* AsyncOpGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */; };
 		850B0F781BBCCBD800553E91 /* AsyncOpGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */; };
 		8516EFC71BA10B9B0079ADB8 /* AsyncOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFB01BA10B9B0079ADB8 /* AsyncOp.swift */; };
@@ -26,8 +26,6 @@
 		8516EFE21BA10BB30079ADB8 /* AsyncOpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC31BA10B9B0079ADB8 /* AsyncOpTests.swift */; };
 		8516EFE31BA10BB30079ADB8 /* AsyncOpThrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */; };
 		8516EFE41BA10BB30079ADB8 /* AsyncOpWhenFinished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */; };
-		85992A731C27A7AB00074473 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85992A721C27A7AB00074473 /* Nimble.framework */; };
-		85992A751C27A7B700074473 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85992A741C27A7B700074473 /* Quick.framework */; };
 		85A678A81C16625E00512283 /* AsyncOpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 85A678A71C16625E00512283 /* AsyncOpKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85C934AC1C324367009B2E3B /* AsyncOpKit-OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C934AB1C324367009B2E3B /* AsyncOpKit-OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85C934B31C324367009B2E3B /* AsyncOpKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85C934A91C324367009B2E3B /* AsyncOpKit.framework */; };
@@ -69,7 +67,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		094C59F8A0715029BF0D133A /* Pods-AsyncOpKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		10C5419355895C4278C0FD62 /* Pods_AsyncOpKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AsyncOpKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		502CF1E5F2EF34E207D671FF /* Pods-AsyncOpKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		61D167126F0ADC09A1707999 /* Pods-AsyncOpKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		850B0F741BBCCB9C00553E91 /* AsyncOpGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpGroup.swift; sourceTree = "<group>"; };
 		850B0F761BBCCBD800553E91 /* AsyncOpGroupTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpGroupTests.swift; sourceTree = "<group>"; };
 		850DD1D11B2D6CD40039EB71 /* AsyncOpKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AsyncOpKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -93,8 +93,6 @@
 		8516EFC41BA10B9B0079ADB8 /* AsyncOpThrowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpThrowTests.swift; sourceTree = "<group>"; };
 		8516EFC51BA10B9B0079ADB8 /* AsyncOpWhenFinished.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpWhenFinished.swift; sourceTree = "<group>"; };
 		8516EFE71BA10DFC0079ADB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		85992A721C27A7AB00074473 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = "Carthage/Checkouts/Nimble/build/Debug-iphoneos/Nimble.framework"; sourceTree = SOURCE_ROOT; };
-		85992A741C27A7B700074473 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = "Carthage/Checkouts/Quick/build/Debug-iphoneos/Quick.framework"; sourceTree = SOURCE_ROOT; };
 		85A678A71C16625E00512283 /* AsyncOpKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncOpKit.h; sourceTree = "<group>"; };
 		85BE3E4B1B2CBDAE00558DEC /* AsyncOpKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AsyncOpKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BE3E561B2CBDAE00558DEC /* AsyncOpKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsyncOpKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,8 +101,6 @@
 		85C934AD1C324367009B2E3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85C934B21C324367009B2E3B /* AsyncOpKit-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AsyncOpKit-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C934B91C324367009B2E3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B2513A325B125B731EDB823 /* Pods-AsyncOpKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AsyncOpKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C8F1E5B2C8B96C533AD5DC85 /* Pods_AsyncOpKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AsyncOpKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,9 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85992A731C27A7AB00074473 /* Nimble.framework in Frameworks */,
-				85992A751C27A7B700074473 /* Quick.framework in Frameworks */,
-				0A8BCF3ECC67CD19711A39F3 /* Pods_AsyncOpKitTests.framework in Frameworks */,
+				7D99E7FEB1B595E75F4F471E /* Pods_AsyncOpKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,9 +198,7 @@
 		85A678A01C165F6E00512283 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				85992A741C27A7B700074473 /* Quick.framework */,
-				85992A721C27A7AB00074473 /* Nimble.framework */,
-				C8F1E5B2C8B96C533AD5DC85 /* Pods_AsyncOpKitTests.framework */,
+				10C5419355895C4278C0FD62 /* Pods_AsyncOpKitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -224,7 +216,7 @@
 				85C934B61C324367009B2E3B /* AsyncOpKit-OSXTests */,
 				85A678A01C165F6E00512283 /* Frameworks */,
 				85BE3E4C1B2CBDAE00558DEC /* Products */,
-				9019AC22440FE155601CBDF4 /* Pods */,
+				D4CFBF0B0EC10F0407CE77E6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,11 +248,11 @@
 			path = "AsyncOpKit-OSXTests";
 			sourceTree = "<group>";
 		};
-		9019AC22440FE155601CBDF4 /* Pods */ = {
+		D4CFBF0B0EC10F0407CE77E6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8B2513A325B125B731EDB823 /* Pods-AsyncOpKitTests.debug.xcconfig */,
-				094C59F8A0715029BF0D133A /* Pods-AsyncOpKitTests.release.xcconfig */,
+				61D167126F0ADC09A1707999 /* Pods-AsyncOpKitTests.debug.xcconfig */,
+				502CF1E5F2EF34E207D671FF /* Pods-AsyncOpKitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -309,12 +301,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85BE3E641B2CBDAE00558DEC /* Build configuration list for PBXNativeTarget "AsyncOpKitTests" */;
 			buildPhases = (
-				336EB2803357F08212F2F9F2 /* Check Pods Manifest.lock */,
+				2AACE34542AFEC943030726B /* Check Pods Manifest.lock */,
 				85BE3E521B2CBDAE00558DEC /* Sources */,
 				85BE3E531B2CBDAE00558DEC /* Frameworks */,
 				85BE3E541B2CBDAE00558DEC /* Resources */,
-				9215E5CA797C2F003185A880 /* Embed Pods Frameworks */,
-				B170FD6CE05BDB5A64FE5772 /* Copy Pods Resources */,
+				20DD9FD32239DA91E4EF1AF1 /* Embed Pods Frameworks */,
+				EDA8091E7887A61979A988C2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -439,22 +431,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		336EB2803357F08212F2F9F2 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9215E5CA797C2F003185A880 /* Embed Pods Frameworks */ = {
+		20DD9FD32239DA91E4EF1AF1 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -469,7 +446,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AsyncOpKitTests/Pods-AsyncOpKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B170FD6CE05BDB5A64FE5772 /* Copy Pods Resources */ = {
+		2AACE34542AFEC943030726B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EDA8091E7887A61979A988C2 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -697,7 +689,7 @@
 		};
 		85BE3E651B2CBDAE00558DEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B2513A325B125B731EDB823 /* Pods-AsyncOpKitTests.debug.xcconfig */;
+			baseConfigurationReference = 61D167126F0ADC09A1707999 /* Pods-AsyncOpKitTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -713,7 +705,7 @@
 		};
 		85BE3E661B2CBDAE00558DEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 094C59F8A0715029BF0D133A /* Pods-AsyncOpKitTests.release.xcconfig */;
+			baseConfigurationReference = 502CF1E5F2EF34E207D671FF /* Pods-AsyncOpKitTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;

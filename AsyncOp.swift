@@ -155,7 +155,11 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
     override public final var asynchronous: Bool { return true }
     override public final var executing: Bool { return state == .Executing }
     override public final var finished: Bool { return state == .Finished }
-    override public var ready: Bool { return !paused && super.ready || state != .Initial }
+    override public var ready: Bool {
+        guard state == .Initial else { return true }
+        guard super.ready else { return false }
+        return !paused
+    }
 
     // MARK: Private storage
     private typealias AsyncInputRequest = () -> AsyncOpValue<InputType>
