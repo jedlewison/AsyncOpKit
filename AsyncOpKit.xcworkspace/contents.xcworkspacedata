@@ -4,26 +4,7 @@
    <FileRef
       location = "group:AsyncOpKit.xcodeproj">
    </FileRef>
-   <Group
-      location = "container:"
-      name = "Checkouts">
-      <FileRef
-         location = "group:InstallingTests.md">
-      </FileRef>
-      <FileRef
-         location = "group:Cartfile">
-      </FileRef>
-      <FileRef
-         location = "group:Cartfile.private">
-      </FileRef>
-      <FileRef
-         location = "group:Cartfile.resolved">
-      </FileRef>
-      <FileRef
-         location = "container:Carthage/Checkouts/Quick/Quick.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "container:Carthage/Checkouts/Nimble/Nimble.xcodeproj">
-      </FileRef>
-   </Group>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
 </Workspace>
