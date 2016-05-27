@@ -75,7 +75,7 @@ public enum AsyncOpResultStatus {
 }
 
 public protocol AsyncOpInputProvider {
-    typealias ProvidedInputValueType
+    associatedtype ProvidedInputValueType
     func provideAsyncOpInput() -> AsyncOpValue<ProvidedInputValueType>
 }
 
