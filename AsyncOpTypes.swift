@@ -9,21 +9,21 @@ import Foundation
 public enum AsyncOpResult<ValueType> {
 
     case Succeeded(ValueType)
-    case Failed(ErrorType)
-    case Cancelled
+    case failed(ErrorProtocol)
+    case cancelled
 
     init(asyncOpValue: AsyncOpValue<ValueType>) {
         switch asyncOpValue {
-        case .Some(let value):
+        case .some(let value):
             self = .Succeeded(value)
-        case .None(let asyncOpError):
+        case .none(let asyncOpError):
             switch asyncOpError {
-            case .NoValue:
-                self = .Failed(AsyncOpError.NoResultBecauseOperationNotFinished)
+            case .noValue:
+                self = .failed(AsyncOpError.noResultBecauseOperationNotFinished)
             case .Cancelled:
-                self = .Cancelled
+                self = .cancelled
             case .Failed(let error):
-                self = .Failed(error)
+                self = .failed(error)
             }
         }
     }
@@ -52,14 +52,14 @@ public protocol AsyncVoidConvertible: NilLiteralConvertible {
 
 extension AsyncVoidConvertible {
     public init(nilLiteral: ()) {
-        self.init(asyncVoid: .Void)
+        self.init(asyncVoid: .void)
     }
 }
 
 public enum AsyncVoid: AsyncVoidConvertible {
-    case Void
+    case void
     public init(asyncVoid: AsyncVoid) {
-        self = .Void
+        self = .void
     }
 }
 
@@ -68,10 +68,10 @@ public protocol AsyncOpResultStatusProvider {
 }
 
 public enum AsyncOpResultStatus {
-    case Pending
-    case Succeeded
-    case Cancelled
-    case Failed
+    case pending
+    case succeeded
+    case cancelled
+    case failed
 }
 
 public protocol AsyncOpInputProvider {
@@ -80,8 +80,8 @@ public protocol AsyncOpInputProvider {
 }
 
 public enum AsyncOpValue<ValueType>: AsyncOpInputProvider {
-    case None(AsyncOpValueErrorType)
-    case Some(ValueType)
+    case none(AsyncOpValueErrorType)
+    case some(ValueType)
 
     public typealias ProvidedInputValueType = ValueType
     public func provideAsyncOpInput() -> AsyncOpValue<ProvidedInputValueType> {
@@ -89,37 +89,37 @@ public enum AsyncOpValue<ValueType>: AsyncOpInputProvider {
     }
 }
 
-public enum AsyncOpValueErrorType: ErrorType {
-    case NoValue
+public enum AsyncOpValueErrorType: ErrorProtocol {
+    case noValue
     case Cancelled
-    case Failed(ErrorType)
+    case Failed(ErrorProtocol)
 }
 
 extension AsyncOpValue {
 
     public func getValue() throws -> ValueType {
         switch self {
-        case .None:
-            throw AsyncOpValueErrorType.NoValue
-        case .Some(let value):
+        case .none:
+            throw AsyncOpValueErrorType.noValue
+        case .some(let value):
             return value
         }
     }
 
     public var value: ValueType? {
         switch self {
-        case .None:
+        case .none:
             return nil
-        case .Some(let value):
+        case .some(let value):
             return value
         }
     }
 
     public var noneError: AsyncOpValueErrorType? {
         switch self {
-        case .None(let error):
+        case .none(let error):
             return error
-        case .Some:
+        case .some:
             return nil
         }
     }
@@ -146,7 +146,7 @@ extension AsyncOpValueErrorType {
         }
     }
 
-    public var failureError: ErrorType? {
+    public var failureError: ErrorProtocol? {
         switch self {
         case .Failed(let error):
             return error
@@ -157,24 +157,24 @@ extension AsyncOpValueErrorType {
 
 }
 
-public enum AsyncOpError: ErrorType {
-    case Unspecified
-    case NoResultBecauseOperationNotFinished
-    case UnimplementedOperation
-    case Multiple([ErrorType])
-    case PreconditionFailure
+public enum AsyncOpError: ErrorProtocol {
+    case unspecified
+    case noResultBecauseOperationNotFinished
+    case unimplementedOperation
+    case multiple([ErrorProtocol])
+    case preconditionFailure
 }
 
 public enum AsyncOpPreconditionInstruction {
-    case Continue
-    case Cancel
-    case Fail(ErrorType)
+    case `continue`
+    case cancel
+    case fail(ErrorProtocol)
 
-    init(errors: [ErrorType]) {
+    init(errors: [ErrorProtocol]) {
         if errors.count == 1 {
-            self = .Fail(errors[0])
+            self = .fail(errors[0])
         } else {
-            self = .Fail(AsyncOpError.Multiple(errors))
+            self = .fail(AsyncOpError.multiple(errors))
         }
     }
 }

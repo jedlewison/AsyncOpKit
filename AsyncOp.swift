@@ -9,7 +9,7 @@ import Foundation
 /// AsyncOp is an NSOperation subclass that supports a generic output type and takes care of the boiler plate necessary for asynchronous execution of NSOperations.
 /// You can subclass AsyncOp, but because it's a generic subclass and provides convenient closures for performing work as well has handling cancellation, results, and errors, in many cases you may not need to.
 
-public class AsyncOp<InputType, OutputType>: NSOperation {
+public class AsyncOp<InputType, OutputType>: Operation {
 
     @nonobjc public required override init() {
         super.init()
@@ -20,12 +20,12 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
             return _input
         }
         set {
-            guard state == .Initial else { debugPrint(WarnSetInput); return }
+            guard state == .initial else { debugPrint(WarnSetInput); return }
             _input = newValue
         }
     }
 
-    public private(set) final var output: AsyncOpValue<OutputType> = .None(.NoValue)
+    public private(set) final var output: AsyncOpValue<OutputType> = .none(.noValue)
 
     // Closures
     public typealias AsyncOpClosure = (asyncOp: AsyncOp<InputType, OutputType>) -> Void
@@ -34,13 +34,13 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
 
     // MARK: Implementation details
     override public final func start() {
-        state = .Executing
-        if !cancelled {
+        state = .executing
+        if !isCancelled {
             main()
         } else {
             preconditionEvaluators.removeAll()
             implementationHandler = nil
-            finish(with: .None(.Cancelled))
+            finish(with: .none(.Cancelled))
         }
     }
 
@@ -55,19 +55,19 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
 
         func main_evaluatePreconditions() -> AsyncOpPreconditionInstruction {
 
-            var errors = [ErrorType]()
-            var preconditionInstruction = AsyncOpPreconditionInstruction.Continue
+            var errors = [ErrorProtocol]()
+            var preconditionInstruction = AsyncOpPreconditionInstruction.continue
 
             for evaluator in preconditionEvaluators {
                 do {
                     let evaluatorInstruction = try evaluator()
                     switch evaluatorInstruction {
-                    case .Cancel where errors.count == 0:
-                        preconditionInstruction = .Cancel
-                    case .Fail(let error):
+                    case .cancel where errors.count == 0:
+                        preconditionInstruction = .cancel
+                    case .fail(let error):
                         errors.append(error)
                         preconditionInstruction = AsyncOpPreconditionInstruction(errors: errors)
-                    case .Continue, .Cancel:
+                    case .continue, .cancel:
                         break
                     }
                 } catch {
@@ -90,7 +90,7 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
                     finish(with: error)
                 }
             } else {
-                finish(with: AsyncOpError.UnimplementedOperation)
+                finish(with: AsyncOpError.unimplementedOperation)
             }
         }
 
@@ -98,13 +98,13 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
         autoreleasepool {
             main_prepareInput()
             switch main_evaluatePreconditions() {
-            case .Continue:
+            case .continue:
                 main_performImplementation() // happy path
-            case .Cancel:
+            case .cancel:
                 implementationHandler = nil
                 cancel()
                 finish(with: .Cancelled)
-            case .Fail(let error):
+            case .fail(let error):
                 cancel()
                 implementationHandler = nil
                 finish(with: error)
@@ -122,20 +122,20 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
 
     public private(set) final var paused: Bool = false {
         willSet {
-            guard state == .Initial else { return }
+            guard state == .initial else { return }
             if paused != newValue {
-                willChangeValueForKey("isReady")
+                willChangeValue(forKey: "isReady")
             }
         }
         didSet {
-            guard state == .Initial else { return }
+            guard state == .initial else { return }
             if paused != oldValue {
-                didChangeValueForKey("isReady")
+                didChangeValue(forKey: "isReady")
             }
         }
     }
 
-    private var state = AsyncOpState.Initial {
+    private var state = AsyncOpState.initial {
         willSet {
             if newValue != state {
                 willChangeValueForState(newValue)
@@ -151,12 +151,12 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
     }
 
     /// Overrides for required NSOperation properties
-    override public final var asynchronous: Bool { return true }
-    override public final var executing: Bool { return state == .Executing }
-    override public final var finished: Bool { return state == .Finished }
-    override public var ready: Bool {
-        guard state == .Initial else { return true }
-        guard super.ready else { return false }
+    override public final var isAsynchronous: Bool { return true }
+    override public final var isExecuting: Bool { return state == .executing }
+    override public final var isFinished: Bool { return state == .finished }
+    override public var isReady: Bool {
+        guard state == .initial else { return true }
+        guard super.isReady else { return false }
         return !paused
     }
 
@@ -166,15 +166,15 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
     private var preconditionEvaluators = [AsyncOpPreconditionEvaluator]()
     private var implementationHandler: AsyncOpThrowingClosure?
     private var completionHandler: AsyncOpClosure?
-    private var completionHandlerQueue: NSOperationQueue?
+    private var completionHandlerQueue: OperationQueue?
     private var cancellationHandler: AsyncOpClosure?
 
     // Convenience for performing cancel and finish actions once
     private var onceGuards: [OnceAction : Bool] = Dictionary(minimumCapacity: OnceAction.count)
-    private let performOnceGuardQ = NSQualityOfService.UserInitiated.createSerialDispatchQueue("asyncOpKit.performOnceGuardQ")
-    private func performOnce(onceAction onceAction: OnceAction, @noescape action: () -> ()) {
+    private let performOnceGuardQ = QualityOfService.userInitiated.createSerialDispatchQueue("asyncOpKit.performOnceGuardQ")
+    private func performOnce(onceAction: OnceAction, @noescape action: () -> ()) {
         var canPerformAction: Bool?
-        dispatch_sync(performOnceGuardQ) {
+        performOnceGuardQ.sync {
             canPerformAction = self.onceGuards[onceAction] ?? true
             self.onceGuards[onceAction] = false
         }
@@ -184,23 +184,23 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
         }
 
     }
-    private var _input: AsyncOpValue<InputType> = AsyncOpValue.None(.NoValue)
+    private var _input: AsyncOpValue<InputType> = AsyncOpValue.none(.noValue)
 
 }
 
 extension AsyncOp {
 
-    public func onStart(implementationHandler: AsyncOpThrowingClosure) {
-        guard state == .Initial else { return }
+    public func onStart(_ implementationHandler: AsyncOpThrowingClosure) {
+        guard state == .initial else { return }
         self.implementationHandler = implementationHandler
     }
 
-    public func whenFinished(whenFinishedQueue completionHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue(), completionHandler: AsyncOpClosure) {
+    public func whenFinished(whenFinishedQueue completionHandlerQueue: OperationQueue = OperationQueue.main(), completionHandler: AsyncOpClosure) {
 
         performOnce(onceAction: .whenFinished) {
             guard self.completionHandler == nil else { return }
-            if self.finished {
-                completionHandlerQueue.addOperationWithBlock {
+            if self.isFinished {
+                completionHandlerQueue.addOperation {
                     completionHandler(asyncOp: self)
                 }
             } else {
@@ -210,8 +210,8 @@ extension AsyncOp {
         }
     }
 
-    public func onCancel(cancellationHandler: AsyncOpClosure) {
-        guard state == .Initial else { return }
+    public func onCancel(_ cancellationHandler: AsyncOpClosure) {
+        guard state == .initial else { return }
         self.cancellationHandler = cancellationHandler
     }
 
@@ -220,7 +220,7 @@ extension AsyncOp {
 extension AsyncOp where OutputType: AsyncVoidConvertible {
 
     public final func finishWithSuccess() {
-        finish(with: .Some(OutputType(asyncVoid: .Void)))
+        finish(with: .some(OutputType(asyncVoid: .void)))
     }
 
 }
@@ -229,23 +229,23 @@ extension AsyncOp where OutputType: AsyncVoidConvertible {
 extension AsyncOp {
 
     public final func finish(with value: OutputType) {
-        finish(with: .Some(value))
+        finish(with: .some(value))
     }
 
     public final func finish(with asyncOpValueError: AsyncOpValueErrorType) {
-        finish(with: .None(asyncOpValueError))
+        finish(with: .none(asyncOpValueError))
     }
 
-    public final func finish(with failureError: ErrorType) {
-        finish(with: .None(.Failed(failureError)))
+    public final func finish(with failureError: ErrorProtocol) {
+        finish(with: .none(.Failed(failureError)))
     }
 
     public final func finish(with asyncOpValue: AsyncOpValue<OutputType>) {
-        guard executing else { return }
+        guard isExecuting else { return }
         performOnce(onceAction: .finish) {
 
             self.output = asyncOpValue
-            self.state = .Finished
+            self.state = .finished
             guard let completionHandler = self.completionHandler else { return }
             self.completionHandler = nil
             self.implementationHandler = nil
@@ -254,7 +254,7 @@ extension AsyncOp {
             self.preconditionEvaluators.removeAll()
             guard let completionHandlerQueue = self.completionHandlerQueue else { return }
             self.completionHandlerQueue = nil
-            completionHandlerQueue.addOperationWithBlock {
+            completionHandlerQueue.addOperation {
                 completionHandler(asyncOp: self)
             }
         }
@@ -278,14 +278,14 @@ extension AsyncOp {
 
 extension AsyncOp: AsyncOpInputProvider {
 
-    public func addPreconditionEvaluator(evaluator: AsyncOpPreconditionEvaluator) {
-        guard state == .Initial else { debugPrint(WarnSetInput); return }
+    public func addPreconditionEvaluator(_ evaluator: AsyncOpPreconditionEvaluator) {
+        guard state == .initial else { debugPrint(WarnSetInput); return }
         preconditionEvaluators.append(evaluator)
     }
 
-    public func setInputProvider<T where T: AsyncOpInputProvider, T.ProvidedInputValueType == InputType>(inputProvider: T) {
-        guard state == .Initial else { debugPrint(WarnSetInput); return }
-        if let inputProvider = inputProvider as? NSOperation {
+    public func setInputProvider<T where T: AsyncOpInputProvider, T.ProvidedInputValueType == InputType>(_ inputProvider: T) {
+        guard state == .initial else { debugPrint(WarnSetInput); return }
+        if let inputProvider = inputProvider as? Operation {
             addDependency(inputProvider)
         }
         handlerForAsyncOpInputRequest = inputProvider.provideAsyncOpInput
@@ -296,12 +296,12 @@ extension AsyncOp: AsyncOpInputProvider {
         return output
     }
 
-    public func setInput(value: InputType, andResume resume: Bool = false) {
-        setInput(AsyncOpValue.Some(value), andResume: resume)
+    public func setInput(_ value: InputType, andResume resume: Bool = false) {
+        setInput(AsyncOpValue.some(value), andResume: resume)
     }
 
-    public func setInput(input: AsyncOpValue<InputType>, andResume resume: Bool = false) {
-        guard state == .Initial else { debugPrint(WarnSetInput); return }
+    public func setInput(_ input: AsyncOpValue<InputType>, andResume resume: Bool = false) {
+        guard state == .initial else { debugPrint(WarnSetInput); return }
         self.input = input
         if resume {
             self.resume()
@@ -313,13 +313,13 @@ extension AsyncOp: AsyncOpInputProvider {
 extension AsyncOp {
 
     public var resultStatus: AsyncOpResultStatus {
-        guard state == .Finished else { return .Pending }
-        guard !cancelled else { return .Cancelled }
+        guard state == .finished else { return .pending }
+        guard !isCancelled else { return .cancelled }
         switch output {
-        case .None:
-            return .Failed
-        case .Some:
-            return .Succeeded
+        case .none:
+            return .failed
+        case .some:
+            return .succeeded
         }
     }
 
@@ -327,14 +327,14 @@ extension AsyncOp {
 
 private extension AsyncOp {
 
-    func willChangeValueForState(state: AsyncOpState) {
+    func willChangeValueForState(_ state: AsyncOpState) {
         guard let key = state.key else { return }
-        willChangeValueForKey(key)
+        willChangeValue(forKey: key)
     }
 
-    func didChangeValueForState(state: AsyncOpState) {
+    func didChangeValueForState(_ state: AsyncOpState) {
         guard let key = state.key else { return }
-        didChangeValueForKey(key)
+        didChangeValue(forKey: key)
     }
 
 }
@@ -342,17 +342,17 @@ private extension AsyncOp {
 private let WarnSetInput = "Setting input without manual mode automatic or when operation has started has no effect"
 
 private enum AsyncOpState {
-    case Initial
-    case Executing
-    case Finished
+    case initial
+    case executing
+    case finished
 
     var key: String? {
         switch self {
-        case .Executing:
+        case .executing:
             return "isExecuting"
-        case .Finished:
+        case .finished:
             return "isFinished"
-        case .Initial:
+        case .initial:
             return nil
         }
     }

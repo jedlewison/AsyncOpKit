@@ -13,28 +13,28 @@ public struct AsyncOpConnector<InputType, OutputType> {
     private let _asyncOpGroup: AsyncOpGroup
     private let _asyncOp: AsyncOp<InputType, OutputType>
 
-    public func then<ValueType>(@noescape anOperationProvider: () -> AsyncOp<OutputType, ValueType>) -> AsyncOpConnector<OutputType, ValueType> {
+    public func then<ValueType>(@noescape _ anOperationProvider: () -> AsyncOp<OutputType, ValueType>) -> AsyncOpConnector<OutputType, ValueType> {
 
         let op = anOperationProvider()
         op.setInputProvider(_asyncOp)
         op.addPreconditionEvaluator { [weak op] in
-            guard let op = op else { return .Cancel }
+            guard let op = op else { return .cancel }
             switch op.input {
-            case .Some:
-                return .Continue
-            case .None(let asyncOpValueError):
+            case .some:
+                return .continue
+            case .none(let asyncOpValueError):
                 switch asyncOpValueError {
-                case .NoValue, .Cancelled:
-                    return .Cancel
+                case .noValue, .Cancelled:
+                    return .cancel
                 case .Failed(let error):
-                    return .Fail(error)
+                    return .fail(error)
                 }
             }
         }
         return _asyncOpGroup.then(op)
     }
 
-    public func finally(handler: (result: AsyncOpResult<OutputType>) -> ()) -> AsyncOpGroup {
+    public func finally(_ handler: (result: AsyncOpResult<OutputType>) -> ()) -> AsyncOpGroup {
         let op = operationToProvideResults()
         op.setInputProvider(_asyncOp)
         op.whenFinished { (asyncOp) -> Void in
@@ -59,33 +59,33 @@ public class AsyncOpGroup {
 
     }
 
-    public func beginWith<InputType, OutputType>(@noescape anAsyncOpProvider: () -> AsyncOp<InputType, OutputType>) -> AsyncOpConnector<InputType, OutputType> {
+    public func beginWith<InputType, OutputType>(@noescape _ anAsyncOpProvider: () -> AsyncOp<InputType, OutputType>) -> AsyncOpConnector<InputType, OutputType> {
         let op = anAsyncOpProvider()
         operations.append(op)
         return AsyncOpConnector<InputType, OutputType>(_asyncOpGroup: self, _asyncOp: op)
     }
 
-    private var operations = [NSOperation]()
+    private var operations = [Operation]()
 
 
     public func cancelGroup() {
         operations.forEach { $0.cancel() }
     }
 
-    private func then<ValueType, OutputType>(operation: AsyncOp<OutputType, ValueType>) -> AsyncOpConnector<OutputType, ValueType> {
+    private func then<ValueType, OutputType>(_ operation: AsyncOp<OutputType, ValueType>) -> AsyncOpConnector<OutputType, ValueType> {
         operations.append(operation)
         return AsyncOpConnector<OutputType, ValueType>(_asyncOpGroup: self, _asyncOp: operation)
     }
 
-    private func finally<InputType, OutputType>(operation: AsyncOp<InputType, OutputType>) -> AsyncOpGroup {
+    private func finally<InputType, OutputType>(_ operation: AsyncOp<InputType, OutputType>) -> AsyncOpGroup {
         operations.append(operation)
         return self
     }
 
 }
 
-extension NSOperationQueue {
-    public func addAsyncOpGroup(asyncOpGroup: AsyncOpGroup?, waitUntilFinished: Bool = false) {
+extension OperationQueue {
+    public func addAsyncOpGroup(_ asyncOpGroup: AsyncOpGroup?, waitUntilFinished: Bool = false) {
         guard let asyncOpGroup = asyncOpGroup else { return }
         addOperations(asyncOpGroup.operations, waitUntilFinished: waitUntilFinished)
     }
