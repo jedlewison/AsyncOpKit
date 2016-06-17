@@ -6,7 +6,6 @@
 
 import Foundation
 
-
 /// AsyncOp is an NSOperation subclass that supports a generic output type and takes care of the boiler plate necessary for asynchronous execution of NSOperations.
 /// You can subclass AsyncOp, but because it's a generic subclass and provides convenient closures for performing work as well has handling cancellation, results, and errors, in many cases you may not need to.
 
@@ -114,7 +113,7 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
     }
 
     override public final func cancel() {
-        dispatch_once(&cancelOnceToken) {
+        performOnce(onceAction: .cancel) {
             super.cancel()
             self.cancellationHandler?(asyncOp: self)
             self.cancellationHandler = nil
@@ -169,9 +168,22 @@ public class AsyncOp<InputType, OutputType>: NSOperation {
     private var completionHandler: AsyncOpClosure?
     private var completionHandlerQueue: NSOperationQueue?
     private var cancellationHandler: AsyncOpClosure?
-    private var finishOnceToken: dispatch_once_t = 0
-    private var whenFinishedOnceToken: dispatch_once_t = 0
-    private var cancelOnceToken: dispatch_once_t = 0
+
+    // Convenience for performing cancel and finish actions once
+    private var onceGuards: [OnceAction : Bool] = Dictionary(minimumCapacity: OnceAction.count)
+    private let performOnceGuardQ = NSQualityOfService.UserInitiated.createSerialDispatchQueue("asyncOpKit.performOnceGuardQ")
+    private func performOnce(onceAction onceAction: OnceAction, @noescape action: () -> ()) {
+        var canPerformAction: Bool?
+        dispatch_sync(performOnceGuardQ) {
+            canPerformAction = self.onceGuards[onceAction] ?? true
+            self.onceGuards[onceAction] = false
+        }
+
+        if canPerformAction == true {
+            action()
+        }
+
+    }
     private var _input: AsyncOpValue<InputType> = AsyncOpValue.None(.NoValue)
 
 }
@@ -184,7 +196,8 @@ extension AsyncOp {
     }
 
     public func whenFinished(whenFinishedQueue completionHandlerQueue: NSOperationQueue = NSOperationQueue.mainQueue(), completionHandler: AsyncOpClosure) {
-        dispatch_once(&whenFinishedOnceToken) {
+
+        performOnce(onceAction: .whenFinished) {
             guard self.completionHandler == nil else { return }
             if self.finished {
                 completionHandlerQueue.addOperationWithBlock {
@@ -229,7 +242,7 @@ extension AsyncOp {
 
     public final func finish(with asyncOpValue: AsyncOpValue<OutputType>) {
         guard executing else { return }
-        dispatch_once(&finishOnceToken) {
+        performOnce(onceAction: .finish) {
 
             self.output = asyncOpValue
             self.state = .Finished
@@ -246,7 +259,7 @@ extension AsyncOp {
             }
         }
     }
-    
+
 }
 
 extension AsyncOp {
@@ -323,7 +336,7 @@ private extension AsyncOp {
         guard let key = state.key else { return }
         didChangeValueForKey(key)
     }
-    
+
 }
 
 private let WarnSetInput = "Setting input without manual mode automatic or when operation has started has no effect"
@@ -332,7 +345,7 @@ private enum AsyncOpState {
     case Initial
     case Executing
     case Finished
-    
+
     var key: String? {
         switch self {
         case .Executing:
@@ -343,4 +356,11 @@ private enum AsyncOpState {
             return nil
         }
     }
+}
+
+private enum OnceAction: Int {
+    case whenFinished
+    case finish
+    case cancel
+    static let count = 3
 }
